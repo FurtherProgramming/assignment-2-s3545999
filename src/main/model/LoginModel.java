@@ -14,6 +14,7 @@ public class LoginModel {
 
     public LoginModel(){
 
+
         connection = SQLConnection.connect();
         if (connection == null)
             System.exit(1);
