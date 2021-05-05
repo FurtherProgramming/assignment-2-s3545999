@@ -1,12 +1,18 @@
 package main.controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 import main.model.LoginModel;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -48,7 +54,16 @@ public class LoginController implements Initializable {
         }
     }
 
+    public void createAccountButtonPushed(ActionEvent event) throws IOException {
 
+        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/createAccount.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(createAccParent, 600, 400));
+        newStage.show();
+
+        final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.close();
+    }
 
 
     //11.2.3 big sur

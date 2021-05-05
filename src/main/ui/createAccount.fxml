@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.CreateAccController">
+   <Text layoutX="14.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FIrst Name:" />
+   <TextField fx:id="txtFirstName" layoutX="101.0" layoutY="62.0" />
+   <Text layoutX="317.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" />
+   <TextField fx:id="txtlastName" layoutX="419.0" layoutY="62.0" />
+   <Text layoutX="14.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID:" />
+   <TextField fx:id="txtEmployeeID" layoutX="98.0" layoutY="97.0" />
+   <Text layoutX="16.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" />
+   <TextField fx:id="txtUsername" layoutX="97.0" layoutY="137.0" />
+   <Text layoutX="16.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" />
+   <Text layoutX="282.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm Password:" />
+   <Text layoutX="16.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Secret Question:" />
+   <Text layoutX="18.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Secret Question Answer:" />
+   <TextField fx:id="txtSecretQAns" layoutX="179.0" layoutY="274.0" />
+   <Button layoutX="262.0" layoutY="333.0" mnemonicParsing="false" onAction="#submitButtonPushed" text="Submit" />
+   <Button fx:id="backButton" layoutX="503.0" layoutY="12.0" mnemonicParsing="false" onAction="#backButtonPressed" text="Back" />
+   <ChoiceBox fx:id="SecretQSelect" layoutX="141.0" layoutY="232.0" prefWidth="150.0" />
+   <PasswordField fx:id="txtPassword" layoutX="96.0" layoutY="181.0" />
+   <PasswordField fx:id="txtConfirmPass" layoutX="415.0" layoutY="181.0" />
+   <Label layoutX="254.0" layoutY="19.0" text="Create Account" />
+</AnchorPane>
