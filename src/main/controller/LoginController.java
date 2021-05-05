@@ -64,10 +64,14 @@ public class LoginController implements Initializable {
         final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.close();
     }
+    public void forgotPassButton(ActionEvent event) throws IOException {
 
+        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/ForgotPass.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(createAccParent, 600, 400));
+        newStage.show();
 
-    //11.2.3 big sur
-
-
-
+        final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.close();
+    }
 }

@@ -99,7 +99,7 @@ public class CreateAccController implements Initializable {
             else
             {
                 User checkUser = new User(txtFirstName.getText(), txtlastName.getText(),
-                        txtUsername.getText(), txtPassword.getText(), false, "mum name", txtSecretQAns.getText());
+                        txtUsername.getText(), txtPassword.getText(), (String) SecretQSelect.getValue(), txtSecretQAns.getText());
                 System.out.println("User Created");
                 boolean created = createAcc.addUser(checkUser);
                 if (created)

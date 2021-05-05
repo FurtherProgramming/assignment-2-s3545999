@@ -20,49 +20,35 @@ import java.util.ResourceBundle;
 
 public class ForgotPasswordController implements Initializable {
     public ForgotPasswordModel forgotPasswordModel = new ForgotPasswordModel();
+
     @FXML
-    private Label isConnected;
-    @FXML
-    private TextField txtUsername;
-    @FXML
-    private TextField txtPassword;
+    TextField TXTusername;
+
 
 
     // Check database connection
     @Override
     public void initialize(URL location, ResourceBundle resources){
-        if (loginModel.isDbConnected()){
+        if (forgotPasswordModel.isDbConnected()){
             // isConnected.setText("Connected");
         }else{
-            isConnected.setText("Not Connected");
+            // isConnected.setText("Not Connected");
         }
 
     }
-    /* login Action method
-       check if user input is the same as database.
-     */
-    public void Login(ActionEvent event){
 
-        try {
-            if (loginModel.isLogin(txtUsername.getText(),txtPassword.getText())){
+    public void submitUsernameButton(ActionEvent event) throws IOException {
 
-                isConnected.setText("Logged in successfully");
-            }else{
-                isConnected.setText("username and password is incorrect");
+        try
+        {
+            if (!forgotPasswordModel.userExists(TXTusername.getText()))
+            {
+                forgotPasswordModel.getUser(TXTusername.getText());
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-    }
+        catch (SQLException e)
+        {
 
-    public void createAccountButtonPushed(ActionEvent event) throws IOException {
-
-        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/createAccount.fxml"));
-        Stage newStage = new Stage();
-        newStage.setScene(new Scene(createAccParent, 600, 400));
-        newStage.show();
-
-        final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.close();
+        }
     }
 }

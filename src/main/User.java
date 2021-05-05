@@ -15,13 +15,13 @@ public class User {
     private String secretQAns;
 
     public User(String fname, String lname, String userName, String password,
-                Boolean admin, String secretQ, String secretQAns)
+                String secretQ, String secretQAns)
     {
         this.fName = fname;
         this.lName = lname;
         this.userName = userName;
         this.password = password;
-        this.admin = admin;
+        this.admin = false;
         this.secretQ = secretQ;
         this.secretQAns = secretQAns;
     }

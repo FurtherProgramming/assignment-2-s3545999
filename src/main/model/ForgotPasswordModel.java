@@ -1,6 +1,7 @@
 package main.model;
 
 import main.SQLConnection;
+import main.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,15 +31,14 @@ public class ForgotPasswordModel {
         }
     }
 
-    public Boolean isLogin(String user, String pass) throws SQLException {
+    public Boolean userExists(String user) throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet=null;
-        String query = "select * from Employee where username = ? and password= ?";
+        String query = "select * from Employee where username = ?";
         try {
 
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, user);
-            preparedStatement.setString(2, pass);
 
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -58,4 +58,32 @@ public class ForgotPasswordModel {
 
     }
 
+    public User getUser(String username) throws SQLException {
+        User changeUser;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String query = "select SecQuestion from Employee where username = ?";
+        try {
+
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                User changeUSer = new User(resultSet.getString("firstName"),resultSet.getString("surname"),
+                        resultSet.getString("username"),resultSet.getString("password"),resultSet.getString("secQuestion"),
+                        resultSet.getString("secAns"));
+                return changeUSer;
+            }
+        }
+        catch (Exception e)
+        {
+        }
+        finally
+        {
+            preparedStatement.close();
+            resultSet.close();
+        }
+        return changeUser;
+    }
 }
