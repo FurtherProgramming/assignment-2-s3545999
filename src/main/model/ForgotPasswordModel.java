@@ -58,8 +58,8 @@ public class ForgotPasswordModel {
 
     }
 
-    public User getUser(String username) throws SQLException {
-        User changeUser;
+    public String getUser(String username) throws SQLException {
+        String userQuestion = "";
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         String query = "select SecQuestion from Employee where username = ?";
@@ -70,10 +70,7 @@ public class ForgotPasswordModel {
 
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                User changeUSer = new User(resultSet.getString("firstName"),resultSet.getString("surname"),
-                        resultSet.getString("username"),resultSet.getString("password"),resultSet.getString("secQuestion"),
-                        resultSet.getString("secAns"));
-                return changeUSer;
+                userQuestion= resultSet.getString("SecQuestion");
             }
         }
         catch (Exception e)
@@ -84,6 +81,6 @@ public class ForgotPasswordModel {
             preparedStatement.close();
             resultSet.close();
         }
-        return changeUser;
+        return userQuestion;
     }
 }
