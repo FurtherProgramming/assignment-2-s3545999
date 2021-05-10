@@ -74,4 +74,7 @@ public class LoginController implements Initializable {
         final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.close();
     }
+
+
+
 }

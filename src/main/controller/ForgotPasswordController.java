@@ -16,6 +16,8 @@ import main.model.LoginModel;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -55,16 +57,10 @@ public class ForgotPasswordController implements Initializable {
         String secQuestion = "";
         try {
             if (forgotPasswordModel.userExists(TXTusername.getText())) {
-                secQuestion = forgotPasswordModel.getUser(TXTusername.getText());
+                forgotPasswordModel.selectUser(TXTusername.getText());
+                secQuestion = forgotPasswordModel.getSecQuestion();
                 if (secQuestion != "") {
-                    SecretQuestion.setText("Your secret question is: " + secQuestion);
-                    SecretQuestion.setVisible(true);
-                    SecQAns.setVisible(true);
-                    SubmitAnswer.setVisible(true);
-                    txtSecQAns.setVisible(true);
-                    UsernameLabel.setVisible(false);
-                    submitUsernameButton.setVisible(false);
-                    TXTusername.setVisible(false);
+                    viewSecretQuestion(secQuestion);
                 }
             }
             else
@@ -90,5 +86,33 @@ public class ForgotPasswordController implements Initializable {
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(createAccScene);
         window.show();
+    }
+
+    public void SubmitSecretAns(ActionEvent event) throws IOException
+    {
+        String secQAns = SecQAns.getText();
+        try
+        {
+            if (!forgotPasswordModel.checkSecAns(secQAns))
+            {
+
+            }
+        }
+        catch (Exception e)
+        {
+
+        }
+
+    }
+
+    public void viewSecretQuestion(String secQuestion) {
+        SecretQuestion.setText("Your secret question is: " + secQuestion);
+        SecretQuestion.setVisible(true);
+        SecQAns.setVisible(true);
+        SubmitAnswer.setVisible(true);
+        txtSecQAns.setVisible(true);
+        UsernameLabel.setVisible(false);
+        submitUsernameButton.setVisible(false);
+        TXTusername.setVisible(false);
     }
 }
