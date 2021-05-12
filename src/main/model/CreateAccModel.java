@@ -61,9 +61,9 @@ public class CreateAccModel {
         System.out.println("Adding1");
         String query = "INSERT INTO Employee (firstName, surname, empRole, username, password, SecQuestion, SecAns) VALUES (?,?,?,?,?,?,?)";
         try {
-            System.out.println("Adding2");
+
             preparedStatement = connection.prepareStatement(query);
-            System.out.println("Adding4");
+
             preparedStatement.setString(1, user.getfName());
             preparedStatement.setString(2, user.getlName());
             preparedStatement.setString(3, "employee");
@@ -72,7 +72,6 @@ public class CreateAccModel {
             preparedStatement.setString(6, user.getSecretQ());
             preparedStatement.setString(7, user.getSecretQAns());
 
-            System.out.println("Adding3");
             preparedStatement.executeUpdate();
             return true;
         }

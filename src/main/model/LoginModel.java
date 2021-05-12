@@ -1,6 +1,8 @@
 package main.model;
 
 import main.SQLConnection;
+import main.User;
+import main.UserHolder;
 import org.sqlite.SQLiteConnection;
 
 import java.sql.Connection;
@@ -43,6 +45,19 @@ public class LoginModel {
 
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
+
+                User theUser = new User();
+
+                theUser.setEmployeeID(1);
+                theUser.setfName(resultSet.getString("firstName"));
+                theUser.setlName(resultSet.getString("surname"));
+                theUser.setUserName(resultSet.getString("username"));
+                theUser.setAdmin(resultSet.getBoolean("Admin"));
+                theUser.setSecretQ(resultSet.getString("secQuestion"));
+
+                UserHolder holder = UserHolder.getInstance();
+                holder.setUser(theUser);
+
                 return true;
             }
             else{
@@ -50,7 +65,7 @@ public class LoginModel {
             }
         }
         catch (Exception e)
-        {
+        {   System.out.println(e);
             return false;
         }finally {
            preparedStatement.close();
@@ -58,5 +73,4 @@ public class LoginModel {
         }
 
     }
-
 }

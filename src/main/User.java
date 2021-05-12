@@ -25,17 +25,42 @@ public class User {
         this.secretQ = secretQ;
         this.secretQAns = secretQAns;
     }
+    public User()
+    {
+
+    }
+
+    public int getEmployeeID() {
+        return employeeID;
+    }
+
+    public void setEmployeeID(int employeeID) {
+        this.employeeID = employeeID;
+    }
 
     public String getfName() {
         return fName;
+    }
+
+    public void setfName(String fName)
+    {
+        this.fName = fName;
     }
 
     public String getlName() {
         return lName;
     }
 
+    public void setlName(String lName) {
+        this.lName = lName;
+    }
+
     public String getUserName() {
         return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -46,11 +71,20 @@ public class User {
         return admin;
     }
 
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
+    }
+
     public String getSecretQ() {
         return secretQ;
+    }
+
+    public void setSecretQ(String secretQ) {
+        this.secretQ = secretQ;
     }
 
     public String getSecretQAns() {
         return secretQAns;
     }
+
 }

@@ -4,40 +4,47 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Light.Distant?>
-<?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="248.0" prefWidth="372.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.LoginController">
+<AnchorPane id="arubcss" prefHeight="400" prefWidth="600" stylesheets="@../arub.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.LoginController">
     <children>
-            <Label fx:id="isConnected" layoutX="21.0" layoutY="24.0" text="Status">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffe5b0" height="200.0" layoutX="11.0" layoutY="111.0" stroke="#ffe5b0" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+            <Label fx:id="isConnected" layoutX="329.0" layoutY="355.0" text="Status">
 
             </Label>
-      <TextField fx:id="txtUsername" layoutX="116.0" layoutY="54.0" prefHeight="26.0" prefWidth="130.0" AnchorPane.bottomAnchor="168.0" AnchorPane.leftAnchor="116.0" AnchorPane.rightAnchor="126.0" AnchorPane.topAnchor="54.0" />
-      <PasswordField fx:id="txtPassword" layoutX="116.0" layoutY="89.0" prefHeight="27.0" prefWidth="130.0" AnchorPane.bottomAnchor="132.0" AnchorPane.leftAnchor="116.0" AnchorPane.rightAnchor="126.0" AnchorPane.topAnchor="89.0" />
-      <Button defaultButton="true" layoutX="183.0" layoutY="140.0" mnemonicParsing="false" onAction="#Login" prefHeight="27.0" prefWidth="117.0" text="Login" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="129.0" AnchorPane.topAnchor="140.0">
-         <effect>
-            <Lighting bumpInput="$null">
-               <light>
-                  <Light.Distant>
-                     <color>
-                        <Color red="0.9342105388641357" green="0.025950292125344276" blue="0.025950292125344276" />
-                     </color>
-                  </Light.Distant>
-               </light>
-            </Lighting>
-         </effect>
+      <TextField fx:id="txtUsername" layoutX="385.0" layoutY="117.0" prefHeight="27.0" prefWidth="168.0" />
+      <PasswordField fx:id="txtPassword" layoutX="385.0" layoutY="164.0" prefHeight="27.0" prefWidth="168.0" />
+      <Button layoutX="27.0" layoutY="241.0" mnemonicParsing="false" onAction="#createAccountButtonPushed" prefHeight="36.0" prefWidth="168.0" text="Create Account" />
+      <Text layoutX="444.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
          <font>
-            <Font name="System Font" size="13.0" />
-         </font></Button>
-      <Button layoutX="127.0" layoutY="207.0" mnemonicParsing="false" onAction="#createAccountButtonPushed" prefHeight="27.0" prefWidth="117.0" text="Create Account" />
-      <Text layoutX="166.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" />
-      <Button fx:id="ForgotButton" layoutX="127.0" layoutY="174.0" mnemonicParsing="false" onAction="#forgotPassButton" prefHeight="27.0" prefWidth="117.0" text="Forgot Password" />
+            <Font size="21.0" />
+         </font></Text>
+      <Button fx:id="ForgotButton" layoutX="332.0" layoutY="297.0" mnemonicParsing="false" onAction="#forgotPassButton" prefHeight="36.0" prefWidth="221.0" text="Forgot Password" />
+      <Button layoutX="332.0" layoutY="241.0" mnemonicParsing="false" onAction="#Login" prefHeight="36.0" prefWidth="221.0" text="Login" />
+      <Label alignment="CENTER_RIGHT" layoutX="283.0" layoutY="124.0" stylesheets="@../arub.css" text="Username:" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="285.0" layoutY="171.0" stylesheets="@../arub.css" text="Password:" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="27.0" layoutY="138.0" prefHeight="89.0" prefWidth="168.0" stylesheets="@../arub.css" text="Do you want to create an account?" wrapText="true">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="243.0" layoutY="31.0" text="ARUB">
+         <font>
+            <Font size="45.0" />
+         </font>
+      </Label>
 
 
     </children>
-
 </AnchorPane>
