@@ -45,15 +45,15 @@ public class LoginController implements Initializable {
         try {
             if (loginModel.isLogin(txtUsername.getText(),txtPassword.getText())){
 
-                Node node = (Node) event.getSource();
-                Stage stage = (Stage) node.getScene().getWindow();
-                stage.close();
                 isConnected.setText("Logged in successfully");
 
-                Parent root = FXMLLoader.load(getClass().getResource("../ui/employeeHomepage.fxml"));
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
+                Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/Welcome2.fxml"));
+                Stage newStage = new Stage();
+                newStage.setScene(new Scene(createAccParent, 600, 400));
+                newStage.show();
+
+                final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                window.close();
             }
             else{
                 isConnected.setText("username and password is incorrect");
