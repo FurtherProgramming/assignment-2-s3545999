@@ -78,47 +78,51 @@ public class CreateAccController implements Initializable {
         System.out.println(txtConfirmPass.getText());
         boolean error = false;
         String errorMessage = "";
-        try {
-            if (txtFirstName.getText() == null || txtlastName.getText() == null ||
-                    txtUsername.getText() == null || txtPassword.getText() == null || txtConfirmPass.getText() == null ||
-                    SecretQSelect.getValue() == null || txtSecretQAns.getText() == null)
+
+        if (txtFirstName.getText() == null || txtlastName.getText() == null ||
+                txtUsername.getText() == null || txtPassword.getText() == null || txtConfirmPass.getText() == null ||
+                SecretQSelect.getValue() == null || txtSecretQAns.getText() == null)
+        {
+            errorMessage = "Required Field Missing";
+            error = true;
+        }
+        else if (!txtPassword.getText().equals(txtConfirmPass.getText()))
+        {
+            errorMessage = "Fail, passwords do not match";
+            error = true;
+        }
+        else if (createAcc.userTaken(txtUsername.getText()))
+        {
+            errorMessage = "Fail, username is taken";
+            error = true;
+        }
+        else
+        {
+            User checkUser = new User(txtFirstName.getText(), txtlastName.getText(),
+                    txtUsername.getText(), txtPassword.getText(), (String) SecretQSelect.getValue(), txtSecretQAns.getText());
+            System.out.println("User Created");
+            boolean created = createAcc.addUser(checkUser);
+            if (created)
             {
-                errorMessage = "Required Field Missing";
-                error = true;
-            }
-            else if (!txtPassword.getText().equals(txtConfirmPass.getText()))
-            {
-                errorMessage = "Fail, passwords do not match";
-                error = true;
-            }
-            else if (createAcc.userTaken(txtUsername.getText()))
-            {
-                errorMessage = "Fail, username is taken";
-                error = true;
+                // Show success message tab then return to login
+                Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/login.fxml"));
+                Scene createAccScene = new Scene(createAccParent);
+
+                Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                window.setScene(createAccScene);
+                window.show();
+
+                Stage popupstage = new Stage();
+                popupstage.setTitle("Success");
+                popupstage.setScene(new Scene(new TextField("Success"), 100, 100));
+                popupstage.show();
+                popupstage.toFront();
             }
             else
             {
-                User checkUser = new User(txtFirstName.getText(), txtlastName.getText(),
-                        txtUsername.getText(), txtPassword.getText(), (String) SecretQSelect.getValue(), txtSecretQAns.getText());
-                System.out.println("User Created");
-                boolean created = createAcc.addUser(checkUser);
-                if (created)
-                {
-                    // Show success message tab then return to login
-                    Stage popupstage = new Stage();
-                    popupstage.setTitle("Success");
-                    popupstage.setScene(new Scene(new TextField("Success"), 100, 100));
-                    popupstage.show();
-                }
-                else
-                {
-                    errorMessage = "User cannot be added to the database";
-                    error = true;
-                }
+                errorMessage = "User cannot be added to the database";
+                error = true;
             }
-        }
-        catch(SQLException e){
-            e.printStackTrace();
         }
         if (error == true)
         {

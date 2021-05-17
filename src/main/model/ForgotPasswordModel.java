@@ -2,6 +2,7 @@ package main.model;
 
 import main.SQLConnection;
 import main.User;
+import main.UserHolder;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,6 +22,11 @@ public class ForgotPasswordModel {
         if (connection == null)
             System.exit(1);
 
+    }
+
+    public int getUserID()
+    {
+        return userID;
     }
 
     public Boolean isDbConnected(){
@@ -120,15 +126,19 @@ public class ForgotPasswordModel {
 
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
+                User theUser = new User();
+                theUser.setEmployeeID(userID);
+                UserHolder holder = UserHolder.getInstance();
+                holder.setUser(theUser);
                 return true;
             }
-            else{
+            else
+            {
                 return false;
             }
         }
         catch (SQLException e)
         {
-
             return false;
         } finally {
             preparedStatement.close();
@@ -136,3 +146,5 @@ public class ForgotPasswordModel {
         }
     }
 }
+
+

@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import main.User;
+
 public class CreateAccModel {
     Connection connection;
 
@@ -27,38 +28,40 @@ public class CreateAccModel {
         }
     }
 
-    public Boolean userTaken(String user) throws SQLException {
+    public Boolean userTaken(String user){
 
         boolean userExists = false;
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet=null;
+        ResultSet resultSet = null;
         String query = "select * from employee where username = ?";
         try {
-
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, user);
 
             resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                userExists = true;
-            }
-            else{
-                userExists = false;
-            }
+            return resultSet.next();
         }
         catch (Exception e)
         {
             return false;
         }finally {
-            preparedStatement.close();
+            assert preparedStatement != null;
+            try {
+                preparedStatement.close();
+
+
+            assert resultSet != null;
             resultSet.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
-        return userExists;
     }
-    public Boolean addUser(User user) throws SQLException {
+
+    public Boolean addUser(User user) {
 
         PreparedStatement preparedStatement = null;
-        System.out.println("Adding1");
+
         String query = "INSERT INTO Employee (firstName, surname, empRole, username, password, SecQuestion, SecAns) VALUES (?,?,?,?,?,?,?)";
         try {
 

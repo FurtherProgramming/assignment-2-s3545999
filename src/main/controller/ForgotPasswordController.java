@@ -12,12 +12,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.model.ForgotPasswordModel;
-import main.model.LoginModel;
+
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -33,24 +31,20 @@ public class ForgotPasswordController implements Initializable {
     @FXML
     Label SecretQuestion;
     @FXML
-    TextField SecQAns;
+    TextField txtSecQAns;
     @FXML
     Button SubmitAnswer;
     @FXML
-    Label txtSecQAns;
-    @FXML
-    Button backButtonPressed;
+    Label answer;
 
 
     // Check database connection
     @Override
     public void initialize(URL location, ResourceBundle resources){
-        if (forgotPasswordModel.isDbConnected()){
-            // isConnected.setText("Connected");
-        }else{
-            // isConnected.setText("Not Connected");
-        }
-
+        SubmitAnswer.setVisible(false);
+        txtSecQAns.setVisible(false);
+        answer.setVisible(false);
+        SecretQuestion.setVisible(false);
     }
 
     public void submitUsernameButton(ActionEvent event) throws IOException {
@@ -74,9 +68,7 @@ public class ForgotPasswordController implements Initializable {
         }
         catch (SQLException e) {
             System.out.println(e);
-
         }
-
     }
 
     public void backButtonPressed(ActionEvent event) throws IOException {
@@ -88,14 +80,24 @@ public class ForgotPasswordController implements Initializable {
         window.show();
     }
 
-    public void SubmitSecretAns(ActionEvent event) throws IOException
+    public void SubmitAnswer(ActionEvent event) throws IOException
     {
-        String secQAns = SecQAns.getText();
+        String secQAns = txtSecQAns.getText();
         try
         {
-            if (!forgotPasswordModel.checkSecAns(secQAns))
+            if (forgotPasswordModel.checkSecAns(secQAns))
             {
+                Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/ChangePass.fxml"));
+                Stage newStage = new Stage();
+                newStage.setScene(new Scene(createAccParent, 600, 400));
+                newStage.show();
 
+                final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                window.close();
+            }
+            else
+            {
+                System.out.println("Wrong Answer");
             }
         }
         catch (Exception e)
@@ -108,7 +110,7 @@ public class ForgotPasswordController implements Initializable {
     public void viewSecretQuestion(String secQuestion) {
         SecretQuestion.setText("Your secret question is: " + secQuestion);
         SecretQuestion.setVisible(true);
-        SecQAns.setVisible(true);
+        txtSecQAns.setVisible(true);
         SubmitAnswer.setVisible(true);
         txtSecQAns.setVisible(true);
         UsernameLabel.setVisible(false);
