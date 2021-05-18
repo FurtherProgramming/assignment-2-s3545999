@@ -52,10 +52,28 @@ public class ChangePasswordController implements Initializable {
         if (password != "" && confirmPassword.equals(password))
         {
             changePass.setPassword(password);
+
+            Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/login.fxml"));
+            Stage newStage = new Stage();
+            newStage.setScene(new Scene(createAccParent, 600, 400));
+            newStage.show();
+
+            final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            window.close();
+
+            Stage popupstage = new Stage();
+            popupstage.setTitle("Success");
+            popupstage.setScene(new Scene(new TextField("Success"), 100, 100));
+            popupstage.show();
+            popupstage.toFront();
         }
         else
         {
-            System.out.println("Fail");
+            Stage popupstage = new Stage();
+            popupstage.setTitle("Failed");
+            popupstage.setScene(new Scene(new TextField("Failed"), 100, 100));
+            popupstage.show();
+            popupstage.toFront();
         }
     }
 }

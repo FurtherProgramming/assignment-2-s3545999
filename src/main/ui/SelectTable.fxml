@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../arub.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="main.controller.makeBooking">
+  <columnConstraints>
+    <ColumnConstraints hgrow=main.controller.makeBooking"SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <ToggleButton mnemonicParsing="false" onAction="#Toggle5" selected="true" text="ToggleButton" GridPane.rowIndex="3" />
+      <ToggleButton mnemonicParsing="false" onAction="#Toggle1" selected="true" text="ToggleButton" GridPane.rowIndex="2" />
+      <ToggleButton mnemonicParsing="false" onAction="#Toggle2" selected="true" text="ToggleButton" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <ToggleButton mnemonicParsing="false" onAction="#Toggle6" selected="true" text="ToggleButton" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <ToggleButton mnemonicParsing="false" onAction="#Toggle3" selected="true" text="ToggleButton" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <ToggleButton mnemonicParsing="false" onAction="#Toggle7" selected="true" text="ToggleButton" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+      <ToggleButton mnemonicParsing="false" onAction="#Toggle8" selected="true" text="ToggleButton" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+      <ToggleButton mnemonicParsing="false" onAction="#Toggle4" selected="true" text="ToggleButton" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+      <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Label text="Select a date" GridPane.columnIndex="1" />
+   </children>
+</GridPane>

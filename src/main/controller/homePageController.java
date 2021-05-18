@@ -45,7 +45,7 @@ public class homePageController implements Initializable {
     }
 
     public void makeBooking(ActionEvent event) throws IOException {
-        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/MakeBooking.fxml"));
+        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/SelectTable.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(createAccParent, 900, 600));
         newStage.show();

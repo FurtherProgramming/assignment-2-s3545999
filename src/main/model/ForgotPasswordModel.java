@@ -17,16 +17,10 @@ public class ForgotPasswordModel {
 
     public ForgotPasswordModel(){
 
-        int userID = -1;
         connection = SQLConnection.connect();
         if (connection == null)
             System.exit(1);
 
-    }
-
-    public int getUserID()
-    {
-        return userID;
     }
 
     public Boolean isDbConnected(){
@@ -93,7 +87,6 @@ public class ForgotPasswordModel {
 
     public String getSecQuestion()
     {
-        String securityQuestion = "";
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         String query = "select SecQuestion from Employee where id = ?";
@@ -103,15 +96,23 @@ public class ForgotPasswordModel {
             preparedStatement.setInt(1, userID);
 
             resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                securityQuestion = resultSet.getString("SecQuestion");
-            }
+
+            return resultSet.getString("SecQuestion");
         }
         catch (Exception e)
         {
-
+            return "";
         }
-        return securityQuestion;
+        finally {
+            try {
+                preparedStatement.close();
+
+            resultSet.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+
     }
 
     public boolean checkSecAns(String secAns) throws SQLException {
@@ -140,7 +141,8 @@ public class ForgotPasswordModel {
         catch (SQLException e)
         {
             return false;
-        } finally {
+        }
+        finally {
             preparedStatement.close();
             resultSet.close();
         }
