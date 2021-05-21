@@ -31,10 +31,11 @@ public class CreateAccModel {
     public Boolean userTaken(String user){
 
         boolean userExists = false;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
+
         String query = "select * from employee where username = ?";
         try {
+            PreparedStatement preparedStatement = null;
+            ResultSet resultSet = null;
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, user);
 
@@ -44,27 +45,16 @@ public class CreateAccModel {
         catch (Exception e)
         {
             return false;
-        }finally {
-            assert preparedStatement != null;
-            try {
-                preparedStatement.close();
-
-
-            assert resultSet != null;
-            resultSet.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
         }
     }
 
     public Boolean addUser(User user) {
 
-        PreparedStatement preparedStatement = null;
+
 
         String query = "INSERT INTO Employee (firstName, surname, empRole, username, password, SecQuestion, SecAns) VALUES (?,?,?,?,?,?,?)";
         try {
-
+            PreparedStatement preparedStatement = null;
             preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setString(1, user.getfName());

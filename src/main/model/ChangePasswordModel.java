@@ -18,14 +18,13 @@ public class ChangePasswordModel {
 
     public boolean setPassword(String newPassword)
     {
-        PreparedStatement preparedStatement = null;
-        UserHolder holder = UserHolder.getInstance();
-
-        User user = holder.getUser();
-        int id = user.getEmployeeID();
-        String query = "Update Employee set password = ? where Employee.id == ?";
-
         try {
+            PreparedStatement preparedStatement = null;
+            UserHolder holder = UserHolder.getInstance();
+
+            User user = holder.getUser();
+            int id = user.getEmployeeID();
+            String query = "Update Employee set password = ? where Employee.id == ?";
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, newPassword);
             preparedStatement.setInt(2, id);

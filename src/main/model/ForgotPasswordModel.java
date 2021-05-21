@@ -33,11 +33,11 @@ public class ForgotPasswordModel {
     }
 
     public Boolean userExists(String user) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet=null;
+
         String query = "select * from Employee where username = ?";
         try {
-
+            PreparedStatement preparedStatement = null;
+            ResultSet resultSet=null;
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, user);
 
@@ -52,19 +52,15 @@ public class ForgotPasswordModel {
         catch (Exception e)
         {
             return false;
-        }finally {
-           preparedStatement.close();
-           resultSet.close();
         }
-
     }
 
     public void selectUser(String username) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
+
         String query = "select id from Employee where username = ?";
         try {
-
+            PreparedStatement preparedStatement = null;
+            ResultSet resultSet = null;
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
 
@@ -77,21 +73,14 @@ public class ForgotPasswordModel {
         {
 
         }
-        finally
-        {
-            preparedStatement.close();
-            resultSet.close();
-        }
-
     }
 
     public String getSecQuestion()
     {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        String query = "select SecQuestion from Employee where id = ?";
         try {
-
+            PreparedStatement preparedStatement = null;
+            ResultSet resultSet = null;
+            String query = "select SecQuestion from Employee where id = ?";
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, userID);
 
@@ -103,24 +92,14 @@ public class ForgotPasswordModel {
         {
             return "";
         }
-        finally {
-            try {
-                preparedStatement.close();
-
-            resultSet.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        }
-
     }
 
     public boolean checkSecAns(String secAns) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet=null;
+
         String query = "select * from Employee where id = ? and SecAns= ?";
         try {
-
+            PreparedStatement preparedStatement = null;
+            ResultSet resultSet=null;
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, userID);
             preparedStatement.setString(2, secAns);
@@ -141,10 +120,6 @@ public class ForgotPasswordModel {
         catch (SQLException e)
         {
             return false;
-        }
-        finally {
-            preparedStatement.close();
-            resultSet.close();
         }
     }
 }

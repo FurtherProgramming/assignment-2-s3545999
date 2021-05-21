@@ -34,11 +34,11 @@ public class LoginModel {
     }
 
     public Boolean isLogin(String user, String pass) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet=null;
+
         String query = "select * from Employee where username = ? and password= ?";
         try {
-
+            PreparedStatement preparedStatement = null;
+            ResultSet resultSet=null;
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, user);
             preparedStatement.setString(2, pass);
@@ -67,10 +67,6 @@ public class LoginModel {
         catch (Exception e)
         {   System.out.println(e);
             return false;
-        }finally {
-           preparedStatement.close();
-           resultSet.close();
         }
-
     }
 }
