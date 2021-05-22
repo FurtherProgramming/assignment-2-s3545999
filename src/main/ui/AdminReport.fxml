@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../arub.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.AdminReportController">
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" stylesheets="@../arub.css" BorderPane.alignment="CENTER">
+         <children>
+            <Button lineSpacing="10.0" mnemonicParsing="false" onAction="#checkIn" prefHeight="57.0" prefWidth="246.0" text="Booking Report" />
+            <Button lineSpacing="10.0" mnemonicParsing="false" onAction="#ManageAccount" prefHeight="57.0" prefWidth="246.0" text="Account Report" />
+         </children>
+      </VBox>
+   </center>
+   <top>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Print Report" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Back" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+</BorderPane>

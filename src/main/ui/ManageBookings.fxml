@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../arub.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../arub.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.ManageBookingController">
    <center>
-      <TableView prefHeight="201.0" prefWidth="580.0" stylesheets="@../arub.css" BorderPane.alignment="CENTER">
+      <TableView prefHeight="382.0" prefWidth="880.0" stylesheets="@../arub.css" BorderPane.alignment="CENTER">
          <columns>
             <TableColumn prefWidth="139.0" text="Booking No." />
             <TableColumn minWidth="0.0" prefWidth="117.0" text="Table No." />
@@ -27,48 +27,48 @@
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <Label alignment="CENTER" text="Cancel Bookings" />
+                  <Label alignment="CENTER" text="Manage Bookings" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#back" text="Back" />
+                  <Button mnemonicParsing="false" onAction="#back" prefHeight="66.0" prefWidth="132.0" text="Back" />
                </children>
             </HBox>
          </children>
       </HBox>
    </top>
    <bottom>
-      <HBox prefHeight="52.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="91.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="177.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="269.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" />
-                  <Label prefHeight="23.0" prefWidth="168.0" text="Booking Number:">
+                  <Label prefHeight="23.0" prefWidth="236.0" text="Booking Number:">
                      <HBox.margin>
-                        <Insets left="5.0" />
+                        <Insets left="20.0" />
                      </HBox.margin>
                   </Label>
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="188.0">
                <children>
-                  <TextField prefHeight="36.0" prefWidth="168.0" />
+                  <TextField prefHeight="36.0" prefWidth="115.0" />
                </children>
             </HBox>
-            <HBox prefHeight="52.0" prefWidth="219.0">
+            <HBox prefHeight="52.0" prefWidth="432.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="52.0" prefWidth="231.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="112.0" text="Confirm" />
+                        <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="167.0" text="Confirm" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" prefHeight="52.0" prefWidth="163.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Reject" />
+                        <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="124.0" text="Reject" />
                      </children>
                   </HBox>
                </children>

@@ -23,7 +23,7 @@ public class User {
         this.password = password;
         this.admin = false;
         this.secretQ = secretQ;
-//        this.secretQAns = secretQAns;
+        this.secretQAns = secretQAns;
     }
     public User()
     {

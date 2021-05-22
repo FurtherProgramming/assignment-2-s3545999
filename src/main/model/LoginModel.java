@@ -47,11 +47,12 @@ public class LoginModel {
             if (resultSet.next()) {
 
                 User theUser = new User();
-
-                theUser.setEmployeeID(1);
+                theUser.setEmployeeID(resultSet.getInt("id"));
+                System.out.println(resultSet.getInt("id"));
                 theUser.setfName(resultSet.getString("firstName"));
                 theUser.setlName(resultSet.getString("surname"));
                 theUser.setUserName(resultSet.getString("username"));
+                System.out.println(resultSet.getBoolean("Admin"));
                 theUser.setAdmin(resultSet.getBoolean("Admin"));
                 theUser.setSecretQ(resultSet.getString("secQuestion"));
 

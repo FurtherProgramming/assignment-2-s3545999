@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
+import main.User;
+import main.UserHolder;
 import main.model.LoginModel;
 
 import java.io.IOException;
@@ -46,8 +48,17 @@ public class LoginController implements Initializable {
             if (loginModel.isLogin(txtUsername.getText(),txtPassword.getText())){
 
                 isConnected.setText("Logged in successfully");
-
-                Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/Welcome2.fxml"));
+                Parent createAccParent;
+                User user = UserHolder.getInstance().getUser();
+                System.out.println(user.getAdmin());
+                if(!user.getAdmin())
+                {
+                    createAccParent = FXMLLoader.load(getClass().getResource("../ui/Welcome.fxml"));
+                }
+                else
+                {
+                    createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminHomepage.fxml"));
+                }
                 Stage newStage = new Stage();
                 newStage.setScene(new Scene(createAccParent, 600, 400));
                 newStage.show();
@@ -76,7 +87,7 @@ public class LoginController implements Initializable {
 
     public void forgotPassButton(ActionEvent event) throws IOException {
 
-        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/ForgotPass2.fxml"));
+        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/ForgotPass.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(createAccParent, 600, 400));
         newStage.show();
