@@ -45,9 +45,9 @@ public class AdminHomepageController implements Initializable {
     }
 
     public void AccountManage(ActionEvent event) throws IOException {
-        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/AccountManagement.fxml"));
+        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminAccountManagement.fxml"));
         Stage newStage = new Stage();
-        newStage.setScene(new Scene(createAccParent, 600, 400));
+        newStage.setScene(new Scene(createAccParent));
         newStage.show();
 
         final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -56,7 +56,7 @@ public class AdminHomepageController implements Initializable {
     public void AdminReports(ActionEvent event) throws IOException {
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminReport.fxml"));
         Stage newStage = new Stage();
-        newStage.setScene(new Scene(createAccParent, 600, 400));
+        newStage.setScene(new Scene(createAccParent));
         newStage.show();
 
         final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();

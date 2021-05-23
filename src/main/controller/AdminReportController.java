@@ -24,4 +24,22 @@ public class AdminReportController implements Initializable {
 
     }
 
+    public void back(ActionEvent event) throws IOException {
+        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminHomepage.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(createAccParent, 600, 400));
+        newStage.show();
+
+        final Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.close();
+    }
+
+    public void BookingReport(ActionEvent event) throws IOException {
+
+
+    }
+
+    public void AccountReport(ActionEvent event) throws IOException {
+
+    }
 }
