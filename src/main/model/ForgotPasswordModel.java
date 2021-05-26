@@ -37,7 +37,7 @@ public class ForgotPasswordModel {
         String query = "select * from Employee where username = ?";
         try {
             PreparedStatement preparedStatement = null;
-            ResultSet resultSet=null;
+            ResultSet resultSet = null;
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, user);
 
@@ -45,7 +45,7 @@ public class ForgotPasswordModel {
             if (resultSet.next()) {
                 return true;
             }
-            else{
+            else {
                 return false;
             }
         }

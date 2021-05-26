@@ -50,8 +50,6 @@ public class CreateAccModel {
 
     public Boolean addUser(User user) {
 
-
-
         String query = "INSERT INTO Employee (firstName, surname, empRole, username, password, SecQuestion, SecAns) VALUES (?,?,?,?,?,?,?)";
         try {
             PreparedStatement preparedStatement = null;
@@ -73,10 +71,5 @@ public class CreateAccModel {
             System.out.println(e);
             return false;
         }
-
     }
-
-
-
-
 }
