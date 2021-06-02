@@ -29,7 +29,7 @@ public class AdminHomepageController implements Initializable {
         UserHolder holder = UserHolder.getInstance();
 
         user = holder.getUser();
-        String name = user.getfName();
+        String name = user.getFirstName();
         String fname = name.substring(0, 1).toUpperCase() + name.substring(1);
         TXTwelcome.setText("Welcome " + fname);
     }

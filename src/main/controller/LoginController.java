@@ -59,8 +59,10 @@ public class LoginController implements Initializable {
                 {
                     createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminHomepage.fxml"));
                 }
+
                 Stage newStage = new Stage();
                 newStage.setScene(new Scene(createAccParent, 600, 400));
+
                 newStage.show();
 
                 final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();

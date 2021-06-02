@@ -13,16 +13,19 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../arub.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.ManageAccountController">
    <center>
-      <TableView prefHeight="382.0" prefWidth="880.0" stylesheets="@../arub.css" BorderPane.alignment="CENTER">
+      <TableView fx:id="accountTable" prefHeight="382.0" prefWidth="880.0" stylesheets="@../arub.css" BorderPane.alignment="CENTER">
          <columns>
-            <TableColumn prefWidth="139.0" text="Booking No." />
-            <TableColumn minWidth="0.0" prefWidth="117.0" text="Table No." />
-            <TableColumn minWidth="0.0" prefWidth="141.0" text="Employee id" />
-            <TableColumn prefWidth="182.0" text="Employee Name" />
+            <TableColumn fx:id="employeeIdCol" prefWidth="75.0" text="Employee ID" />
+            <TableColumn fx:id="fNameCol" prefWidth="672.0" text="First Name" />
+            <TableColumn fx:id="surnameCol" prefWidth="75.0" text="Surname" />
+            <TableColumn fx:id="usernameCol" prefWidth="75.0" text="Username" />
          </columns>
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
    </center>
    <top>

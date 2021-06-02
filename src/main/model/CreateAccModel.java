@@ -3,10 +3,8 @@ package main.model;
 
 import main.SQLConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+
 import main.User;
 
 public class CreateAccModel {
@@ -16,7 +14,6 @@ public class CreateAccModel {
         connection = SQLConnection.connect();
         if (connection == null)
             System.exit(1);
-
     }
 
     public Boolean isDbConnected(){
@@ -55,8 +52,8 @@ public class CreateAccModel {
             PreparedStatement preparedStatement = null;
             preparedStatement = connection.prepareStatement(query);
 
-            preparedStatement.setString(1, user.getfName());
-            preparedStatement.setString(2, user.getlName());
+            preparedStatement.setString(1, user.getFirstName());
+            preparedStatement.setString(2, user.getLastName());
             preparedStatement.setString(3, "employee");
             preparedStatement.setString(4, user.getUserName());
             preparedStatement.setString(5, user.getPassword());

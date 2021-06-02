@@ -39,7 +39,7 @@ public class homePageController implements Initializable {
         UserHolder holder = UserHolder.getInstance();
 
         user = holder.getUser();
-        String name = user.getfName();
+        String name = user.getFirstName();
         String fname = name.substring(0, 1).toUpperCase() + name.substring(1);
         TXTwelcome.setText("Welcome " + fname);
     }
@@ -80,5 +80,15 @@ public class homePageController implements Initializable {
 
         final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.close();
+    }
+
+    public void logout(ActionEvent event) throws IOException
+    {
+        UserHolder userHolder = UserHolder.getInstance();
+        userHolder.setUser(null);
+        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/login.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(createAccParent, 600, 400));
+        newStage.show();
     }
 }

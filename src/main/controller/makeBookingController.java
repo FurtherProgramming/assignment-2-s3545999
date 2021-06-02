@@ -8,7 +8,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -18,6 +20,7 @@ import main.model.makeBookingModel;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -32,7 +35,7 @@ public class makeBookingController implements Initializable {
 
     private List<Rectangle> rectangles = new ArrayList<>();
     private Rectangle currentRectangle;
-    private String date = "";
+    private LocalDate date;
 
     List<Desk> currentDesks;
     @FXML
@@ -54,6 +57,10 @@ public class makeBookingController implements Initializable {
     Rectangle Table7;
     @FXML
     Rectangle Table8;
+    @FXML
+    Label booking;
+    @FXML
+    Button cancel;
 
     public void initialize(URL location, ResourceBundle resources){
         rectangles.add(Table1);
@@ -65,15 +72,33 @@ public class makeBookingController implements Initializable {
         rectangles.add(Table7);
         rectangles.add(Table8);
         setAllTab(Color.RED);
-        for(int i = 0; i<rectangles.size(); i++)
+
+        for(int i = 0; i < rectangles.size(); i++)
         {
             rectangles.get(i).setMouseTransparent(true);
+        }
+
+        if(!makeModel.checkBooking())
+        {
+            System.out.println("HERE");
+            cancel.setDisable(true);
+            cancel.setMouseTransparent(true);
+            booking.setText("You do not have a booking!");
+        }
+        else
+        {
+            String theString = makeModel.getBooking();
+            booking.setText(theString);
+        }
+        if(makeModel.checkBooking()) {
+            datePicker.setMouseTransparent(true);
+            datePicker.setDisable(true);
         }
     }
 
     public void back(ActionEvent event) throws IOException {
 
-        Parent createAccParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ui/employeeHomepage.fxml")));
+        Parent createAccParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ui/welcome.fxml")));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(createAccParent, 600, 400));
         newStage.show();
@@ -114,11 +139,10 @@ public class makeBookingController implements Initializable {
         int currentDay = dateNow.getDayOfYear();
         int currentYear = dateNow.getYear();
 
-        java.sql.Date theDate = java.sql.Date.valueOf(datePicker.getValue());
+        date = datePicker.getValue();
         System.out.println("Checking desks database");
         if(year > currentYear || (year == currentYear && day > currentDay)) {
             System.out.println("Checking correct date");
-            date = theDate.toString();
             currentDesks = makeModel.getTableAvailability(date);
             setTables();
         }
@@ -153,6 +177,14 @@ public class makeBookingController implements Initializable {
         for(int i = 0; i < rectangles.size(); i++)
         {
             rectangles.get(i).setFill(colour);
+        }
+    }
+
+    public void cancel(ActionEvent event)
+    {
+        if(makeModel.cancelBooking())
+        {
+            System.out.println("Success");
         }
     }
 }

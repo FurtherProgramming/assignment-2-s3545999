@@ -16,12 +16,9 @@ public class LoginModel {
     Connection connection;
 
     public LoginModel(){
-
-
         connection = SQLConnection.connect();
         if (connection == null)
             System.exit(1);
-
     }
 
     public Boolean isDbConnected(){
@@ -38,7 +35,7 @@ public class LoginModel {
         String query = "select * from Employee where username = ? and password= ?";
         try {
             PreparedStatement preparedStatement = null;
-            ResultSet resultSet=null;
+            ResultSet resultSet = null;
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, user);
             preparedStatement.setString(2, pass);
@@ -47,10 +44,10 @@ public class LoginModel {
             if (resultSet.next()) {
 
                 User theUser = new User();
-                theUser.setEmployeeID(resultSet.getInt("id"));
+                theUser.setEmployeeId(resultSet.getInt("id"));
                 System.out.println(resultSet.getInt("id"));
-                theUser.setfName(resultSet.getString("firstName"));
-                theUser.setlName(resultSet.getString("surname"));
+                theUser.setFirstName(resultSet.getString("firstName"));
+                theUser.setLastName(resultSet.getString("surname"));
                 theUser.setUserName(resultSet.getString("username"));
                 System.out.println(resultSet.getBoolean("Admin"));
                 theUser.setAdmin(resultSet.getBoolean("Admin"));
@@ -58,7 +55,6 @@ public class LoginModel {
 
                 UserHolder holder = UserHolder.getInstance();
                 holder.setUser(theUser);
-
                 return true;
             }
             else{

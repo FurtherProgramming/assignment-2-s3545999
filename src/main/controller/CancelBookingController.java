@@ -1,15 +1,19 @@
 package main.controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import main.Booking;
 import main.User;
 import main.UserHolder;
+import main.model.cancelBookingModel;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,11 +22,28 @@ import java.util.ResourceBundle;
 
 public class CancelBookingController implements Initializable {
 
-    private ArrayList<Booking> theBookings;
+    cancelBookingModel cancelBooking = new cancelBookingModel();
+
+    @FXML
+    Button cancel;
+
+    @FXML
+    Label booking;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        if(!cancelBooking.checkBooking())
+        {
+            System.out.println("HERE");
+            cancel.setDisable(true);
+            cancel.setMouseTransparent(true);
+            booking.setText("You do not have a booking!");
+        }
+        else
+        {
+            String theString = cancelBooking.getBooking();
+            booking.setText(theString);
+        }
     }
 
     public void back(ActionEvent event) throws IOException {
@@ -36,9 +57,11 @@ public class CancelBookingController implements Initializable {
         window.close();
     }
 
-    public void fillTable()
+    public void cancel(ActionEvent event)
     {
-        User user = UserHolder.getInstance().getUser();
-        // Go to Cancel Booking Model and get all users Bookings
+        if(cancelBooking.cancelBooking())
+        {
+            System.out.println("Success");
+        }
     }
 }

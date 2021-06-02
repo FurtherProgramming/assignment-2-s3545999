@@ -3,9 +3,10 @@ package main;
 
 
 public class User {
-    private int employeeID;
-    private String fName;
-    private String lName;
+
+    private Integer employeeId;
+    private String firstName;
+    private String lastName;
 
     private String userName;
 
@@ -14,11 +15,11 @@ public class User {
     private String secretQ;
     private String secretQAns;
 
-    public User(String fname, String lname, String userName, String password,
+    public User(String Fname, String lname, String userName, String password,
                 String secretQ, String secretQAns)
     {
-        this.fName = fname;
-        this.lName = lname;
+        this.firstName = Fname;
+        this.lastName = lname;
         this.userName = userName;
         this.password = password;
         this.admin = false;
@@ -30,29 +31,29 @@ public class User {
 
     }
 
-    public int getEmployeeID() {
-        return employeeID;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployeeID(int employeeID) {
-        this.employeeID = employeeID;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
-    public String getfName() {
-        return fName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setfName(String fName)
+    public void setFirstName(String Fname)
     {
-        this.fName = fName;
+        this.firstName = Fname;
     }
 
-    public String getlName() {
-        return lName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setlName(String lName) {
-        this.lName = lName;
+    public void setLastName(String lName) {
+        this.lastName = lName;
     }
 
     public String getUserName() {

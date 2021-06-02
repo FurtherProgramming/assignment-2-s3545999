@@ -23,7 +23,7 @@ public class ChangePasswordModel {
             UserHolder holder = UserHolder.getInstance();
 
             User user = holder.getUser();
-            int id = user.getEmployeeID();
+            int id = user.getEmployeeId();
             String query = "Update Employee set password = ? where Employee.id == ?";
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, newPassword);

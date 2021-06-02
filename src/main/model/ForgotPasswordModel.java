@@ -107,7 +107,7 @@ public class ForgotPasswordModel {
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 User theUser = new User();
-                theUser.setEmployeeID(userID);
+                theUser.setEmployeeId(userID);
                 UserHolder holder = UserHolder.getInstance();
                 holder.setUser(theUser);
                 return true;
