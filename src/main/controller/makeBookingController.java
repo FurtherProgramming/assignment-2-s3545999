@@ -1,6 +1,5 @@
 package main.controller;
 
-import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,12 +14,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import main.Desk;
+import main.Booking;
 import main.model.makeBookingModel;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -37,7 +35,7 @@ public class makeBookingController implements Initializable {
     private Rectangle currentRectangle;
     private LocalDate date;
 
-    List<Desk> currentDesks;
+    List<Booking> currentBookings;
     @FXML
     DatePicker datePicker;
 
@@ -60,7 +58,11 @@ public class makeBookingController implements Initializable {
     @FXML
     Label booking;
     @FXML
+    Label changeTXT;
+    @FXML
     Button cancel;
+    @FXML
+    Button submitter;
 
     public void initialize(URL location, ResourceBundle resources){
         rectangles.add(Table1);
@@ -78,21 +80,23 @@ public class makeBookingController implements Initializable {
             rectangles.get(i).setMouseTransparent(true);
         }
 
-        if(!makeModel.checkBooking())
+        if(!makeModel.checkBooking(LocalDate.now()))
         {
-            System.out.println("HERE");
-            cancel.setDisable(true);
-            cancel.setMouseTransparent(true);
-            booking.setText("You do not have a booking!");
+            cancel.setVisible(false);
+            booking.setVisible(false);
+            changeTXT.setText("You don't have a Booking! Do you want to make one?");
         }
         else
         {
             String theString = makeModel.getBooking();
             booking.setText(theString);
         }
-        if(makeModel.checkBooking()) {
+        if(makeModel.checkBooking(LocalDate.now()) && !makeModel.checkBooking(LocalDate.now().plusDays(2)))
+        {
             datePicker.setMouseTransparent(true);
             datePicker.setDisable(true);
+            submitter.setVisible(false);
+            changeTXT.setText("You must cancel your booking before rebooking!");
         }
     }
 
@@ -114,8 +118,7 @@ public class makeBookingController implements Initializable {
         currentRectangle = rectangle;
     }
 
-    public void submit(ActionEvent event)
-    {
+    public void submit(ActionEvent event) throws IOException {
         if(currentRectangle != null)
         {
             for(int i = 0; i < rectangles.size(); i++)
@@ -123,14 +126,15 @@ public class makeBookingController implements Initializable {
                 if (currentRectangle == rectangles.get(i))
                 {
                     makeModel.makeBooking(i+1, date);
+                    refresh(event);
                 }
             }
         }
-
     }
 
     public void datePicker(ActionEvent event)
     {
+        currentRectangle = null;
         LocalDate datePicked = datePicker.getValue();
         datePicked.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
         int day = datePicked.getDayOfYear();
@@ -140,10 +144,10 @@ public class makeBookingController implements Initializable {
         int currentYear = dateNow.getYear();
 
         date = datePicker.getValue();
-        System.out.println("Checking desks database");
+
         if(year > currentYear || (year == currentYear && day > currentDay)) {
-            System.out.println("Checking correct date");
-            currentDesks = makeModel.getTableAvailability(date);
+
+            currentBookings = makeModel.getTableAvailability(date);
             setTables();
         }
         else {
@@ -161,14 +165,13 @@ public class makeBookingController implements Initializable {
         {
             rectangles.get(i).setMouseTransparent(false);
         }
-        for(int i = 0; i < currentDesks.size(); i++)
+        for(int i = 0; i < currentBookings.size(); i++)
         {
             System.out.println("Setting Color");
-            System.out.println(currentDesks.get(i).getDeskID());
-            int deskid = currentDesks.get(i).getDeskID();
+            System.out.println(currentBookings.get(i).getTableNumber());
+            int deskid = currentBookings.get(i).getTableNumber();
 
             rectangles.get(deskid - 1).setFill(Color.RED);
-
         }
     }
 
@@ -185,6 +188,23 @@ public class makeBookingController implements Initializable {
         if(makeModel.cancelBooking())
         {
             System.out.println("Success");
+            refresh(event);
         }
+    }
+
+    public void refresh(ActionEvent event){
+        try {
+            Parent createAccParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ui/SelectTable.fxml")));
+            Stage newStage = new Stage();
+            newStage.setScene(new Scene(createAccParent));
+            newStage.show();
+
+            final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            window.close();
+        } catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
     }
 }

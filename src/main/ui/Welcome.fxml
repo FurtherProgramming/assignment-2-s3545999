@@ -11,10 +11,12 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" stylesheets="@../arub.css" BorderPane.alignment="CENTER">
          <children>
-            <Button lineSpacing="10.0" mnemonicParsing="false" onAction="#makeBooking" prefHeight="57.0" prefWidth="246.0" text="Make a Booking" />
-            <Button lineSpacing="10.0" mnemonicParsing="false" onAction="#CancelBooking" prefHeight="57.0" prefWidth="246.0" text="Cancel a Booking" />
-            <Button lineSpacing="10.0" mnemonicParsing="false" onAction="#checkIn" prefHeight="57.0" prefWidth="246.0" text="Checkin" />
-            <Button lineSpacing="10.0" mnemonicParsing="false" onAction="#ManageAccount" prefHeight="57.0" prefWidth="246.0" text="Manage Account">
+            <Button lineSpacing="10.0" mnemonicParsing="false" onAction="#makeBooking" prefHeight="70.0" prefWidth="275.0" text="Manage Booking">
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin></Button>
+            <Button lineSpacing="10.0" mnemonicParsing="false" onAction="#checkIn" prefHeight="70.0" prefWidth="275.0" text="Checkin" />
+            <Button lineSpacing="10.0" mnemonicParsing="false" onAction="#ManageAccount" prefHeight="70.0" prefWidth="275.0" text="Manage Account">
                <VBox.margin>
                   <Insets bottom="30.0" />
                </VBox.margin></Button>
@@ -22,17 +24,20 @@
       </VBox>
    </center>
    <top>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox fx:id="header1" centerShape="false" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="400.0">
                <children>
-                  <Label fx:id="TXTwelcome" text="Welcome" />
+                  <Label fx:id="TXTwelcome" text="Welcome">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
                </children>
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#logout" text="Logout" />
+                  <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#logout" text="Logout" />
                </children>
                <padding>
                   <Insets right="10.0" />

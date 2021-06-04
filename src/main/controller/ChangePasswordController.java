@@ -35,7 +35,7 @@ public class ChangePasswordController implements Initializable {
     }
 
     public void backButtonPressed(ActionEvent event) throws IOException {
-        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/login.fxml"));
+        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/Welcome.fxml"));
         Scene createAccScene = new Scene(createAccParent);
 
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -53,7 +53,7 @@ public class ChangePasswordController implements Initializable {
         {
             changePass.setPassword(password);
 
-            Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/login.fxml"));
+            Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/Welcome.fxml"));
             Stage newStage = new Stage();
             newStage.setScene(new Scene(createAccParent, 600, 400));
             newStage.show();

@@ -1,37 +1,94 @@
 package main;
 
+import java.util.Date;
+
 public class Booking {
 
-    private String Date;
-    private String TableNumber;
-    private Boolean AdminAcc;
+    private int bookingNumber;
+    private Object date;
+    private String dateString;
+    private int TableNumber;
+    private int employeeID;
+    private boolean adminAccepted;
+    private boolean canceled;
+    private String firstName;
+    private String lastName;
 
-    Booking(){
+    public Booking(){
 
     }
 
-    public String getDate() {
-        return Date;
-    }
-
-    public void setDate(String date) {
-        Date = date;
-    }
-
-    public String getTableNumber() {
+    public int getTableNumber() {
         return TableNumber;
     }
 
-    public void setTableNumber(String tableNumber) {
+    public void setTableNumber(int tableNumber) {
         TableNumber = tableNumber;
     }
 
-    public Boolean getAdminAcc() {
-        return AdminAcc;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setAdminAcc(Boolean adminAcc) {
-        AdminAcc = adminAcc;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+
+    public boolean isAdminAccepted() {
+        return adminAccepted;
+    }
+
+    public void setAdminAccepted(boolean adminAccepted) {
+        this.adminAccepted = adminAccepted;
+    }
+
+    public boolean isCanceled() {
+        return canceled;
+    }
+
+    public String getDateString() {
+        return dateString;
+    }
+
+    public void setDateString(String dateString) {
+        this.dateString = dateString;
+    }
+
+    public void setCanceled(boolean canceled) {
+        this.canceled = canceled;
+    }
+
+    public int getEmployeeID() {
+        return employeeID;
+    }
+
+    public void setEmployeeID(int employeeID) {
+        this.employeeID = employeeID;
+    }
+
+    public Object getDate() {
+        return date;
+    }
+
+    public void setDate(Object date) {
+        date = date;
+        setDateString(date.toString());
+    }
+
+    public int getBookingNumber() {
+        return bookingNumber;
+    }
+
+    public void setBookingNumber(int bookingNumber) {
+        this.bookingNumber = bookingNumber;
+    }
 }

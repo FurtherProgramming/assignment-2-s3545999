@@ -8,26 +8,28 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
 
-public class cancelBookingModel {
+public class CheckinModel {
 
     Connection connection;
 
-    public cancelBookingModel(){
+    public CheckinModel(){
         connection = SQLConnection.connect();
         if (connection == null)
             System.exit(1);
     }
 
-    public Boolean checkBooking() {
+    public Boolean checkBookingToday() {
 
         int UserID = UserHolder.getInstance().getUser().getEmployeeId();
         System.out.println(UserID);
+        java.sql.Date dateNow = new java.sql.Date(new java.util.Date().getTime());
         try {
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
-            String query = "select * from DeskBookings where EmployeeID = ? AND CheckedIn = false AND Canceled = false";
+            String query = "select * from DeskBookings where EmployeeID = ? AND Canceled = false AND bookedDate = ?";
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, UserID);
+            preparedStatement.setObject(2, dateNow);
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next())
             {

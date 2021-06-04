@@ -105,7 +105,7 @@ public class CreateAccController implements Initializable {
             if (created)
             {
                 // Show success message tab then return to login
-                Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/login.fxml"));
+                Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/Welcome.fxml"));
                 Scene createAccScene = new Scene(createAccParent);
 
                 Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();

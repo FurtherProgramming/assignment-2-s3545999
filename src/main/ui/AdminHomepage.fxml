@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../arub.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.AdminHomepageController">
    <center>
@@ -19,24 +18,20 @@
       </VBox>
    </center>
    <top>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox fx:id="header1" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="425.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="425.0">
                <children>
-                  <Label fx:id="TXTwelcome" alignment="CENTER" prefHeight="41.0" prefWidth="256.0" text="Welcome" textAlignment="CENTER">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                     <padding>
-                        <Insets top="20.0" />
-                     </padding>
+                  <Label fx:id="TXTwelcome" prefHeight="47.0" prefWidth="410.0" text="Welcome">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
                   </Label>
                </children>
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" text="Logout" />
+                  <Button mnemonicParsing="false" onAction="#logout" text="Logout" />
                </children>
                <HBox.margin>
                   <Insets right="5.0" />

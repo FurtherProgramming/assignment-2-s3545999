@@ -5,19 +5,22 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../arub.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.ManageBookingController">
    <center>
-      <TableView prefHeight="382.0" prefWidth="880.0" stylesheets="@../arub.css" BorderPane.alignment="CENTER">
+      <TableView fx:id="bookingTable" prefHeight="382.0" prefWidth="880.0" stylesheets="@../arub.css" BorderPane.alignment="CENTER">
          <columns>
-            <TableColumn prefWidth="139.0" text="Booking No." />
-            <TableColumn minWidth="0.0" prefWidth="117.0" text="Table No." />
-            <TableColumn minWidth="0.0" prefWidth="141.0" text="Employee id" />
-            <TableColumn prefWidth="182.0" text="Employee Name" />
+            <TableColumn fx:id="bookingNumCol" prefWidth="140.0" text="Booking No." />
+            <TableColumn fx:id="dateCol" prefWidth="163.06964111328125" text="Date" />
+            <TableColumn fx:id="tableNumCol" minWidth="0.0" prefWidth="140.0" text="Table No." />
+            <TableColumn fx:id="employeeIDCol" minWidth="0.0" prefWidth="140.0" text="Employee id" />
+            <TableColumn fx:id="E" prefWidth="293.7840576171875" text="Employee Name">
+               <columns>
+                  <TableColumn fx:id="firstNameCol" prefWidth="150.0" text="First" />
+                  <TableColumn fx:id="lastNameCol" minWidth="0.0" prefWidth="145.37164306640625" text="Last" />
+               </columns></TableColumn>
          </columns>
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -44,31 +47,22 @@
    <bottom>
       <HBox prefHeight="91.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="269.0">
+            <HBox prefHeight="52.0" prefWidth="900.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" />
-                  <Label prefHeight="23.0" prefWidth="236.0" text="Booking Number:">
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="188.0">
-               <children>
-                  <TextField prefHeight="36.0" prefWidth="115.0" />
-               </children>
-            </HBox>
-            <HBox prefHeight="52.0" prefWidth="432.0">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="52.0" prefWidth="231.0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="52.0" prefWidth="450.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="167.0" text="Confirm" />
+                        <Button mnemonicParsing="false" onAction="#confirm" prefHeight="53.0" prefWidth="167.0" text="Confirm">
+                           <HBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </HBox.margin></Button>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="52.0" prefWidth="163.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="450.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="124.0" text="Reject" />
+                        <Button mnemonicParsing="false" onAction="#reject" prefHeight="53.0" prefWidth="167.0" text="Reject">
+                           <HBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </HBox.margin></Button>
                      </children>
                   </HBox>
                </children>

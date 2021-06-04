@@ -14,3 +14,17 @@
 .label {
     -fx-text-fill: black;
 }
+
+.table-column {
+    -fx-alignment: CENTER;
+}
+
+#TXTwelcome{
+    -fx-font-size: 40;
+    -fx-font-style: italic;
+    -fx-text-fill: WHITE;
+}
+
+#header1 {
+    -fx-background-color: #000E34;
+}

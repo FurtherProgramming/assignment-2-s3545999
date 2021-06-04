@@ -1,6 +1,6 @@
 package main.model;
 
-import main.Desk;
+import main.Booking;
 import main.SQLConnection;
 import main.UserHolder;
 
@@ -8,7 +8,6 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public class makeBookingModel {
 
@@ -40,7 +39,7 @@ public class makeBookingModel {
             {
                 bookedDate = resultSet.getObject("bookedDate").toString();
                 tableNum = resultSet.getInt("deskId");
-                returnString = "You have booked table Number: " + tableNum + " for " + bookedDate;
+                returnString = "You have booked desk number " + tableNum + " for " + bookedDate;
             }
 
         } catch (Exception e) {
@@ -49,16 +48,21 @@ public class makeBookingModel {
         return returnString;
     }
 
-    public Boolean checkBooking() {
+    public Boolean checkBooking(LocalDate date) {
 
         int UserID = UserHolder.getInstance().getUser().getEmployeeId();
         System.out.println(UserID);
+
         try {
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
-            String query = "select * from DeskBookings where EmployeeID = ? AND CheckedIn = 0 AND Canceled = false";
+            String query = "select * from DeskBookings where EmployeeID = ? " +
+                    "AND CheckedIn = 0 " +
+                    "AND Canceled = false " +
+                    "AND bookedDate > ?";
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, UserID);
+            preparedStatement.setObject(2, date);
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next())
             {
@@ -71,9 +75,9 @@ public class makeBookingModel {
         return false;
     }
 
-    public List<Desk> getTableAvailability(LocalDate date)
+    public List<Booking> getTableAvailability(LocalDate date)
     {
-        List<Desk> desks = new ArrayList<>();
+        List<Booking> bookings = new ArrayList<>();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
@@ -89,18 +93,17 @@ public class makeBookingModel {
                 System.out.println(resultSet.getInt("deskId"));
                 System.out.println("Employee id");
                 System.out.println(resultSet.getInt("EmployeeID"));
-                Desk desk = new Desk();
-                desk.setUserID(resultSet.getInt("EmployeeID"));
-                desk.setAvailability(false);
-                desk.setDeskID(resultSet.getInt("deskId"));
-                desks.add(desk);
+                Booking booking = new Booking();
+                booking.setEmployeeID(resultSet.getInt("EmployeeID"));
+                booking.setEmployeeID(resultSet.getInt("deskId"));
+                bookings.add(booking);
             }
             preparedStatement.close();
             resultSet.close();
-            return desks;
+            return bookings;
         } catch (Exception e) {
             System.out.println(e);
-            return desks;
+            return bookings;
         }
     }
 
@@ -109,7 +112,10 @@ public class makeBookingModel {
         int userId = UserHolder.getInstance().getUser().getEmployeeId();
         String query = "INSERT INTO DeskBookings (bookedDate, deskId, EmployeeId, CheckedIn, AdminAccepted) VALUES (?,?,?,?,?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
-
+            if(checkBooking(LocalDate.now()))
+            {
+                cancelBooking();
+            }
             preparedStatement.setObject(1, date);
             preparedStatement.setInt(2, deskId);
             preparedStatement.setInt(3, userId);
