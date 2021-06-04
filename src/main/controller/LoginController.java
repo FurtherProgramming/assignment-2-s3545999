@@ -32,11 +32,6 @@ public class LoginController implements Initializable {
     // Check database connection
     @Override
     public void initialize(URL location, ResourceBundle resources){
-        if (loginModel.isDbConnected()){
-            isConnected.setText("Connected");
-        }else{
-            isConnected.setText("Not Connected");
-        }
 
     }
     /* login Action method
@@ -47,7 +42,6 @@ public class LoginController implements Initializable {
         try {
             if (loginModel.isLogin(txtUsername.getText(),txtPassword.getText())){
 
-                isConnected.setText("Logged in successfully");
                 Parent createAccParent;
                 User user = UserHolder.getInstance().getUser();
                 System.out.println(user.getAdmin());
@@ -67,9 +61,6 @@ public class LoginController implements Initializable {
 
                 final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
                 window.close();
-            }
-            else{
-                isConnected.setText("username and password is incorrect");
             }
         } catch (SQLException | IOException e) {
             e.printStackTrace();

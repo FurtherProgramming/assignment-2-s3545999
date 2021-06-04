@@ -54,19 +54,10 @@ public class homePageController implements Initializable {
         window.close();
     }
 
-    public void CancelBooking(ActionEvent event) throws IOException {
-        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/CancelBooking.fxml"));
-        Stage newStage = new Stage();
-        newStage.setScene(new Scene(createAccParent, 600, 400));
-        newStage.show();
-
-        final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.close();
-    }
     public void checkIn(ActionEvent event) throws IOException {
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/CheckIn.fxml"));
         Stage newStage = new Stage();
-        newStage.setScene(new Scene(createAccParent, 600, 400));
+        newStage.setScene(new Scene(createAccParent));
         newStage.show();
 
         final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -75,7 +66,7 @@ public class homePageController implements Initializable {
     public void ManageAccount(ActionEvent event) throws IOException {
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/ManageAccount.fxml"));
         Stage newStage = new Stage();
-        newStage.setScene(new Scene(createAccParent, 600, 400));
+        newStage.setScene(new Scene(createAccParent));
         newStage.show();
 
         final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();

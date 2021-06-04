@@ -54,12 +54,6 @@ public class CreateAccController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources){
         fillSecretQ();
-        if (createAcc.isDbConnected()){
-           // isConnected.setText("Connected");
-        }else{
-            // isConnected.setText("Not Connected");
-        }
-
     }
 
     public void backButtonPressed(ActionEvent event) throws IOException {

@@ -5,46 +5,44 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane id="arubcss" prefHeight="400" prefWidth="600" stylesheets="@../arub.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.LoginController">
-    <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffe5b0" height="200.0" layoutX="11.0" layoutY="111.0" stroke="#ffe5b0" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-        <Label fx:id="isConnected" layoutX="329.0" layoutY="355.0" text="Status">
-
-        </Label>
-        <TextField fx:id="txtUsername" layoutX="385.0" layoutY="117.0" prefHeight="27.0" prefWidth="168.0" />
-        <PasswordField fx:id="txtPassword" layoutX="385.0" layoutY="164.0" prefHeight="27.0" prefWidth="168.0" />
-        <Button layoutX="27.0" layoutY="241.0" mnemonicParsing="false" onAction="#createAccountButtonPushed" prefHeight="36.0" prefWidth="168.0" text="Create Account" />
-        <Text layoutX="444.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
-            <font>
-                <Font size="21.0" />
-            </font></Text>
-        <Button fx:id="ForgotButton" layoutX="332.0" layoutY="297.0" mnemonicParsing="false" onAction="#forgotPassButton" prefHeight="36.0" prefWidth="221.0" text="Forgot Password" />
-        <Button layoutX="332.0" layoutY="241.0" mnemonicParsing="false" onAction="#Login" prefHeight="36.0" prefWidth="221.0" text="Login" />
-        <Label alignment="CENTER_RIGHT" layoutX="283.0" layoutY="124.0" stylesheets="@../arub.css" text="Username:" textFill="WHITE">
-            <font>
-                <Font size="20.0" />
-            </font>
-        </Label>
-        <Label alignment="CENTER_RIGHT" layoutX="285.0" layoutY="171.0" stylesheets="@../arub.css" text="Password:" textFill="WHITE">
-            <font>
-                <Font size="20.0" />
-            </font>
-        </Label>
-        <Label layoutX="27.0" layoutY="138.0" prefHeight="89.0" prefWidth="168.0" stylesheets="@../arub.css" text="Do you want to create an account?" wrapText="true">
-            <font>
-                <Font size="24.0" />
-            </font>
-        </Label>
-        <Label layoutX="243.0" layoutY="31.0" text="ARUB">
-            <font>
-                <Font size="45.0" />
-            </font>
-        </Label>
-
-
-    </children>
-</AnchorPane>
+<BorderPane fx:id="smallHome" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../arub.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.LoginController">
+   <top>
+      <HBox fx:id="header1" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" stylesheets="@../arub.css" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="HeaderTXT" text="ARUB" />
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffe5b0" height="200.0" layoutX="11.0" layoutY="48.0" stroke="#ffe5b0" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+            <Button layoutX="27.0" layoutY="176.0" mnemonicParsing="false" onAction="#createAccountButtonPushed" prefHeight="36.0" prefWidth="168.0" text="Create Account" />
+            <Label layoutX="27.0" layoutY="61.0" prefHeight="89.0" prefWidth="173.0" stylesheets="@../arub.css" text="Do you want to create an account?" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtUsername" layoutX="395.0" layoutY="56.0" prefHeight="27.0" prefWidth="168.0" />
+            <PasswordField fx:id="txtPassword" layoutX="395.0" layoutY="101.0" prefHeight="27.0" prefWidth="168.0" />
+            <Button fx:id="ForgotButton" layoutX="342.0" layoutY="222.0" mnemonicParsing="false" onAction="#forgotPassButton" prefHeight="36.0" prefWidth="221.0" text="Forgot Password" />
+            <Button layoutX="342.0" layoutY="172.0" mnemonicParsing="false" onAction="#Login" prefHeight="36.0" prefWidth="221.0" text="Login" />
+            <Label alignment="CENTER_RIGHT" layoutX="293.0" layoutY="61.0" stylesheets="@../arub.css" text="Username:" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" layoutX="295.0" layoutY="106.0" stylesheets="@../arub.css" text="Password:" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </left>
+</BorderPane>

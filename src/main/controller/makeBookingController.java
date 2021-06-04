@@ -73,7 +73,7 @@ public class makeBookingController implements Initializable {
         rectangles.add(Table6);
         rectangles.add(Table7);
         rectangles.add(Table8);
-        setAllTab(Color.RED);
+        setAllTab(Color.GRAY);
 
         for(int i = 0; i < rectangles.size(); i++)
         {
@@ -91,6 +91,7 @@ public class makeBookingController implements Initializable {
             String theString = makeModel.getBooking();
             booking.setText(theString);
         }
+
         if(makeModel.checkBooking(LocalDate.now()) && !makeModel.checkBooking(LocalDate.now().plusDays(2)))
         {
             datePicker.setMouseTransparent(true);
@@ -102,7 +103,7 @@ public class makeBookingController implements Initializable {
 
     public void back(ActionEvent event) throws IOException {
 
-        Parent createAccParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ui/welcome.fxml")));
+        Parent createAccParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ui/Welcome.fxml")));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(createAccParent, 600, 400));
         newStage.show();
@@ -167,11 +168,9 @@ public class makeBookingController implements Initializable {
         }
         for(int i = 0; i < currentBookings.size(); i++)
         {
-            System.out.println("Setting Color");
-            System.out.println(currentBookings.get(i).getTableNumber());
             int deskid = currentBookings.get(i).getTableNumber();
 
-            rectangles.get(deskid - 1).setFill(Color.RED);
+            rectangles.get(deskid - 1).setFill(Color.GREY);
         }
     }
 

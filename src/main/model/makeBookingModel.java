@@ -25,15 +25,18 @@ public class makeBookingModel {
         String bookedDate  = "";
         Integer tableNum = -1;
         int UserID = UserHolder.getInstance().getUser().getEmployeeId();
-        System.out.println(UserID);
-        java.sql.Date dateNow = new java.sql.Date(new java.util.Date().getTime());
+        LocalDate dateNow = LocalDate.now();
 
         try {
-            String query = "select * from DeskBookings where EmployeeID = ? and bookedDate > ? and CheckedIn = 0 and Canceled = 0";
+            String query = "select * from DeskBookings " +
+                    "where EmployeeID = ? " +
+                    "and bookedDate > ? " +
+                    "and CheckedIn = 0 " +
+                    "and Canceled = 0";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setInt(1, UserID);
-            preparedStatement.setDate(2, dateNow);
+            preparedStatement.setObject(2, dateNow);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next())
             {
@@ -89,13 +92,9 @@ public class makeBookingModel {
 
             while(resultSet.next())
             {
-                System.out.println("deskId");
-                System.out.println(resultSet.getInt("deskId"));
-                System.out.println("Employee id");
-                System.out.println(resultSet.getInt("EmployeeID"));
                 Booking booking = new Booking();
                 booking.setEmployeeID(resultSet.getInt("EmployeeID"));
-                booking.setEmployeeID(resultSet.getInt("deskId"));
+                booking.setTableNumber(resultSet.getInt("deskId"));
                 bookings.add(booking);
             }
             preparedStatement.close();

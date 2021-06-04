@@ -3,6 +3,13 @@
     -fx-font-family: sans-serif;
     -fx-font-size: 20px;
     -fx-text-fill: black;
+    -fx-pref-width: 900;
+    -fx-pref-height: 600;
+}
+
+#smallHome {
+    -fx-pref-width: 600;
+    -fx-pref-height: 400;
 }
 
 .button {
@@ -25,6 +32,17 @@
     -fx-text-fill: WHITE;
 }
 
+#HeaderTXT{
+    -fx-font-size: 40;
+    -fx-text-fill: WHITE;
+}
+
 #header1 {
     -fx-background-color: #000E34;
+}
+
+#backButton
+{
+    -fx-alignment: center-right;
+    -fx-font-size: 30;
 }

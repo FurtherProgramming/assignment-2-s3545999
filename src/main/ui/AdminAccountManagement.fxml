@@ -27,12 +27,12 @@
       </TableView>
    </center>
    <top>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox fx:id="header1" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0" />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="603.0">
                <children>
-                  <Label alignment="CENTER" text="Account Management">
+                  <Label fx:id="HeaderTXT" alignment="CENTER" prefHeight="55.0" prefWidth="497.0" text="Account Management">
                      <font>
                         <Font size="24.0" />
                      </font></Label>
@@ -40,7 +40,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#back" prefHeight="66.0" prefWidth="132.0" text="Back" />
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" prefHeight="66.0" prefWidth="132.0" text="Back" />
                </children>
             </HBox>
          </children>

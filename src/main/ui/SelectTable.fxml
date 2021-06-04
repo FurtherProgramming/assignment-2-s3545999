@@ -19,14 +19,14 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="900.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="75.0" prefWidth="630.0">
+                  <VBox alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="630.0">
                      <children>
-                        <Label fx:id="booking" alignment="CENTER_RIGHT" text="You already have a booking!" />
+                        <Label fx:id="booking" alignment="CENTER_RIGHT" text="You already have a booking!" textAlignment="RIGHT" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="300.0">
                      <children>
-                        <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+                        <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancel" text="Cancel Booking" />
                      </children>
                   </VBox>
                </children>
@@ -65,7 +65,7 @@
                     </rowConstraints>
                      <children>
                         <Rectangle fx:id="Table1" arcHeight="5.0" arcWidth="5.0" fill="#ff531f" height="55.0" onMouseClicked="#highlight" stroke="BLACK" strokeType="INSIDE" width="118.0" GridPane.rowIndex="1" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Desk 1" textAlignment="CENTER" wrappingWidth="109.41404724121094" GridPane.rowIndex="1" />
+                        <Text disable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Desk 1" textAlignment="CENTER" wrappingWidth="109.41404724121094" GridPane.rowIndex="1" />
                         <Rectangle fx:id="Table2" arcHeight="5.0" arcWidth="5.0" fill="#ff531f" height="55.0" onMouseClicked="#highlight" stroke="BLACK" strokeType="INSIDE" width="118.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                         <Rectangle fx:id="Table3" arcHeight="5.0" arcWidth="5.0" fill="#ff531f" height="55.0" onMouseClicked="#highlight" stroke="BLACK" strokeType="INSIDE" width="118.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                         <Rectangle fx:id="Table4" arcHeight="5.0" arcWidth="5.0" fill="#ff531f" height="55.0" onMouseClicked="#highlight" stroke="BLACK" strokeType="INSIDE" width="118.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
@@ -73,13 +73,13 @@
                         <Rectangle fx:id="Table6" arcHeight="5.0" arcWidth="5.0" fill="#ff531f" height="55.0" onMouseClicked="#highlight" stroke="BLACK" strokeType="INSIDE" width="118.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
                         <Rectangle fx:id="Table7" arcHeight="5.0" arcWidth="5.0" fill="#ff531f" height="55.0" onMouseClicked="#highlight" stroke="BLACK" strokeType="INSIDE" width="118.0" GridPane.columnIndex="6" GridPane.rowIndex="6" />
                         <Rectangle fx:id="Table8" arcHeight="5.0" arcWidth="5.0" fill="#ff531f" height="55.0" onMouseClicked="#highlight" stroke="BLACK" strokeType="INSIDE" width="118.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Desk 2" textAlignment="CENTER" wrappingWidth="109.41404724121094" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Desk 3" textAlignment="CENTER" wrappingWidth="109.41404724121094" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Desk 4" textAlignment="CENTER" wrappingWidth="109.41404724121094" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Desk 5" textAlignment="CENTER" wrappingWidth="109.41404724121094" GridPane.rowIndex="6" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Desk 6" textAlignment="CENTER" wrappingWidth="109.41404724121094" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Desk 7" textAlignment="CENTER" wrappingWidth="109.41404724121094" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Desk 8" textAlignment="CENTER" wrappingWidth="109.41404724121094" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+                        <Text disable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Desk 2" textAlignment="CENTER" wrappingWidth="109.41404724121094" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Text disable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Desk 3" textAlignment="CENTER" wrappingWidth="109.41404724121094" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                        <Text disable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Desk 4" textAlignment="CENTER" wrappingWidth="109.41404724121094" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                        <Text disable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Desk 5" textAlignment="CENTER" wrappingWidth="109.41404724121094" GridPane.rowIndex="6" />
+                        <Text disable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Desk 6" textAlignment="CENTER" wrappingWidth="109.41404724121094" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                        <Text disable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Desk 7" textAlignment="CENTER" wrappingWidth="109.41404724121094" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                        <Text disable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Desk 8" textAlignment="CENTER" wrappingWidth="109.41404724121094" GridPane.columnIndex="6" GridPane.rowIndex="6" />
                      </children>
                   </GridPane>
                </children>
@@ -93,29 +93,20 @@
       </VBox>
    </center>
    <top>
-      <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+      <HBox fx:id="header1" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <HBox prefHeight="100.0" prefWidth="300.0" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <Label alignment="CENTER" text="Book a Desk" />
+                  <Label fx:id="HeaderTXT" text="Manage Booking" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#back" text="Back" />
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" text="Back" />
                </children>
             </HBox>
          </children>
-      </GridPane>
+      </HBox>
    </top>
 </BorderPane>

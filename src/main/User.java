@@ -64,6 +64,18 @@ public class User {
         this.userName = userName;
     }
 
+    public void setEmployeeId(Integer employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setSecretQAns(String secretQAns) {
+        this.secretQAns = secretQAns;
+    }
+
     public String getPassword() {
         return password;
     }
