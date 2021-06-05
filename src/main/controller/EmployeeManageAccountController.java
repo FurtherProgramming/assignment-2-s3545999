@@ -11,14 +11,17 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import main.User;
 import main.UserHolder;
+import main.model.EmployeeManageAccountModel;
 import main.model.cancelBookingModel;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class EmployeeManageAccountController implements Initializable {
 
+    EmployeeManageAccountModel employeeManageAccountModel = new EmployeeManageAccountModel();
     @FXML
     TextField firstName;
     @FXML
@@ -38,12 +41,18 @@ public class EmployeeManageAccountController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        List<String> questions = employeeManageAccountModel.getSecQuestions();
+
+        secQuestion.getItems().addAll(questions);
+
+
         User user = UserHolder.getInstance().getUser();
         firstName.setText(user.getFirstName());
         lastName.setText(user.getLastName());
         username.setText(user.getUserName());
         password.setText(user.getPassword());
         confirmPassword.setText(user.getPassword());
+        secQuestion.getSelectionModel().select(0);
         secAnswer.setText(user.getSecretQAns());
         confirmAnswer.setText(user.getSecretQAns());
     }
@@ -61,6 +70,13 @@ public class EmployeeManageAccountController implements Initializable {
 
     public void Submit(ActionEvent event)
     {
-
+        if(password.getText() == password.getText()
+        && secAnswer.getText() == confirmAnswer.getText())
+        {
+            User user = UserHolder.getInstance().getUser();
+            user.setFirstName(firstName.getText());
+            user.setLastName(lastName.getText());
+        }
+        }
     }
 }
