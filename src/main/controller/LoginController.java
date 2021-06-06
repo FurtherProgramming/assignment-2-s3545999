@@ -21,6 +21,7 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
     public LoginModel loginModel = new LoginModel();
+
     @FXML
     private Label isConnected;
     @FXML

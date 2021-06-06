@@ -39,4 +39,60 @@ public class EmployeeManageAccountModel {
         return questions;
     }
 
+    public boolean updateUser(User user)
+    {
+        try {
+            String query = "Update Employee " +
+                    "set firstName = ? " +
+                    "and surname = ? " +
+                    "and username = ? " +
+                    "and password = ? " +
+                    "and SecQuestion = ? " +
+                    "and SecAns = ? " +
+                    "and Admin = ?" +
+                    "where id == ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, user.getFirstName());
+            preparedStatement.setString(2, user.getLastName());
+            preparedStatement.setString(3, user.getUserName());
+            preparedStatement.setString(4, user.getPassword());
+            preparedStatement.setString(4, user.getSecretQ());
+            preparedStatement.setString(5, user.getSecretQAns());
+            preparedStatement.setBoolean(6, user.getAdmin());
+            preparedStatement.setInt(7, user.getEmployeeId());
+
+            preparedStatement.executeUpdate();
+            return true;
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+            return false;
+        }
+    }
+
+    public boolean addUser(User user)
+    {
+        try {
+            String query = "INSERT INTO Employee " +
+                    "(firstName, surname, username, password, SecQuestion, SecAns, Admin) " +
+                    "VALUES (?,?,?,?,?,?,?,?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, user.getFirstName());
+            preparedStatement.setString(2, user.getLastName());
+            preparedStatement.setString(3, user.getUserName());
+            preparedStatement.setString(4, user.getPassword());
+            preparedStatement.setString(5, user.getSecretQ());
+            preparedStatement.setString(6, user.getSecretQAns());
+            preparedStatement.setBoolean(7, user.getAdmin());
+
+            preparedStatement.executeUpdate();
+            return true;
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+            return false;
+        }
+    }
 }

@@ -18,7 +18,7 @@
             <HBox prefHeight="100.0" prefWidth="200.0" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="500.0">
                <children>
-                  <Label fx:id="HeaderTXT" text="Manage Your Account" />
+                  <Label id="HeaderTXT" fx:id="HeaderTXT" text="Manage Your Account" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -32,9 +32,9 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="50.0" prefWidth="200.0">
+            <HBox prefHeight="65.0" prefWidth="200.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="117.0">
                      <children>
                         <Label text="First Name:" />
                      </children>
@@ -42,33 +42,33 @@
                         <Insets left="15.0" />
                      </HBox.margin>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="700.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="310.0">
                      <children>
-                        <TextField fx:id="firstName" prefHeight="36.0" prefWidth="667.0" />
+                        <TextField fx:id="firstName" prefHeight="36.0" prefWidth="300.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="50.0" prefWidth="137.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="117.0">
+                           <children>
+                              <Label text="Last Name:" />
+                           </children>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="301.0">
+                     <children>
+                        <TextField fx:id="lastName" prefHeight="36.0" prefWidth="300.0" />
                      </children>
                   </HBox>
                </children>
             </HBox>
-            <HBox prefHeight="50.0" prefWidth="200.0">
+            <HBox prefHeight="65.0" prefWidth="200.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Label text="Last Name:" />
-                     </children>
-                     <HBox.margin>
-                        <Insets left="15.0" />
-                     </HBox.margin>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="700.0">
-                     <children>
-                        <TextField fx:id="lastName" prefHeight="36.0" prefWidth="667.0" />
-                     </children>
-                  </HBox>
-               </children>
-            </HBox>
-            <HBox prefHeight="50.0" prefWidth="200.0">
-               <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="117.0">
                      <children>
                         <Label text="Username:" />
                      </children>
@@ -76,48 +76,38 @@
                         <Insets left="15.0" />
                      </HBox.margin>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="700.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="760.0">
                      <children>
-                        <TextField fx:id="username" prefHeight="36.0" prefWidth="667.0" />
+                        <TextField fx:id="username" prefHeight="36.0" prefWidth="747.0" />
                      </children>
                   </HBox>
                </children>
             </HBox>
-            <HBox prefHeight="50.0" prefWidth="200.0">
+            <HBox prefHeight="65.0" prefWidth="900.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" prefHeight="55.0" prefWidth="131.0">
                      <children>
-                        <Label text="Password:" />
-                     </children>
-                     <HBox.margin>
-                        <Insets left="15.0" />
-                     </HBox.margin>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="700.0">
-                     <children>
-                        <PasswordField fx:id="password" prefHeight="36.0" prefWidth="665.0" />
+                        <Label alignment="CENTER" text="Password:" />
                      </children>
                   </HBox>
-               </children>
-            </HBox>
-            <HBox prefHeight="50.0" prefWidth="200.0">
-               <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="221.0">
                      <children>
-                        <Label text="Confirm Password:" />
+                        <PasswordField fx:id="password" prefHeight="36.0" prefWidth="221.0" />
                      </children>
-                     <HBox.margin>
-                        <Insets left="15.0" />
-                     </HBox.margin>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="700.0">
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="179.0">
                      <children>
-                        <PasswordField fx:id="confirmPassword" prefHeight="36.0" prefWidth="665.0" />
+                        <Label alignment="CENTER" text="Confirm Password:" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="64.0" prefWidth="353.0">
+                     <children>
+                        <PasswordField fx:id="confirmPassword" prefHeight="36.0" prefWidth="353.0" />
                      </children>
                   </HBox>
                </children>
             </HBox>
-            <HBox prefHeight="50.0" prefWidth="200.0">
+            <HBox prefHeight="65.0" prefWidth="200.0">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -129,12 +119,12 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="700.0">
                      <children>
-                        <ChoiceBox fx:id="secQuestion" prefHeight="36.0" prefWidth="665.0" />
+                        <ChoiceBox fx:id="secQuestion" prefHeight="36.0" prefWidth="675.0" />
                      </children>
                   </HBox>
                </children>
             </HBox>
-            <HBox prefHeight="50.0" prefWidth="200.0">
+            <HBox prefHeight="65.0" prefWidth="200.0">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -148,14 +138,14 @@
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="700.0">
                            <children>
-                              <PasswordField fx:id="secAnswer" prefHeight="36.0" prefWidth="665.0" />
+                              <PasswordField fx:id="secAnswer" prefHeight="36.0" prefWidth="675.0" />
                            </children>
                         </HBox>
                      </children>
                   </HBox>
                </children>
             </HBox>
-            <HBox prefHeight="50.0" prefWidth="200.0">
+            <HBox prefHeight="65.0" prefWidth="200.0">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -167,7 +157,21 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="700.0">
                      <children>
-                        <PasswordField fx:id="confirmAnswer" prefHeight="36.0" prefWidth="665.0" />
+                        <PasswordField fx:id="confirmAnswer" prefHeight="36.0" prefWidth="675.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="65.0" prefWidth="200.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="AdminTXT" text="Admin:" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ChoiceBox fx:id="admin" prefWidth="150.0" />
                      </children>
                   </HBox>
                </children>
@@ -176,7 +180,7 @@
       </VBox>
    </center>
    <bottom>
-      <Button mnemonicParsing="false" text="Submit" BorderPane.alignment="CENTER">
+      <Button mnemonicParsing="false" onAction="#Submit" text="Submit" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="20.0" />
          </BorderPane.margin>
