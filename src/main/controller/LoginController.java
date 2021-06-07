@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
+import main.CreateManageHolder;
 import main.User;
 import main.UserHolder;
 import main.model.LoginModel;
@@ -22,8 +23,6 @@ import java.util.ResourceBundle;
 public class LoginController implements Initializable {
     public LoginModel loginModel = new LoginModel();
 
-    @FXML
-    private Label isConnected;
     @FXML
     private TextField txtUsername;
     @FXML
@@ -56,7 +55,7 @@ public class LoginController implements Initializable {
                 }
 
                 Stage newStage = new Stage();
-                newStage.setScene(new Scene(createAccParent, 600, 400));
+                newStage.setScene(new Scene(createAccParent));
 
                 newStage.show();
 
@@ -68,11 +67,15 @@ public class LoginController implements Initializable {
         }
     }
 
-    public void createAccountButtonPushed(ActionEvent event) throws IOException {
+    public void createAccountButtonPushed(ActionEvent event) throws IOException
+    {
+        CreateManageHolder.getInstance().setNewAccount(true);
+        CreateManageHolder.getInstance().setAdmin(false);
+        CreateManageHolder.getInstance().setUser(null);
 
-        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/createAccount.fxml"));
+        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/ManageAccount.fxml"));
         Stage newStage = new Stage();
-        newStage.setScene(new Scene(createAccParent, 600, 400));
+        newStage.setScene(new Scene(createAccParent));
         newStage.show();
 
         final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();

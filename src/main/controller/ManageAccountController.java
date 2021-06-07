@@ -12,6 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import main.CreateManageHolder;
 import main.User;
 import main.model.ManageAccountModel;
 
@@ -62,15 +63,20 @@ public class ManageAccountController implements Initializable {
 
         if(accountTable.getSelectionModel().getSelectedItem() != null)
         {
+            User user = manageAccount.getUser(accountTable.getSelectionModel().getSelectedItem().getEmployeeId());
+            CreateManageHolder holder = CreateManageHolder.getInstance();
+            holder.setNewAccount(false);
+            holder.setAdmin(true);
+            holder.setUser(user);
 
+            Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/ManageAccount.fxml"));
+            Stage newStage = new Stage();
+            newStage.setScene(new Scene(createAccParent));
+            newStage.show();
+
+            final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            window.close();
         }
-//        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminHomepage.fxml"));
-//        Stage newStage = new Stage();
-//        newStage.setScene(new Scene(createAccParent, 600, 400));
-//        newStage.show();
-//
-//        final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-//        window.close();
     }
 
 }

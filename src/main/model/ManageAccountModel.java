@@ -21,6 +21,35 @@ public class ManageAccountModel {
             System.exit(1);
     }
 
+    public User getUser(int userID)
+    {
+        User user = new User();
+        try {
+            String query = "select * from Employee " +
+                    "where id == ? ";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, userID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next())
+            {
+                user.setFirstName(resultSet.getString("firstName"));
+                user.setLastName(resultSet.getString("surname"));
+                user.setUserName(resultSet.getString("username"));
+                user.setPassword(resultSet.getString("password"));
+                user.setSecretQ(resultSet.getString("SecQuestion"));
+                user.setEmployeeId(resultSet.getInt("id"));
+                user.setSecretQAns(resultSet.getString("SecAns"));
+                user.setAdmin(resultSet.getBoolean("Admin"));
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        return user;
+    }
+
     public ObservableList<User> getAllUsers()
     {
         ObservableList<User> users = FXCollections.observableArrayList();

@@ -21,18 +21,10 @@ public class LoginModel {
             System.exit(1);
     }
 
-    public Boolean isDbConnected(){
-        try {
-            return !connection.isClosed();
-        }
-        catch(Exception e){
-            return false;
-        }
-    }
-
     public Boolean isLogin(String user, String pass) throws SQLException {
 
-        String query = "select * from Employee where username = ? and password= ?";
+        String query = "select * from Employee " +
+                "where username = ? and password= ?";
         try {
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
@@ -45,6 +37,7 @@ public class LoginModel {
 
                 User theUser = new User();
                 theUser.setEmployeeId(resultSet.getInt("id"));
+                System.out.println(resultSet.getString("firstName"));
                 theUser.setFirstName(resultSet.getString("firstName"));
                 theUser.setLastName(resultSet.getString("surname"));
                 theUser.setUserName(resultSet.getString("username"));
@@ -57,12 +50,14 @@ public class LoginModel {
                 holder.setUser(theUser);
                 return true;
             }
-            else{
+            else
+            {
                 return false;
             }
         }
         catch (Exception e)
-        {   System.out.println(e);
+        {
+            System.out.println(e);
             return false;
         }
     }

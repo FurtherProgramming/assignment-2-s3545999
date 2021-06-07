@@ -25,7 +25,8 @@ public class EmployeeManageAccountController implements Initializable {
     EmployeeManageAccountModel employeeManageAccountModel = new EmployeeManageAccountModel();
 
     User user;
-    boolean adminUpdate;
+    Boolean adminUpdate;
+    Boolean newAccount;
     @FXML
     Label HeaderTXT;
     @FXML
@@ -51,15 +52,30 @@ public class EmployeeManageAccountController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        newAccount = CreateManageHolder.getInstance().getNewAccount();
+
         List<String> questions = employeeManageAccountModel.getSecQuestions();
         secQuestion.getItems().addAll(questions);
         CreateManageHolder holder = CreateManageHolder.getInstance();
+        newAccount = holder.getNewAccount();
+        adminUpdate = holder.getAdmin();
+        if(holder.getUser() != null)
+        {
+            user = holder.getUser();
+        }
 
-        if(holder.getNewAccount() == true)
+        if(adminUpdate != true)
+        {
+            AdminTXT.setVisible(false);
+            admin.setVisible(false);
+        }
+
+        if(newAccount == true)
         {
             HeaderTXT.setText("Create an Account");
         }
-        else if(holder.getUser() != null)
+        else if(user != null)
         {
             user = holder.getUser();
             firstName.setText(user.getFirstName());
@@ -70,24 +86,34 @@ public class EmployeeManageAccountController implements Initializable {
             secQuestion.getSelectionModel().select(0);
             secAnswer.setText(user.getSecretQAns());
             confirmAnswer.setText(user.getSecretQAns());
-        }
 
-        if(holder.getAdmin() != true)
-        {
-            AdminTXT.setVisible(false);
-            admin.setVisible(false);
-        }
-        else
-        {
-            admin.getItems().add("Yes");
-            admin.getItems().add("No");
+            if(adminUpdate == true)
+            {
+                admin.getItems().add("Yes");
+                admin.getItems().add("No");
+                if(user.getAdmin() == true)
+                {
+                    admin.getSelectionModel().select(0);
+                }
+            }
         }
     }
 
 
     public void back(ActionEvent event) throws IOException {
-
-        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/Welcome.fxml"));
+        Parent createAccParent;
+        if(newAccount == true)
+        {
+            createAccParent = FXMLLoader.load(getClass().getResource("../ui/login.fxml"));
+        }
+        else if(adminUpdate == true)
+        {
+            createAccParent = FXMLLoader.load(getClass().getResource("../ui/ManageAccount.fxml"));
+        }
+        else
+        {
+            createAccParent = FXMLLoader.load(getClass().getResource("../ui/Welcome.fxml"));
+        }
         Stage newStage = new Stage();
         newStage.setScene(new Scene(createAccParent, 600, 400));
 
@@ -98,44 +124,64 @@ public class EmployeeManageAccountController implements Initializable {
 
     public void Submit(ActionEvent event)
     {
-        System.out.println(password.getText());
-        System.out.println(confirmPassword.getText());
-        System.out.println(secAnswer.getText());
-        System.out.println(confirmAnswer.getText());
-
         if(password.getText().equals(confirmPassword.getText())
-        && secAnswer.getText().equals(confirmAnswer.getText()))
+        && secAnswer.getText().equals(confirmAnswer.getText())
+        && checkAcceptable())
         {
-            System.out.println("Hello");
 
-            boolean newUser = false;
-            if(user == null)
+            if(newAccount == true)
             {
-                newUser = true;
                 user = new User();
+                user.setAdmin(false);
             }
+
             user.setFirstName(firstName.getText());
+
+            System.out.println(user.getFirstName());
+
             user.setLastName(lastName.getText());
             user.setUserName(username.getText());
             user.setPassword(password.getText());
             user.setSecretQAns(secQuestion.getValue());
             user.setSecretQAns(secAnswer.getText());
-            if(adminUpdate == true && admin.getValue() == "yes")
+            if(adminUpdate == true)
             {
-                user.setAdmin(true);
+                if(admin.getValue() == "Yes")
+                {
+                    user.setAdmin(true);
+                }
+                else
+                {
+                    user.setAdmin(false);
+                }
             }
-            if(newUser)
+
+            if(newAccount == true)
             {
+                System.out.println("Hello");
                 employeeManageAccountModel.addUser(user);
             }
             else
             {
+                System.out.println("Hello2");
                 employeeManageAccountModel.updateUser(user);
+
+                if (user.getEmployeeId() == UserHolder.getInstance().getUser().getEmployeeId())
+                {
+                    UserHolder.getInstance().setUser(user);
+                }
             }
-            if(user.getEmployeeId() == UserHolder.getInstance().getUser().getEmployeeId())
-            {
-                UserHolder.getInstance().setUser(user);
-            }
+
         }
+    }
+
+    private boolean checkAcceptable()
+    {
+        boolean accept = true;
+        if(firstName.getText().equals(""))
+        {
+            return false;
+        }
+        return true;
     }
 }

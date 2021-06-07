@@ -56,6 +56,7 @@ public class homePageController implements Initializable {
         final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.close();
     }
+
     public void ManageAccount(ActionEvent event) throws IOException {
         CreateManageHolder holder = CreateManageHolder.getInstance();
         holder.setUser(user);
@@ -81,5 +82,8 @@ public class homePageController implements Initializable {
         Stage newStage = new Stage();
         newStage.setScene(new Scene(createAccParent, 600, 400));
         newStage.show();
+
+        final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.close();
     }
 }

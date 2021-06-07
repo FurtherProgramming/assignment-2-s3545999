@@ -41,27 +41,33 @@ public class EmployeeManageAccountModel {
 
     public boolean updateUser(User user)
     {
+        String name = user.getFirstName();
         try {
+
+            System.out.println(user.getFirstName());
+            System.out.println(user.getEmployeeId());
+
             String query = "Update Employee " +
-                    "set firstName = ? " +
-                    "and surname = ? " +
-                    "and username = ? " +
-                    "and password = ? " +
-                    "and SecQuestion = ? " +
-                    "and SecAns = ? " +
-                    "and Admin = ?" +
-                    "where id == ?";
+                    "set firstName = ?, " +
+                    "surname = ?, " +
+                    "username = ?, " +
+                    "password = ?, " +
+                    "SecQuestion = ?, " +
+                    "SecAns = ?, " +
+                    "Admin = ? " +
+                    "where Employee.id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+            System.out.println(name);
             preparedStatement.setString(1, user.getFirstName());
             preparedStatement.setString(2, user.getLastName());
             preparedStatement.setString(3, user.getUserName());
             preparedStatement.setString(4, user.getPassword());
-            preparedStatement.setString(4, user.getSecretQ());
-            preparedStatement.setString(5, user.getSecretQAns());
-            preparedStatement.setBoolean(6, user.getAdmin());
-            preparedStatement.setInt(7, user.getEmployeeId());
-
+            preparedStatement.setString(5, user.getSecretQ());
+            preparedStatement.setString(6, user.getSecretQAns());
+            preparedStatement.setBoolean(7, user.getAdmin());
+            preparedStatement.setInt(8, user.getEmployeeId());
             preparedStatement.executeUpdate();
+
             return true;
         }
         catch(Exception e)
@@ -76,7 +82,7 @@ public class EmployeeManageAccountModel {
         try {
             String query = "INSERT INTO Employee " +
                     "(firstName, surname, username, password, SecQuestion, SecAns, Admin) " +
-                    "VALUES (?,?,?,?,?,?,?,?)";
+                    "VALUES (?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, user.getFirstName());
             preparedStatement.setString(2, user.getLastName());
