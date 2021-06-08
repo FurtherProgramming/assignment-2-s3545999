@@ -12,6 +12,7 @@ public class User {
     private Boolean admin;
     private String secretQ;
     private String secretQAns;
+    private Boolean active;
 
     public User(String Fname, String lname, String userName, String password,
                 String secretQ, String secretQAns)
@@ -98,4 +99,7 @@ public class User {
         return secretQAns;
     }
 
+    public Boolean getActive() { return active; }
+
+    public void setActive(Boolean active) { this.active = active; }
 }

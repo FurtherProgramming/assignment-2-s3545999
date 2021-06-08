@@ -46,3 +46,8 @@
     -fx-alignment: center-right;
     -fx-font-size: 30;
 }
+
+.text-field:error {
+    -fx-background-color: #FFC7C7;
+    -fx-border-color: red;
+}

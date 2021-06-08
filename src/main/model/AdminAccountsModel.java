@@ -21,12 +21,54 @@ public class AdminAccountsModel {
             System.exit(1);
     }
 
+    public boolean deleteUser(int userID)
+    {
+        boolean update = false;
+        try {
+            String query = "DELETE from Employee " +
+                    "where id == ? ";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, userID);
+            if(preparedStatement.executeUpdate() == 1)
+            {
+                update = true;
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        return update;
+    }
+
+    public boolean updateActivityUser(boolean active, User user)
+    {
+        boolean update = false;
+        try {
+            String query = "UPDATE Employee set Active = ? where id == ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setBoolean(1, active);
+            preparedStatement.setInt(2, user.getEmployeeId());
+            if(preparedStatement.executeUpdate() == 1)
+            {
+                update = true;
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        return update;
+    }
+
     public User getUser(int userID)
     {
         User user = new User();
         try {
             String query = "select * from Employee " +
-                    "where id == ? ";
+                    "where id = ? ";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, userID);
@@ -41,6 +83,7 @@ public class AdminAccountsModel {
                 user.setEmployeeId(resultSet.getInt("id"));
                 user.setSecretQAns(resultSet.getString("SecAns"));
                 user.setAdmin(resultSet.getBoolean("Admin"));
+
             }
         }
         catch(Exception e)
@@ -64,6 +107,8 @@ public class AdminAccountsModel {
                 user.setFirstName(resultSet.getString("firstName"));
                 user.setLastName(resultSet.getString("surname"));
                 user.setUserName(resultSet.getString("username"));
+                user.setAdmin(resultSet.getBoolean("admin"));
+                user.setActive(resultSet.getBoolean("Active"));
                 users.add(user);
             }
         }

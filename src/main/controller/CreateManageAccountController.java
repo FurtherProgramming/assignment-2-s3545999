@@ -1,5 +1,9 @@
 package main.controller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
+import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,16 +20,18 @@ import main.model.CreateManageAccountModel;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class CreateManageAccountController implements Initializable {
 
     CreateManageAccountModel createManageAccountModel = new CreateManageAccountModel();
 
+    private final PseudoClass errorClass = PseudoClass.getPseudoClass("error");
+
     User user;
     Boolean adminUpdate;
     Boolean newAccount;
+
     @FXML
     Label HeaderTXT;
     @FXML
@@ -51,7 +57,6 @@ public class CreateManageAccountController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         newAccount = CreateManageHolder.getInstance().getNewAccount();
 
         List<String> questions = createManageAccountModel.getSecQuestions();
@@ -59,6 +64,7 @@ public class CreateManageAccountController implements Initializable {
         CreateManageHolder holder = CreateManageHolder.getInstance();
         newAccount = holder.getNewAccount();
         adminUpdate = holder.getAdmin();
+
         if(holder.getUser() != null)
         {
             user = holder.getUser();
@@ -68,6 +74,19 @@ public class CreateManageAccountController implements Initializable {
         {
             AdminTXT.setVisible(false);
             admin.setVisible(false);
+        }
+        else
+        {
+            admin.getItems().add("Yes");
+            admin.getItems().add("No");
+            if(user != null && user.getAdmin() == true)
+            {
+                admin.getSelectionModel().select("Yes");
+            }
+            else
+            {
+                admin.getSelectionModel().select("No");
+            }
         }
 
         if(newAccount == true)
@@ -85,47 +104,37 @@ public class CreateManageAccountController implements Initializable {
             secQuestion.getSelectionModel().select(0);
             secAnswer.setText(user.getSecretQAns());
             confirmAnswer.setText(user.getSecretQAns());
-
-            if(adminUpdate == true)
-            {
-                admin.getItems().add("Yes");
-                admin.getItems().add("No");
-                if(user.getAdmin() == true)
-                {
-                    admin.getSelectionModel().select(0);
-                }
-            }
         }
+        initialiseValidation();
     }
 
 
-    public void back(ActionEvent event) throws IOException {
-        Parent createAccParent;
-        if(newAccount == true)
-        {
-            createAccParent = FXMLLoader.load(getClass().getResource("../ui/login.fxml"));
-        }
-        else if(adminUpdate == true)
-        {
-            createAccParent = FXMLLoader.load(getClass().getResource("../ui/CreateManageAccount.fxml"));
-        }
-        else
-        {
-            createAccParent = FXMLLoader.load(getClass().getResource("../ui/EmployeeHomepage.fxml"));
-        }
-        Stage newStage = new Stage();
-        newStage.setScene(new Scene(createAccParent, 600, 400));
+    public void back(ActionEvent event){
+        try {
+            Parent createAccParent;
+            if (adminUpdate == true) {
+                createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminAccounts.fxml"));
+            }
+            else if (newAccount == true) {
+                createAccParent = FXMLLoader.load(getClass().getResource("../ui/login.fxml"));
+            } else {
+                createAccParent = FXMLLoader.load(getClass().getResource("../ui/EmployeeHomepage.fxml"));
+            }
+            Stage newStage = new Stage();
+            newStage.setScene(new Scene(createAccParent));
 
-        newStage.show();
-        final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.close();
+            newStage.show();
+            final Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.close();
+        }catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
     public void Submit(ActionEvent event)
     {
-        if(password.getText().equals(confirmPassword.getText())
-        && secAnswer.getText().equals(confirmAnswer.getText())
-        && checkAcceptable())
+        if(validateSubmission() && confirmation())
         {
 
             if(newAccount == true)
@@ -135,14 +144,12 @@ public class CreateManageAccountController implements Initializable {
             }
 
             user.setFirstName(firstName.getText());
-
-            System.out.println(user.getFirstName());
-
             user.setLastName(lastName.getText());
             user.setUserName(username.getText());
             user.setPassword(password.getText());
-            user.setSecretQAns(secQuestion.getValue());
+            user.setSecretQ(secQuestion.getValue());
             user.setSecretQAns(secAnswer.getText());
+
             if(adminUpdate == true)
             {
                 if(admin.getValue() == "Yes")
@@ -154,33 +161,180 @@ public class CreateManageAccountController implements Initializable {
                     user.setAdmin(false);
                 }
             }
+            try {
+                if (newAccount == true) {
+                    createManageAccountModel.addUser(user);
 
-            if(newAccount == true)
-            {
-                System.out.println("Hello");
-                createManageAccountModel.addUser(user);
-            }
-            else
-            {
-                System.out.println("Hello2");
-                createManageAccountModel.updateUser(user);
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("Account Successfully created!");
 
-                if (user.getEmployeeId() == UserHolder.getInstance().getUser().getEmployeeId())
-                {
-                    UserHolder.getInstance().setUser(user);
+                    Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+                    stage.show();
+                    stage.setAlwaysOnTop(true);
+                    stage.toFront();
+                } else {
+                    createManageAccountModel.updateUser(user);
+                    if (user.getEmployeeId() == UserHolder.getInstance().getUser().getEmployeeId()) {
+                        UserHolder.getInstance().setUser(user);
+                    }
                 }
             }
-
+            catch (Exception e)
+            {
+                System.out.println(e);
+            }
+            back(event);
         }
     }
 
-    private boolean checkAcceptable()
+    private boolean confirmation()
     {
-        boolean accept = true;
-        if(firstName.getText().equals(""))
+        boolean confirmed = true;
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        if(newAccount == true)
         {
-            return false;
+            alert.setContentText("Are you sure you want to create the account?");
         }
-        return true;
+        else if(adminUpdate == true)
+        {
+            alert.setContentText("Are you sure you want to update the account?");
+        }
+        else
+        {
+            alert.setContentText("Are you sure you want to update your account?");
+        }
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if(result.get() != ButtonType.OK)
+        {
+            confirmed = false;
+        }
+        System.out.println(confirmed);
+        return confirmed;
+    }
+
+    private boolean validateSubmission()
+    {
+        boolean check = true;
+        String alertMessage = "";
+
+        if(firstName.getText().equals("") || lastName.getText().equals(""))
+        {
+            validate(firstName);
+            validate(lastName);
+            alertMessage = "Must have valid name!";
+            check = false;
+        }
+        else if(username.getText().equals("") || username.getText().contains(" "))
+        {
+            validate(username);
+            alertMessage = "Must have valid username!";
+            check = false;
+        }
+        else if(user != null && !username.getText().equals(user.getUserName()) &&
+                createManageAccountModel.checkusername(username.getText()))
+        {
+            alertMessage = "Username is taken!";
+            username.pseudoClassStateChanged(errorClass, true);
+            check = false;
+        }
+        else if(!password.getText().equals(confirmPassword.getText())
+        || password.getText().equals("") || password.getText().contains(" "))
+        {
+            validate(password);
+            validate(confirmPassword);
+            alertMessage = "Invalid password!";
+            check = false;
+        }
+        else if(secQuestion.getValue() == null)
+        {
+            alertMessage = "Invalid Security question!";
+            check = false;
+        }
+        else if(!secAnswer.getText().equals(confirmAnswer.getText())
+                || secAnswer.getText().equals("") || secAnswer.getText().contains(" "))
+        {
+            validate(secAnswer);
+            validate(confirmAnswer);
+            alertMessage = "Invalid security answer!";
+            check = false;
+        }
+
+        if(check == false)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(alertMessage);
+            alert.show();
+        }
+
+        return check;
+    }
+
+
+    private void initialiseValidation()
+    {
+        setUpValidation(firstName);
+        setUpValidation(lastName);
+        setUpValidation(username);
+        setUpValidation(password);
+        setUpValidation(confirmPassword);
+        setUpValidation(secAnswer);
+        setUpValidation(confirmAnswer);
+    }
+
+    // Following code modified from ValidatingTextFieldExample, James D
+    // found at https://stackoverflow.com/questions/24231610/javafx-red-border-for-text-field
+
+    // Designed to set up the listener which watched for changes in the text fields
+    // Enables errors to be shown on the text boxes
+    private void setUpValidation(final TextField textField)
+    {
+        textField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                validate(textField);
+            }
+        });
+    }
+
+    // Updates the class to psuedoclass of the textfield if an error
+    private void validate(TextField textField)
+    {
+        if(textField.getText().equals("") || textField.getText().contains(" "))
+        {
+            textField.pseudoClassStateChanged(errorClass, true);
+        }
+        else if(textField.equals(password) || textField.equals(confirmPassword))
+        {
+            if(!password.getText().equals(confirmPassword.getText()))
+            {
+                password.pseudoClassStateChanged(errorClass, true);
+                confirmPassword.pseudoClassStateChanged(errorClass, true);
+            }
+            else
+            {
+                password.pseudoClassStateChanged(errorClass, false);
+                confirmPassword.pseudoClassStateChanged(errorClass, false);
+            }
+        }
+        else if(textField.equals(secAnswer) || textField.equals(confirmAnswer))
+        {
+            if(!secAnswer.getText().equals(confirmAnswer.getText()))
+            {
+                secAnswer.pseudoClassStateChanged(errorClass, true);
+                confirmAnswer.pseudoClassStateChanged(errorClass, true);
+            }
+            else
+            {
+                secAnswer.pseudoClassStateChanged(errorClass, false);
+                confirmAnswer.pseudoClassStateChanged(errorClass, false);
+            }
+        }
+        else
+        {
+            textField.pseudoClassStateChanged(errorClass, false);
+        }
     }
 }

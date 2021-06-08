@@ -8,6 +8,7 @@ import main.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -18,6 +19,26 @@ public class CreateManageAccountModel {
         connection = SQLConnection.connect();
         if (connection == null)
             System.exit(1);
+    }
+
+    public boolean checkusername(String user)
+    {
+        boolean taken = false;
+        try{
+            String query = "select * from Employee where username = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, user);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next())
+            {
+                taken = true;
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        return taken;
     }
 
     public List<String> getSecQuestions()
@@ -39,7 +60,7 @@ public class CreateManageAccountModel {
         return questions;
     }
 
-    public boolean updateUser(User user)
+    public boolean updateUser(User user) throws SQLException
     {
         String name = user.getFirstName();
         try {
@@ -70,9 +91,8 @@ public class CreateManageAccountModel {
 
             return true;
         }
-        catch(Exception e)
+        catch (Exception e)
         {
-            System.out.println(e);
             return false;
         }
     }
