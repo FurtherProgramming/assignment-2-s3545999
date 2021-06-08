@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import main.User;
 import main.UserHolder;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,7 +34,7 @@ public class AdminHomepageController implements Initializable {
     }
 
     public void bookingManagement(ActionEvent event) throws IOException {
-        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/ManageBookings.fxml"));
+        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminManageBookings.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(createAccParent, 900, 600));
         newStage.show();
@@ -45,7 +44,7 @@ public class AdminHomepageController implements Initializable {
     }
 
     public void AccountManage(ActionEvent event) throws IOException {
-        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminAccountManagement.fxml"));
+        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminAccounts.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(createAccParent));
         newStage.show();

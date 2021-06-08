@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ManageAccountModel {
+public class AdminAccountsModel {
     Connection connection;
 
-    public ManageAccountModel(){
+    public AdminAccountsModel(){
         connection = SQLConnection.connect();
         if (connection == null)
             System.exit(1);

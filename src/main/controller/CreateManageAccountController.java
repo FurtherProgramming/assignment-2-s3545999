@@ -12,17 +12,16 @@ import javafx.stage.Stage;
 import main.CreateManageHolder;
 import main.User;
 import main.UserHolder;
-import main.model.EmployeeManageAccountModel;
-import main.model.cancelBookingModel;
+import main.model.CreateManageAccountModel;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class EmployeeManageAccountController implements Initializable {
+public class CreateManageAccountController implements Initializable {
 
-    EmployeeManageAccountModel employeeManageAccountModel = new EmployeeManageAccountModel();
+    CreateManageAccountModel createManageAccountModel = new CreateManageAccountModel();
 
     User user;
     Boolean adminUpdate;
@@ -55,7 +54,7 @@ public class EmployeeManageAccountController implements Initializable {
 
         newAccount = CreateManageHolder.getInstance().getNewAccount();
 
-        List<String> questions = employeeManageAccountModel.getSecQuestions();
+        List<String> questions = createManageAccountModel.getSecQuestions();
         secQuestion.getItems().addAll(questions);
         CreateManageHolder holder = CreateManageHolder.getInstance();
         newAccount = holder.getNewAccount();
@@ -108,11 +107,11 @@ public class EmployeeManageAccountController implements Initializable {
         }
         else if(adminUpdate == true)
         {
-            createAccParent = FXMLLoader.load(getClass().getResource("../ui/ManageAccount.fxml"));
+            createAccParent = FXMLLoader.load(getClass().getResource("../ui/CreateManageAccount.fxml"));
         }
         else
         {
-            createAccParent = FXMLLoader.load(getClass().getResource("../ui/Welcome.fxml"));
+            createAccParent = FXMLLoader.load(getClass().getResource("../ui/EmployeeHomepage.fxml"));
         }
         Stage newStage = new Stage();
         newStage.setScene(new Scene(createAccParent, 600, 400));
@@ -159,12 +158,12 @@ public class EmployeeManageAccountController implements Initializable {
             if(newAccount == true)
             {
                 System.out.println("Hello");
-                employeeManageAccountModel.addUser(user);
+                createManageAccountModel.addUser(user);
             }
             else
             {
                 System.out.println("Hello2");
-                employeeManageAccountModel.updateUser(user);
+                createManageAccountModel.updateUser(user);
 
                 if (user.getEmployeeId() == UserHolder.getInstance().getUser().getEmployeeId())
                 {

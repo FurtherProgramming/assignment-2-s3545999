@@ -12,10 +12,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 
-public class ManageBookingModel {
+public class AdminManageBookingModel {
     Connection connection;
 
-    public ManageBookingModel(){
+    public AdminManageBookingModel(){
         connection = SQLConnection.connect();
         if (connection == null)
             System.exit(1);

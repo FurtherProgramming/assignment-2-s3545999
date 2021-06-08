@@ -40,7 +40,7 @@ public class CheckinController implements Initializable {
 
     public void back(ActionEvent event) throws IOException {
 
-        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/Welcome.fxml"));
+        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/EmployeeHomepage.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(createAccParent, 600, 400));
         newStage.show();

@@ -8,19 +8,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import main.CreateManageHolder;
 import main.User;
 import main.UserHolder;
-import main.model.EmployeeManageAccountModel;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class homePageController implements Initializable {
+public class EmployeeHomepageController implements Initializable {
 
     private User user;
 
@@ -38,7 +35,7 @@ public class homePageController implements Initializable {
     }
 
     public void makeBooking(ActionEvent event) throws IOException {
-        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/SelectTable.fxml"));
+        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/ManageBooking.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(createAccParent, 900, 600));
         newStage.show();
@@ -63,7 +60,7 @@ public class homePageController implements Initializable {
         holder.setAdmin(false);
         holder.setNewAccount(false);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../ui/ManageAccount.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../ui/CreateManageAccount.fxml"));
         Parent createAccParent = loader.load();
 
         Stage newStage = new Stage();

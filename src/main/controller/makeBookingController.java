@@ -103,7 +103,7 @@ public class makeBookingController implements Initializable {
 
     public void back(ActionEvent event) throws IOException {
 
-        Parent createAccParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ui/Welcome.fxml")));
+        Parent createAccParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ui/EmployeeHomepage.fxml")));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(createAccParent, 600, 400));
         newStage.show();
@@ -193,7 +193,7 @@ public class makeBookingController implements Initializable {
 
     public void refresh(ActionEvent event){
         try {
-            Parent createAccParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ui/SelectTable.fxml")));
+            Parent createAccParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ui/ManageBooking.fxml")));
             Stage newStage = new Stage();
             newStage.setScene(new Scene(createAccParent));
             newStage.show();

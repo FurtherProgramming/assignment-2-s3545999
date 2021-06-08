@@ -11,10 +11,10 @@ import java.sql.ResultSet;
 import java.util.List;
 
 
-public class EmployeeManageAccountModel {
+public class CreateManageAccountModel {
     Connection connection;
 
-    public EmployeeManageAccountModel(){
+    public CreateManageAccountModel(){
         connection = SQLConnection.connect();
         if (connection == null)
             System.exit(1);

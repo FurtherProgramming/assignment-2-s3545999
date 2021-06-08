@@ -15,18 +15,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import main.Booking;
 import main.User;
-import main.UserHolder;
-import main.model.ManageBookingModel;
+import main.model.AdminManageBookingModel;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.ResourceBundle;
 
-public class ManageBookingController implements Initializable {
+public class AdminManageBookingController implements Initializable {
 
-    ManageBookingModel manageBookingModel = new ManageBookingModel();
+    AdminManageBookingModel adminManageBookingModel = new AdminManageBookingModel();
     private ArrayList<Booking> theBookings;
 
     @FXML
@@ -71,7 +69,7 @@ public class ManageBookingController implements Initializable {
         if(bookingTable.getSelectionModel().getSelectedItem() != null)
         {
             int bookingId = bookingTable.getSelectionModel().getSelectedItem().getBookingNumber();
-            manageBookingModel.confirm(bookingId);
+            adminManageBookingModel.confirm(bookingId);
             refreshTable();
         }
     }
@@ -80,14 +78,14 @@ public class ManageBookingController implements Initializable {
         if(bookingTable.getSelectionModel().getSelectedItem() != null)
         {
             int bookingId = bookingTable.getSelectionModel().getSelectedItem().getBookingNumber();
-            manageBookingModel.reject(bookingId);
+            adminManageBookingModel.reject(bookingId);
             refreshTable();
         }
     }
 
     public void refreshTable()
     {
-        ObservableList<Booking> bookings = manageBookingModel.getAllBookings();
+        ObservableList<Booking> bookings = adminManageBookingModel.getAllBookings();
         bookingTable.setItems(bookings);
     }
 }

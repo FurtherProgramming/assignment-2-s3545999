@@ -6,7 +6,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
@@ -47,7 +46,7 @@ public class LoginController implements Initializable {
                 System.out.println(user.getAdmin());
                 if(!user.getAdmin())
                 {
-                    createAccParent = FXMLLoader.load(getClass().getResource("../ui/Welcome.fxml"));
+                    createAccParent = FXMLLoader.load(getClass().getResource("../ui/EmployeeHomepage.fxml"));
                 }
                 else
                 {
@@ -73,7 +72,7 @@ public class LoginController implements Initializable {
         CreateManageHolder.getInstance().setAdmin(false);
         CreateManageHolder.getInstance().setUser(null);
 
-        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/ManageAccount.fxml"));
+        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/CreateManageAccount.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(createAccParent));
         newStage.show();

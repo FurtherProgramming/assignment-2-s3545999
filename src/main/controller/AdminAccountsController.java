@@ -14,17 +14,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import main.CreateManageHolder;
 import main.User;
-import main.model.ManageAccountModel;
+import main.model.AdminAccountsModel;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
-public class ManageAccountController implements Initializable {
+public class AdminAccountsController implements Initializable {
 
-    ManageAccountModel manageAccount = new ManageAccountModel();
+    AdminAccountsModel manageAccount = new AdminAccountsModel();
 
     @FXML
     private TableView<User> accountTable;
@@ -69,7 +67,7 @@ public class ManageAccountController implements Initializable {
             holder.setAdmin(true);
             holder.setUser(user);
 
-            Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/ManageAccount.fxml"));
+            Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/CreateManageAccount.fxml"));
             Stage newStage = new Stage();
             newStage.setScene(new Scene(createAccParent));
             newStage.show();
