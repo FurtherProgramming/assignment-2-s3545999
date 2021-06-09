@@ -22,20 +22,21 @@ public class AdminReportModel {
             System.exit(1);
     }
 
-    public List<String[]> getAllUsers()
+    public ArrayList<ArrayList<String>> getAllUsers()
     {
-        List<String[]> users = new ArrayList<String[]>();
-        String[] headings = new String[9];
-        headings[0] = "id";
-        headings[1] = "firstName";
-        headings[2] = "surname";
-        headings[3] = "username";
-        headings[4] = "SecQuestion";
-        headings[5] = "SecAns";
-        headings[6] = "password";
-        headings[7] = "admin";
-        headings[8] = "Active";
-        users.add(headings);
+
+        ArrayList<ArrayList<String>> users = new ArrayList<ArrayList<String>>();
+        ArrayList<String > headers = new ArrayList<String >();
+        headers.add("id");
+        headers.add("firstName");
+        headers.add("surname");
+        headers.add("username");
+        headers.add("SecQuestion");
+        headers.add("SecAns");
+        headers.add("password");
+        headers.add("admin");
+        headers.add("Active");
+        users.add(headers);
 
         try {
             String query = "select * from Employee";
@@ -44,16 +45,16 @@ public class AdminReportModel {
 
             while(resultSet.next())
             {
-                String[] user = new String[9];
-                user[0] = String.valueOf(resultSet.getInt("id"));
-                user[1] = resultSet.getString("firstName");
-                user[2] = resultSet.getString("surname");
-                user[3] = resultSet.getString("username");
-                user[4] = resultSet.getString("SecQuestion");
-                user[5] = resultSet.getString("SecAns");
-                user[6] = resultSet.getString("password");
-                user[7] = String.valueOf(resultSet.getBoolean("admin"));
-                user[8] = String.valueOf(resultSet.getBoolean("Active"));
+                ArrayList<String > user = new ArrayList<>();
+                user.add(String.valueOf(resultSet.getInt("id")));
+                user.add(resultSet.getString("firstName"));
+                user.add(resultSet.getString("surname"));
+                user.add(resultSet.getString("username"));
+                user.add(resultSet.getString("SecQuestion"));
+                user.add(resultSet.getString("SecAns"));
+                user.add(resultSet.getString("password"));
+                user.add(String.valueOf(resultSet.getBoolean("admin")));
+                user.add(String.valueOf(resultSet.getBoolean("Active")));
                 users.add(user);
             }
         }

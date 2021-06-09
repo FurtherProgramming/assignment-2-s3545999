@@ -59,33 +59,51 @@ public class AdminReportController implements Initializable {
     }
 
     public void accountReport(ActionEvent event) throws IOException {
-        List<String[]> users = adminReportModel.getAllUsers();
+        ArrayList<ArrayList<String>> users = adminReportModel.getAllUsers();
         printCSV(users);
     }
 
-    public void printCSV(List<String[]> list)
+    public void printCSV(ArrayList<ArrayList<String>> list)
     {
-        File file = new File(fileName.getText());
-        try
+        String fileToWrite = fileName.getText();
+        if(fileToWrite.endsWith(".csv"))
         {
-            FileWriter output = new FileWriter(file);
-            for(int i = 0; i < list.size(); i++)
+            String fileWithFolder = "Reports/" + fileToWrite;
+            File file = new File(fileWithFolder);
+            try
             {
-                for(int j = 0; j < list.get(i).length; j++)
+                FileWriter output = new FileWriter(file);
+                for(int i = 0; i < list.size(); i++)
                 {
-                    output.write(list.get(i)[j]);
-                    output.write(", ");
+                    for(int j = 0; j < list.get(i).size(); j++)
+                    {
+                        System.out.println(list.get(i).get(j));
+                        output.write(list.get(i).get(j));
+                        output.write(", ");
+                    }
+                    output.write("\n");
                 }
-                output.write("\n");
+                output.close();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                String alertText = "File has been written to: " + fileWithFolder;
+                alert.setContentText(alertText);
+                alert.show();
             }
-
+            catch(Exception e)
+            {
+                System.out.println(e);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("File name is invalid!");
+                alert.show();
+            }
         }
-        catch(Exception e)
+        else
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("File name is invalid!");
+            alert.setContentText("File must end with '.csv'");
             alert.show();
         }
+
 
     }
 
