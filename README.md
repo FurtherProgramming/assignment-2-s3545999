@@ -15,10 +15,13 @@ Logging in with a non-admin account allows for desk booking and checking in.
 Only one booking can be made at a time.
 While an admin account is only used for controlling the bookings and users.
 
-
 This projected should be downloaded from github and then loaded into intellij IDEA Ultimate.
 Main can be found in src/main/Main. Clicking on main and clicking run will run the program.
 Running requires javafx8 and sqlite to be installed.
+
+Users can only make bookings from tomorrow onwards these must be accepted before they can be 
+checked in to. Changing the clock of your computer is the best way to access the use of the
+checkin method by changing date to the day of the accepted booking.
 
 ## Packaging
 The main class is Main.java
