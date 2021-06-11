@@ -260,7 +260,6 @@ public class makeBookingController implements Initializable {
             alert.setContentText("Successfully deleted");
             refresh(event);
         }
-
     }
 
     // Refresh the page
