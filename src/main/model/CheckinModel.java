@@ -37,6 +37,7 @@ public class CheckinModel {
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next())
             {
+
                 return true;
             }
         } catch (Exception e) {
@@ -44,6 +45,26 @@ public class CheckinModel {
         }
         return false;
     }
+
+    public void setLastdesk(int deskID)
+    {
+        try {
+            int UserID = UserHolder.getInstance().getUser().getEmployeeId();
+            PreparedStatement preparedStatement = null;
+
+            String query = "update Employee " +
+                    "set LastDesk = ? " +
+                    "where id = ?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, deskID);
+            preparedStatement.setObject(2, UserID);
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
 
     public Booking getBooking()
     {

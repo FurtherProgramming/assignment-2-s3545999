@@ -78,6 +78,7 @@ public class AdminAccountsModel {
                 user.setFirstName(resultSet.getString("firstName"));
                 user.setLastName(resultSet.getString("surname"));
                 user.setUserName(resultSet.getString("username"));
+                user.setRole(resultSet.getString("empRole"));
                 user.setPassword(resultSet.getString("password"));
                 user.setSecretQ(resultSet.getString("SecQuestion"));
                 user.setEmployeeId(resultSet.getInt("id"));

@@ -140,8 +140,62 @@ public class makeBookingModel {
             System.out.println(e);
         }
 
+        if(hasPrevBooking())
+        {
+            bookings.add(getPrevTable());
+        }
+
         return bookings;
     }
+
+    public boolean hasPrevBooking()
+    {
+        boolean has = false;
+        try {
+            int id = UserHolder.getInstance().getUser().getEmployeeId();
+            PreparedStatement preparedStatement = null;
+            ResultSet resultSet = null;
+            String query = "select LastDesk from Employee " +
+                    "where id = ?";
+
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+            while(resultSet.next())
+            {
+                has = true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return has;
+    }
+
+
+    public Booking getPrevTable()
+    {
+        Booking booking = new Booking();;
+        try {
+            int id = UserHolder.getInstance().getUser().getEmployeeId();
+            PreparedStatement preparedStatement = null;
+            ResultSet resultSet = null;
+            String query = "select LastDesk from Employee " +
+                    "where id = ?";
+
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+            while(resultSet.next())
+            {
+                booking.setTableNumber(resultSet.getInt("LastDesk"));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return booking;
+    }
+
+
 
     public boolean makeBooking(int deskId, LocalDate date)
     {

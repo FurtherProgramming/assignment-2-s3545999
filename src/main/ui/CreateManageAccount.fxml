@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../arub.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.CreateManageAccountController">
    <top>
       <HBox fx:id="header1" prefHeight="100.0" prefWidth="200.0" stylesheets="@../arub.css" BorderPane.alignment="CENTER">
@@ -78,7 +77,17 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="760.0">
                      <children>
-                        <TextField fx:id="username" prefHeight="36.0" prefWidth="747.0" />
+                        <TextField fx:id="username" prefHeight="36.0" prefWidth="297.0" />
+                        <Label text="Role:">
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="role" prefHeight="36.0" prefWidth="302.0">
+                           <HBox.margin>
+                              <Insets left="70.0" />
+                           </HBox.margin>
+                        </TextField>
                      </children>
                   </HBox>
                </children>
@@ -90,19 +99,19 @@
                         <Label alignment="CENTER" text="Password:" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="221.0">
+                  <HBox alignment="CENTER" prefHeight="64.0" prefWidth="324.0">
                      <children>
-                        <PasswordField fx:id="password" prefHeight="36.0" prefWidth="221.0" />
+                        <PasswordField fx:id="password" prefHeight="36.0" prefWidth="296.0" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="179.0">
+                  <HBox alignment="CENTER" prefHeight="64.0" prefWidth="129.0">
                      <children>
-                        <Label alignment="CENTER" text="Confirm Password:" />
+                        <Label alignment="CENTER" text="Confirm:" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="64.0" prefWidth="353.0">
                      <children>
-                        <PasswordField fx:id="confirmPassword" prefHeight="36.0" prefWidth="353.0" />
+                        <PasswordField fx:id="confirmPassword" prefHeight="36.0" prefWidth="306.0" />
                      </children>
                   </HBox>
                </children>

@@ -122,6 +122,99 @@ public class AdminManageBookingModel {
         }
     }
 
+    public boolean checkTableAvailable(Booking booking)
+    {
+        boolean available = true;
+        try {
+            PreparedStatement preparedStatement = null;
+            String query = "SELECT * from DeskBookings " +
+                    "where AdminAccepted = true " +
+                    "and Canceled = false " +
+                    "and deskId = ?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, booking.getTableNumber());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next())
+            {
+                available = false;
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+
+        if(available == true)
+        {
+            try {
+                PreparedStatement preparedStatement = null;
+                String query = "SELECT * from deskAvailability " +
+                        "where deskNumber = ?" +
+                        "and covidAvailability = false";
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setInt(1, booking.getTableNumber());
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if(resultSet.next())
+                {
+                    available = false;
+                }
+            }
+            catch(Exception e){
+                System.out.println(e);
+            }
+        }
+        return available;
+    }
+
+
+    public boolean hasPrevBooking()
+    {
+        boolean has = false;
+        try {
+            int id = UserHolder.getInstance().getUser().getEmployeeId();
+            PreparedStatement preparedStatement = null;
+            ResultSet resultSet = null;
+            String query = "select LastDesk from Employee " +
+                    "where id = ?";
+
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+            while(resultSet.next())
+            {
+                has = true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return has;
+    }
+
+
+    public boolean isPrevTable(int userId, int tableID)
+    {
+        boolean prevTable = false;
+        try {
+            int id = UserHolder.getInstance().getUser().getEmployeeId();
+            PreparedStatement preparedStatement = null;
+            ResultSet resultSet = null;
+            String query = "select * from Employee " +
+                    "where id = ?" +
+                    "and LastDesk = ?";
+
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, tableID);
+            resultSet = preparedStatement.executeQuery();
+            while(resultSet.next())
+            {
+                prevTable = true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return prevTable;
+    }
+
     public void reject(int bookingId)
     {
         try {

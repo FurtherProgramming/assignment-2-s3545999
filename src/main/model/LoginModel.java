@@ -24,7 +24,8 @@ public class LoginModel {
     public Boolean isLogin(String user, String pass) throws SQLException {
 
         String query = "select * from Employee " +
-                "where username = ? and password= ?";
+                "where username = ? and password= ?" +
+                "and Active = true";
         try {
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
@@ -40,6 +41,7 @@ public class LoginModel {
                 theUser.setFirstName(resultSet.getString("firstName"));
                 theUser.setLastName(resultSet.getString("surname"));
                 theUser.setUserName(resultSet.getString("username"));
+                theUser.setRole(resultSet.getString("empRole"));
                 theUser.setPassword(resultSet.getString("password"));
                 theUser.setAdmin(resultSet.getBoolean("Admin"));
                 theUser.setSecretQ(resultSet.getString("secQuestion"));

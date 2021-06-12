@@ -77,33 +77,42 @@ public class AdminManageBookingController implements Initializable {
 
         if(bookingTable.getSelectionModel().getSelectedItem() != null)
         {
-
+            int tableID = bookingTable.getSelectionModel().getSelectedItem().getTableNumber();
+            int userID = bookingTable.getSelectionModel().getSelectedItem().getEmployeeID();
             Booking booking = bookingTable.getSelectionModel().getSelectedItem();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
+
             if(booking.isAdminAccepted())
             {
                 Alert alertInfo = new Alert(Alert.AlertType.INFORMATION);
                 alertInfo.setContentText("This booking is already accepted!");
                 alertInfo.show();
             }
-            else if(adminManageBookingModel.checkNotRejected(booking.getEmployeeID()))
+            else if(booking.isCanceled() && adminManageBookingModel.checkNotRejected(booking.getEmployeeID()))
             {
                 String text = booking.getFirstName() + " " +booking.getLastName() +
                         " has a booking which has not been accepted or rejected.";
-                alert.setContentText(text);
-                alert.show();
+                error(text);
             }
             else if(adminManageBookingModel.checkAccepted(booking.getEmployeeID()))
             {
                 String text = booking.getFirstName() + " " +booking.getLastName() +
                         " already has a confirmed booking\n"
                         +"It must be cancelled before another can be accepted!";
-                alert.setContentText(text);
-                alert.show();
+                error(text);
+            }
+            else if(!adminManageBookingModel.checkTableAvailable(booking))
+            {
+                String text = "Table " + booking.getTableNumber() + " is not available that day!\n";
+                error(text);
+            }
+            else if(adminManageBookingModel.hasPrevBooking() &&
+                    adminManageBookingModel.isPrevTable(userID, tableID))
+            {
+                String text = "Table " + booking.getTableNumber() + " was their last desk!\n";
+                error(text);
             }
             else
             {
-                Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
                 String text = "Are you sure you want to accept:\n";
 
                 if (confirmation(text, booking)) {
@@ -114,6 +123,14 @@ public class AdminManageBookingController implements Initializable {
             }
         }
     }
+
+    public void error(String text)
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setContentText(text);
+        alert.show();
+    }
+
 
     public void reject(ActionEvent event){
         if(bookingTable.getSelectionModel().getSelectedItem() != null)

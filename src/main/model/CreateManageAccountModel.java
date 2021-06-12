@@ -69,6 +69,7 @@ public class CreateManageAccountModel {
                     "set firstName = ?, " +
                     "surname = ?, " +
                     "username = ?, " +
+                    "empRole = ?, " +
                     "password = ?, " +
                     "SecQuestion = ?, " +
                     "SecAns = ?, " +
@@ -78,6 +79,7 @@ public class CreateManageAccountModel {
             preparedStatement.setString(1, user.getFirstName());
             preparedStatement.setString(2, user.getLastName());
             preparedStatement.setString(3, user.getUserName());
+            preparedStatement.setString(4, user.getRole());
             preparedStatement.setString(4, user.getPassword());
             preparedStatement.setString(5, user.getSecretQ());
             preparedStatement.setString(6, user.getSecretQAns());
@@ -97,16 +99,17 @@ public class CreateManageAccountModel {
     {
         try {
             String query = "INSERT INTO Employee " +
-                    "(firstName, surname, username, password, SecQuestion, SecAns, Admin) " +
+                    "(firstName, surname, username, empRole,password, SecQuestion, SecAns, Admin) " +
                     "VALUES (?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, user.getFirstName());
             preparedStatement.setString(2, user.getLastName());
             preparedStatement.setString(3, user.getUserName());
-            preparedStatement.setString(4, user.getPassword());
-            preparedStatement.setString(5, user.getSecretQ());
-            preparedStatement.setString(6, user.getSecretQAns());
-            preparedStatement.setBoolean(7, user.getAdmin());
+            preparedStatement.setString(4, user.getRole());
+            preparedStatement.setString(5, user.getPassword());
+            preparedStatement.setString(6, user.getSecretQ());
+            preparedStatement.setString(7, user.getSecretQAns());
+            preparedStatement.setBoolean(8, user.getAdmin());
 
             preparedStatement.executeUpdate();
             return true;

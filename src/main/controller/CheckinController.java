@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -71,14 +72,13 @@ public class CheckinController implements Initializable {
 
     public void CheckIn(ActionEvent event) throws IOException {
         checkinModel.checkIn(todayBooking.getBookingNumber());
+        checkinModel.setLastdesk(todayBooking.getTableNumber());
 
-        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/Checkin.fxml"));
-        Stage newStage = new Stage();
-        newStage.setScene(new Scene(createAccParent));
-        newStage.show();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText("Successfully Checked In!");
+        alert.showAndWait();
 
-        final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.close();
+        back(event);
     }
 
 

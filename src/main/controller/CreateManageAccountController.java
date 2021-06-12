@@ -53,6 +53,8 @@ public class CreateManageAccountController implements Initializable {
     @FXML
     Label AdminTXT;
     @FXML
+    TextField role;
+    @FXML
     ChoiceBox<String> admin;
 
     @Override
@@ -95,13 +97,15 @@ public class CreateManageAccountController implements Initializable {
         }
         else if(user != null)
         {
+
             user = holder.getUser();
             firstName.setText(user.getFirstName());
             lastName.setText(user.getLastName());
             username.setText(user.getUserName());
+            role.setText(user.getRole());
             password.setText(user.getPassword());
             confirmPassword.setText(user.getPassword());
-            secQuestion.getSelectionModel().select(0);
+            secQuestion.getSelectionModel().select(user.getSecretQ());
             secAnswer.setText(user.getSecretQAns());
             confirmAnswer.setText(user.getSecretQAns());
         }
@@ -136,7 +140,6 @@ public class CreateManageAccountController implements Initializable {
     {
         if(validateSubmission() && confirmation())
         {
-
             if(newAccount == true)
             {
                 user = new User();
@@ -146,6 +149,7 @@ public class CreateManageAccountController implements Initializable {
             user.setFirstName(firstName.getText());
             user.setLastName(lastName.getText());
             user.setUserName(username.getText());
+            user.setRole(role.getText());
             user.setPassword(password.getText());
             user.setSecretQ(secQuestion.getValue());
             user.setSecretQAns(secAnswer.getText());
@@ -219,7 +223,8 @@ public class CreateManageAccountController implements Initializable {
         boolean check = true;
         String alertMessage = "";
 
-        if(firstName.getText().equals("") || lastName.getText().equals(""))
+        if(firstName.getText().equals("") || firstName.getText().contains(" ")||
+                lastName.getText().equals("") || lastName.getText().contains(" "))
         {
             validate(firstName);
             validate(lastName);
@@ -232,8 +237,15 @@ public class CreateManageAccountController implements Initializable {
             alertMessage = "Must have valid username!";
             check = false;
         }
+        else if(role.getText().equals(""))
+        {
+            validate(role);
+            alertMessage = "Must have a role!";
+            check = false;
+        }
         else if(user != null && !username.getText().equals(user.getUserName()) &&
-                createManageAccountModel.checkusername(username.getText()))
+                createManageAccountModel.checkusername(username.getText())
+        || user == null && createManageAccountModel.checkusername(username.getText()))
         {
             alertMessage = "Username is taken!";
             username.pseudoClassStateChanged(errorClass, true);
@@ -277,6 +289,7 @@ public class CreateManageAccountController implements Initializable {
         setUpValidation(firstName);
         setUpValidation(lastName);
         setUpValidation(username);
+        setUpValidation(role);
         setUpValidation(password);
         setUpValidation(confirmPassword);
         setUpValidation(secAnswer);

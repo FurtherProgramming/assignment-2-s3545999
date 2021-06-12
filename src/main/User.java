@@ -2,29 +2,18 @@ package main;
 
 public class User {
 
-    private Integer employeeId;
+    private int employeeId;
     private String firstName;
     private String lastName;
 
     private String userName;
-
+    private String role;
     private String password;
     private Boolean admin;
     private String secretQ;
     private String secretQAns;
     private Boolean active;
 
-    public User(String Fname, String lname, String userName, String password,
-                String secretQ, String secretQAns)
-    {
-        this.firstName = Fname;
-        this.lastName = lname;
-        this.userName = userName;
-        this.password = password;
-        this.admin = false;
-        this.secretQ = secretQ;
-        this.secretQAns = secretQAns;
-    }
     public User()
     {
 
@@ -63,9 +52,9 @@ public class User {
         this.userName = userName;
     }
 
-    public void setEmployeeId(Integer employeeId) {
-        this.employeeId = employeeId;
-    }
+    public String getRole() { return role; }
+
+    public void setRole(String role) { this.role = role; }
 
     public void setPassword(String password) {
         this.password = password;
