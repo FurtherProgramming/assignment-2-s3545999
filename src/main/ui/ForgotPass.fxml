@@ -19,22 +19,22 @@
             </Label>
             <HBox alignment="CENTER" prefHeight="101.0" prefWidth="900.0">
                <children>
-                  <Label fx:id="textBox1Label" text="Username:">
+                  <Label fx:id="textBox1Label" prefWidth="150.0" text="Username:">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="textBox1" prefHeight="36.0" prefWidth="413.0" promptText="Username" />
+                  <TextField fx:id="textBox1" prefHeight="36.0" prefWidth="400.0" promptText="Username" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="99.0" prefWidth="900.0">
                <children>
-                  <Label fx:id="textBox2Label" text="Confirm:">
+                  <Label fx:id="textBox2Label" prefHeight="63.0" prefWidth="150.0" text="Confirm:">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="textBox2" prefHeight="36.0" prefWidth="440.0" promptText="Confirm New Pasword" />
+                  <TextField fx:id="textBox2" prefHeight="36.0" prefWidth="400.0" promptText="Confirm New Pasword" />
                </children>
                <opaqueInsets>
                   <Insets top="3.0" />

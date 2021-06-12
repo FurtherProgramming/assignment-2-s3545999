@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import main.Booking;
+import main.UserHolder;
 import main.model.makeBookingModel;
 
 import java.io.IOException;
@@ -59,11 +60,13 @@ public class makeBookingController implements Initializable {
     @FXML
     Label changeTXT;
     @FXML
+    Label HeaderTXT;
+    @FXML
     Button cancel;
     @FXML
     Button submitter;
 
-    public void initialize(URL location, ResourceBundle resources){
+    public void initialize(URL location, ResourceBundle resources) {
         rectangles.add(Table1);
         rectangles.add(Table2);
         rectangles.add(Table3);
@@ -75,40 +78,45 @@ public class makeBookingController implements Initializable {
         setAllTab(Color.GRAY);
         lockdown = makeModel.isLockdown();
 
-        for(int i = 0; i < rectangles.size(); i++)
-        {
+        for (int i = 0; i < rectangles.size(); i++) {
             rectangles.get(i).setMouseTransparent(true);
         }
-        if(!lockdown)
-        {
-            if(!makeModel.checkBooking(LocalDate.now()))
-            {
-                cancel.setVisible(false);
-                booking.setVisible(false);
-                changeTXT.setText("You don't have a Booking! Do you want to make one?");
-            }
-            else
-            {
-                currentUserBooking = makeModel.getBooking();
-                String bookingText = String.format("You have booked table " + currentUserBooking.getTableNumber() +
-                        " for " + currentUserBooking.getDate().toString());
-                booking.setText(bookingText);
-            }
+        if (!UserHolder.getInstance().getUser().getAdmin()) {
+            if (!lockdown) {
+                if (!makeModel.checkBooking(LocalDate.now())) {
+                    cancel.setVisible(false);
+                    booking.setVisible(false);
+                    changeTXT.setText("You don't have a Booking! Do you want to make one?");
+                } else {
+                    currentUserBooking = makeModel.getBooking();
+                    String bookingText = String.format("You have booked table " + currentUserBooking.getTableNumber() +
+                            " for " + currentUserBooking.getDate().toString());
+                    booking.setText(bookingText);
+                }
 
-            if(makeModel.checkBooking(LocalDate.now()) && !makeModel.checkBooking(LocalDate.now().plusDays(2)))
-            {
+                if (makeModel.checkBooking(LocalDate.now()) && !makeModel.checkBooking(LocalDate.now().plusDays(2))) {
+                    disableBooking();
+                    changeTXT.setText("You have a booking in the next two days!\n\n" +
+                            "You must cancel your booking before rebooking!");
+                }
+            } else {
                 disableBooking();
-                changeTXT.setText("You have a booking in the next two days!\n\n" +
-                        "You must cancel your booking before rebooking!");
+                booking.setVisible(false);
+                cancel.setVisible(false);
+                changeTXT.setText("You cannot book due to lockdown!");
             }
+        } else {
+            adminSetUp();
         }
-        else
-        {
-            disableBooking();
-            booking.setVisible(false);
-            cancel.setVisible(false);
-            changeTXT.setText("You cannot book due to lockdown!");
-        }
+    }
+
+    private void adminSetUp()
+    {
+        changeTXT.setText("Welcome Admin! Choose a date to view desk allocation");
+        cancel.setVisible(false);
+        submitter.setVisible(false);
+        booking.setVisible(false);
+        HeaderTXT.setText("View Table allocation");
     }
 
     private void disableBooking()
@@ -119,8 +127,15 @@ public class makeBookingController implements Initializable {
     }
 
     public void back(ActionEvent event) throws IOException {
-
-        Parent createAccParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ui/EmployeeHomepage.fxml")));
+        Parent createAccParent;
+        if(UserHolder.getInstance().getUser().getAdmin())
+        {
+            createAccParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ui/AdminReport.fxml")));
+        }
+        else
+        {
+            createAccParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ui/EmployeeHomepage.fxml")));
+        }
         Stage newStage = new Stage();
         newStage.setScene(new Scene(createAccParent));
         newStage.show();
@@ -130,12 +145,15 @@ public class makeBookingController implements Initializable {
     }
 
     public void highlight(MouseEvent event) {
-        Rectangle rectangle = (Rectangle) event.getSource();
-        setTables();
-        rectangle.setFill(Color.rgb(92,121,239));
-        rectangle.setStroke(Color.WHITE);
-        rectangle.strokeWidthProperty().set(3);
-        currentRectangle = rectangle;
+        if(!UserHolder.getInstance().getUser().getAdmin())
+        {
+            Rectangle rectangle = (Rectangle) event.getSource();
+            setTables();
+            rectangle.setFill(Color.rgb(92,121,239));
+            rectangle.setStroke(Color.WHITE);
+            rectangle.strokeWidthProperty().set(3);
+            currentRectangle = rectangle;
+        }
     }
 
     public void submit(ActionEvent event) throws IOException {

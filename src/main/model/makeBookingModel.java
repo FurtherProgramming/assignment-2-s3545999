@@ -142,6 +142,7 @@ public class makeBookingModel {
 
         if(hasPrevBooking())
         {
+            System.out.println("PREV Booking");
             bookings.add(getPrevTable());
         }
 
@@ -163,7 +164,10 @@ public class makeBookingModel {
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next())
             {
-                has = true;
+                if(resultSet.getString("LastDesk") != null)
+                {
+                    has = true;
+                }
             }
         } catch (Exception e) {
             System.out.println(e);

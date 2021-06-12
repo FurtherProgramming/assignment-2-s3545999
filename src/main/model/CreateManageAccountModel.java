@@ -60,9 +60,8 @@ public class CreateManageAccountModel {
         return questions;
     }
 
-    public boolean updateUser(User user) throws SQLException
+    public boolean updateUser(User user)
     {
-        String name = user.getFirstName();
         try {
 
             String query = "Update Employee " +
@@ -80,11 +79,11 @@ public class CreateManageAccountModel {
             preparedStatement.setString(2, user.getLastName());
             preparedStatement.setString(3, user.getUserName());
             preparedStatement.setString(4, user.getRole());
-            preparedStatement.setString(4, user.getPassword());
-            preparedStatement.setString(5, user.getSecretQ());
-            preparedStatement.setString(6, user.getSecretQAns());
-            preparedStatement.setBoolean(7, user.getAdmin());
-            preparedStatement.setInt(8, user.getEmployeeId());
+            preparedStatement.setString(5, user.getPassword());
+            preparedStatement.setString(6, user.getSecretQ());
+            preparedStatement.setString(7, user.getSecretQAns());
+            preparedStatement.setBoolean(8, user.getAdmin());
+            preparedStatement.setInt(9, user.getEmployeeId());
             preparedStatement.executeUpdate();
 
             return true;
@@ -100,7 +99,7 @@ public class CreateManageAccountModel {
         try {
             String query = "INSERT INTO Employee " +
                     "(firstName, surname, username, empRole,password, SecQuestion, SecAns, Admin) " +
-                    "VALUES (?,?,?,?,?,?,?)";
+                    "VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, user.getFirstName());
             preparedStatement.setString(2, user.getLastName());

@@ -54,6 +54,16 @@ public class AdminReportController implements Initializable {
         window.close();
     }
 
+    public void desks(ActionEvent event) throws IOException{
+        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/ManageBooking.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(createAccParent));
+        newStage.show();
+
+        final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.close();
+    }
+
     public void BookingReport(ActionEvent event) {
         if(toDate.getValue() != null && fromDate != null)
         {

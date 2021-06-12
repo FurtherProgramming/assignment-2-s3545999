@@ -14,7 +14,14 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" stylesheets="@../arub.css" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" prefHeight="53.0" prefWidth="600.0" />
+            <VBox alignment="CENTER" prefHeight="89.0" prefWidth="900.0">
+               <children>
+                  <Button lineSpacing="10.0" mnemonicParsing="false" onAction="#desks" prefHeight="50.0" prefWidth="250.0" text="View Desk Layout">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+               </children></VBox>
             <VBox alignment="CENTER" prefHeight="46.0" prefWidth="900.0">
                <children>
                   <Label text="What do you want to call the file?" />

@@ -96,9 +96,9 @@
       <HBox fx:id="header1" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="100.0" prefWidth="300.0" />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="616.0">
                <children>
-                  <Label fx:id="HeaderTXT" text="Manage Booking" />
+                  <Label fx:id="HeaderTXT" alignment="CENTER" prefHeight="47.0" prefWidth="503.0" text="Manage Booking" textAlignment="CENTER" />
                </children>
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="300.0">

@@ -142,22 +142,16 @@ public class AdminAccountsController implements Initializable {
 
         if(accountTable.getSelectionModel().getSelectedItem() != null)
         {
-            int currentUser = UserHolder.getInstance().getUser().getEmployeeId();
 
-            if(accountTable.getSelectionModel().getSelectedItem().getEmployeeId() != currentUser) {
+            User user = accountTable.getSelectionModel().getSelectedItem();
 
-                User user = accountTable.getSelectionModel().getSelectedItem();
+            String message = "Are you sure you want to delete this account?";
 
-                String message = "Are you sure you want to delete this account?";
-
-                if (confirmUpdate(user, message)) {
-                    manageAccount.deleteUser(user.getEmployeeId());
-                    reload(event);
-                }
+            if (confirmUpdate(user, message)) {
+                manageAccount.deleteUser(user.getEmployeeId());
+                reload(event);
             }
-
         }
-
     }
 
     private boolean confirmUpdate(User user, String message)

@@ -72,7 +72,8 @@ public class CreateManageAccountController implements Initializable {
             user = holder.getUser();
         }
 
-        if(adminUpdate != true)
+        if(adminUpdate != true || (holder.getUser() != null &&
+                user.getEmployeeId() == UserHolder.getInstance().getUser().getEmployeeId()))
         {
             AdminTXT.setVisible(false);
             admin.setVisible(false);
@@ -156,8 +157,10 @@ public class CreateManageAccountController implements Initializable {
 
             if(adminUpdate == true)
             {
-                if(admin.getValue() == "Yes")
+                System.out.println(admin.getSelectionModel().getSelectedIndex());
+                if(admin.getSelectionModel().getSelectedIndex() == 0)
                 {
+                    System.out.println("HERE");
                     user.setAdmin(true);
                 }
                 else

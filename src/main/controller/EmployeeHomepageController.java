@@ -37,7 +37,7 @@ public class EmployeeHomepageController implements Initializable {
     public void makeBooking(ActionEvent event) throws IOException {
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/ManageBooking.fxml"));
         Stage newStage = new Stage();
-        newStage.setScene(new Scene(createAccParent, 900, 600));
+        newStage.setScene(new Scene(createAccParent));
         newStage.show();
 
         final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
