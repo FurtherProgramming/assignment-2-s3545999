@@ -14,7 +14,7 @@
          <columns>
             <TableColumn fx:id="bookingNumCol" editable="false" prefWidth="43.986406326293945" text="ID" />
             <TableColumn fx:id="dateCol" prefWidth="145.87124633789062" text="Date" />
-            <TableColumn fx:id="tableNumCol" minWidth="0.0" prefWidth="114.92967224121094" text="Table No." />
+            <TableColumn fx:id="tableNumCol" minWidth="0.0" prefWidth="114.92967224121094" text="Desk No." />
             <TableColumn fx:id="employeeIDCol" minWidth="0.0" prefWidth="144.98800659179688" text="Employee id" />
             <TableColumn fx:id="E" prefWidth="206.01202392578125" text="Employee Name">
                <columns>

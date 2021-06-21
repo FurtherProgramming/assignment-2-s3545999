@@ -89,7 +89,7 @@ public class makeBookingController implements Initializable {
                     changeTXT.setText("You don't have a Booking! Do you want to make one?");
                 } else {
                     currentUserBooking = makeModel.getBooking();
-                    String bookingText = String.format("You have booked table " + currentUserBooking.getTableNumber() +
+                    String bookingText = String.format("You have booked desk " + currentUserBooking.getTableNumber() +
                             " for " + currentUserBooking.getDate().toString());
                     booking.setText(bookingText);
                 }
@@ -116,7 +116,7 @@ public class makeBookingController implements Initializable {
         cancel.setVisible(false);
         submitter.setVisible(false);
         booking.setVisible(false);
-        HeaderTXT.setText("View Table allocation");
+        HeaderTXT.setText("View Desk allocation");
     }
 
     private void disableBooking()
@@ -164,7 +164,7 @@ public class makeBookingController implements Initializable {
                 if (currentRectangle == rectangles.get(i))
                 {
                     int desk = i+1;
-                    String contentText = "Are you sure you want to book Table " + desk +"?";
+                    String contentText = "Are you sure you want to book Desk " + desk +"?";
 
                     if(currentUserBooking != null)
                     {

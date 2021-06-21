@@ -130,9 +130,11 @@ public class AdminManageBookingModel {
             String query = "SELECT * from DeskBookings " +
                     "where AdminAccepted = true " +
                     "and Canceled = false " +
-                    "and deskId = ?";
+                    "and deskId = ?" +
+                    "and bookedDate = ?";
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, booking.getTableNumber());
+            preparedStatement.setObject(2, booking.getDate());
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next())
             {
