@@ -55,6 +55,10 @@ public class CreateManageAccountController implements Initializable {
     @FXML
     TextField role;
     @FXML
+    Label lastDeskLabel;
+    @FXML
+    CheckBox lastDeskCheck;
+    @FXML
     ChoiceBox<String> admin;
 
     @Override
@@ -77,6 +81,8 @@ public class CreateManageAccountController implements Initializable {
         {
             AdminTXT.setVisible(false);
             admin.setVisible(false);
+            lastDeskLabel.setVisible(false);
+            lastDeskCheck.setVisible(false);
         }
         else
         {
@@ -92,26 +98,41 @@ public class CreateManageAccountController implements Initializable {
             }
         }
 
+        if(adminUpdate == true && holder.getUser().getAdmin() == false)
+        {
+            if(createManageAccountModel.checkIfLastDesk(holder.getUser()))
+            {
+                lastDeskLabel.setVisible(true);
+                lastDeskCheck.setVisible(true);
+            }
+        }
+
         if(newAccount == true)
         {
             HeaderTXT.setText("Create an Account");
         }
         else if(user != null)
         {
-
-            user = holder.getUser();
-            firstName.setText(user.getFirstName());
-            lastName.setText(user.getLastName());
-            username.setText(user.getUserName());
-            role.setText(user.getRole());
-            password.setText(user.getPassword());
-            confirmPassword.setText(user.getPassword());
-            secQuestion.getSelectionModel().select(user.getSecretQ());
-            secAnswer.setText(user.getSecretQAns());
-            confirmAnswer.setText(user.getSecretQAns());
+            setUser();
         }
         initialiseValidation();
     }
+
+    private void setUser()
+    {
+        CreateManageHolder holder = CreateManageHolder.getInstance();
+        user = holder.getUser();
+        firstName.setText(user.getFirstName());
+        lastName.setText(user.getLastName());
+        username.setText(user.getUserName());
+        role.setText(user.getRole());
+        password.setText(user.getPassword());
+        confirmPassword.setText(user.getPassword());
+        secQuestion.getSelectionModel().select(user.getSecretQ());
+        secAnswer.setText(user.getSecretQAns());
+        confirmAnswer.setText(user.getSecretQAns());
+    }
+
 
 
     public void back(ActionEvent event){
@@ -146,6 +167,8 @@ public class CreateManageAccountController implements Initializable {
                 user = new User();
                 user.setAdmin(false);
             }
+            CreateManageHolder holder = CreateManageHolder.getInstance();
+
 
             user.setFirstName(firstName.getText());
             user.setLastName(lastName.getText());
@@ -155,12 +178,12 @@ public class CreateManageAccountController implements Initializable {
             user.setSecretQ(secQuestion.getValue());
             user.setSecretQAns(secAnswer.getText());
 
+
             if(adminUpdate == true)
             {
                 System.out.println(admin.getSelectionModel().getSelectedIndex());
                 if(admin.getSelectionModel().getSelectedIndex() == 0)
                 {
-                    System.out.println("HERE");
                     user.setAdmin(true);
                 }
                 else
@@ -180,6 +203,14 @@ public class CreateManageAccountController implements Initializable {
                     stage.setAlwaysOnTop(true);
                     stage.toFront();
                 } else {
+
+                    if(adminUpdate == true && holder.getUser().getAdmin() == false)
+                    {
+                        if(lastDeskCheck.isSelected())
+                        {
+                            createManageAccountModel.releaseLast(user);
+                        }
+                    }
                     createManageAccountModel.updateUser(user);
                     if (user.getEmployeeId() == UserHolder.getInstance().getUser().getEmployeeId()) {
                         UserHolder.getInstance().setUser(user);

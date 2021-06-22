@@ -21,6 +21,44 @@ public class CreateManageAccountModel {
             System.exit(1);
     }
 
+    public boolean checkIfLastDesk(User user)
+    {
+        boolean lastDesk = false;
+        try{
+            String query = "select * from Employee where id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, user.getEmployeeId());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.getInt("LastDesk") > 0)
+            {
+                lastDesk = true;
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        return lastDesk;
+    }
+
+    public void releaseLast(User user)
+    {
+        try {
+            String query = "Update Employee " +
+                    "set LastDesk = NULL " +
+                    "where Employee.id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, user.getEmployeeId());
+            preparedStatement.executeUpdate();
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+
     public boolean checkusername(String user)
     {
         boolean taken = false;

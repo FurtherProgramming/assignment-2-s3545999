@@ -14,6 +14,8 @@ public class User {
     private String secretQAns;
     private Boolean active;
 
+    private Boolean deleteLastBooking;
+
     public User()
     {
 
@@ -91,4 +93,8 @@ public class User {
     public Boolean getActive() { return active; }
 
     public void setActive(Boolean active) { this.active = active; }
+
+    public Boolean getDeleteLastBooking() { return deleteLastBooking; }
+
+    public void setDeleteLastBooking(Boolean deleteLastBooking) { this.deleteLastBooking = deleteLastBooking; }
 }
