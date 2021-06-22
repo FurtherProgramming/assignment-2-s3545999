@@ -81,9 +81,6 @@ public class AdminReportModel {
         headers.add("Canceled");
         bookings.add(headers);
 
-
-        System.out.println(beforeDate);
-        System.out.println(afterDate);
         try {
             String query = "select * from DeskBookings " +
                     "where bookedDate >= ? " +

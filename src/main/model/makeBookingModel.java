@@ -72,8 +72,8 @@ public class makeBookingModel {
 
     public Boolean checkBooking(LocalDate date) {
 
+        boolean check = false;
         int UserID = UserHolder.getInstance().getUser().getEmployeeId();
-        System.out.println(UserID);
 
         try {
             PreparedStatement preparedStatement = null;
@@ -89,13 +89,12 @@ public class makeBookingModel {
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next())
             {
-                System.out.println();
-                return true;
+                check =  true;
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-        return false;
+        return check;
     }
 
     public List<Booking> getTableAvailability(LocalDate date)
@@ -107,7 +106,7 @@ public class makeBookingModel {
             String query = "select * from DeskBookings " +
                     "where bookedDate = ? " +
                     "and Canceled = false";
-            System.out.println(date);
+
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setObject(1, date);
             resultSet = preparedStatement.executeQuery();
@@ -170,7 +169,7 @@ public class makeBookingModel {
     {
         boolean success = false;
         int UserID = UserHolder.getInstance().getUser().getEmployeeId();
-        System.out.println(UserID);
+
         java.sql.Date dateNow = new java.sql.Date(new java.util.Date().getTime());
 
         try {

@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -34,7 +35,6 @@ public class CancelBookingController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         if(!cancelBooking.checkBooking())
         {
-            System.out.println("HERE");
             cancel.setDisable(true);
             cancel.setMouseTransparent(true);
             booking.setText("You do not have a booking!");
@@ -61,7 +61,9 @@ public class CancelBookingController implements Initializable {
     {
         if(cancelBooking.cancelBooking())
         {
-            System.out.println("Success");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Booking Cancelled!");
+            alert.show();
         }
     }
 }

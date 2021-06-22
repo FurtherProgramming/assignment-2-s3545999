@@ -37,7 +37,6 @@ public class LoginModel {
 
                 User theUser = new User();
                 theUser.setEmployeeId(resultSet.getInt("id"));
-                System.out.println(resultSet.getString("firstName"));
                 theUser.setFirstName(resultSet.getString("firstName"));
                 theUser.setLastName(resultSet.getString("surname"));
                 theUser.setUserName(resultSet.getString("username"));

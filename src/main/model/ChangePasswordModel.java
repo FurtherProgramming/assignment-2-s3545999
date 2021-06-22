@@ -18,6 +18,7 @@ public class ChangePasswordModel {
 
     public boolean setPassword(String newPassword)
     {
+        boolean set = false;
         try {
             PreparedStatement preparedStatement = null;
             UserHolder holder = UserHolder.getInstance();
@@ -29,12 +30,12 @@ public class ChangePasswordModel {
             preparedStatement.setString(1, newPassword);
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
-            return true;
+            set = true;
         }
         catch (Exception e)
         {
             System.out.println(e);
-            return false;
         }
+        return set;
     }
 }

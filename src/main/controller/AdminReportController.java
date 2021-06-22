@@ -85,7 +85,6 @@ public class AdminReportController implements Initializable {
                         {
                             output.write(", ");
                         }
-                        System.out.println(list.get(i).get(j));
                         output.write(list.get(i).get(j));
                     }
                     output.write("\n");

@@ -65,9 +65,6 @@ public class CreateManageAccountModel {
         String name = user.getFirstName();
         try {
 
-            System.out.println(user.getFirstName());
-            System.out.println(user.getEmployeeId());
-
             String query = "Update Employee " +
                     "set firstName = ?, " +
                     "surname = ?, " +
@@ -78,7 +75,6 @@ public class CreateManageAccountModel {
                     "Admin = ? " +
                     "where Employee.id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            System.out.println(name);
             preparedStatement.setString(1, user.getFirstName());
             preparedStatement.setString(2, user.getLastName());
             preparedStatement.setString(3, user.getUserName());

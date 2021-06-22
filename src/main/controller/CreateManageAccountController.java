@@ -211,7 +211,6 @@ public class CreateManageAccountController implements Initializable {
         {
             confirmed = false;
         }
-        System.out.println(confirmed);
         return confirmed;
     }
 

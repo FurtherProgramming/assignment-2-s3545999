@@ -65,7 +65,6 @@ public class CheckinModel {
                 booking.setTableNumber(resultSet.getInt("deskId"));
                 booking.setBookingNumber(resultSet.getInt("BookingID"));
                 booking.setCheckedIn(resultSet.getBoolean("CheckedIn"));
-                System.out.println(booking.isCheckedIn());
             }
 
         } catch (Exception e) {

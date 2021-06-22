@@ -21,7 +21,7 @@ public class cancelBookingModel {
     public Boolean checkBooking() {
 
         int UserID = UserHolder.getInstance().getUser().getEmployeeId();
-        System.out.println(UserID);
+
         try {
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
@@ -34,7 +34,6 @@ public class cancelBookingModel {
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next())
             {
-                System.out.println();
                 return true;
             }
         } catch (Exception e) {
@@ -49,7 +48,6 @@ public class cancelBookingModel {
         String bookedDate  = "";
         Integer tableNum = -1;
         int UserID = UserHolder.getInstance().getUser().getEmployeeId();
-        System.out.println(UserID);
         java.sql.Date dateNow = new java.sql.Date(new Date().getTime());
 
         try {
@@ -80,7 +78,6 @@ public class cancelBookingModel {
     {
         boolean success = false;
         int UserID = UserHolder.getInstance().getUser().getEmployeeId();
-        System.out.println(UserID);
         java.sql.Date dateNow = new java.sql.Date(new Date().getTime());
 
         try {
