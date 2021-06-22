@@ -88,8 +88,8 @@ public class makeBookingController implements Initializable {
                     changeTXT.setText("You don't have a Booking! Do you want to make one?");
                 } else {
                     currentUserBooking = makeModel.getBooking();
-                    String bookingText = String.format("You have booked desk " + currentUserBooking.getTableNumber() +
-                            " for " + currentUserBooking.getDate().toString());
+                    String bookingText = "You have booked desk " + currentUserBooking.getTableNumber() +
+                            " for " + currentUserBooking.getDate().toString();
                     booking.setText(bookingText);
                 }
 
