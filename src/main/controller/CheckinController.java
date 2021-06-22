@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import main.Booking;
 import main.model.CheckinModel;
 
 import java.awt.*;
@@ -20,6 +21,7 @@ import java.util.ResourceBundle;
 public class CheckinController implements Initializable {
 
     CheckinModel checkinModel = new CheckinModel();
+    Booking todayBooking;
 
     @FXML
     Label bookingTXT;
@@ -36,13 +38,31 @@ public class CheckinController implements Initializable {
             bookingTXT.setVisible(false);
             checkInButton.setVisible(false);
         }
+        else
+        {
+            todayBooking = checkinModel.getBooking();
+            if(todayBooking.isCheckedIn())
+            {
+                bookingToday.setText("You have already checked in!");
+                String txt =  "You are checked into Table " + todayBooking.getTableNumber();
+                bookingTXT.setText(txt);
+                checkInButton.setVisible(false);
+            }
+            else
+            {
+                String txt =  "Table " + todayBooking.getTableNumber()
+                        + "\nDo you want to checkin?";
+                bookingTXT.setText(txt);
+            }
+
+        }
     }
 
     public void back(ActionEvent event) throws IOException {
 
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/EmployeeHomepage.fxml"));
         Stage newStage = new Stage();
-        newStage.setScene(new Scene(createAccParent, 600, 400));
+        newStage.setScene(new Scene(createAccParent));
         newStage.show();
 
         final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -50,7 +70,15 @@ public class CheckinController implements Initializable {
     }
 
     public void CheckIn(ActionEvent event) throws IOException {
+        checkinModel.checkIn(todayBooking.getBookingNumber());
 
+        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/Checkin.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(createAccParent));
+        newStage.show();
+
+        final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.close();
     }
 
 

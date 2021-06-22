@@ -1,14 +1,17 @@
 package main;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Date;
 
 public class Booking {
 
     private int bookingNumber;
     private Object date;
-    private String dateString;
     private int TableNumber;
     private int employeeID;
+    private boolean checkedIn;
     private boolean adminAccepted;
     private boolean canceled;
     private String firstName;
@@ -55,14 +58,6 @@ public class Booking {
         return canceled;
     }
 
-    public String getDateString() {
-        return dateString;
-    }
-
-    public void setDateString(String dateString) {
-        this.dateString = dateString;
-    }
-
     public void setCanceled(boolean canceled) {
         this.canceled = canceled;
     }
@@ -80,8 +75,7 @@ public class Booking {
     }
 
     public void setDate(Object date) {
-        date = date;
-        setDateString(date.toString());
+        this.date = date;
     }
 
     public int getBookingNumber() {
@@ -91,4 +85,8 @@ public class Booking {
     public void setBookingNumber(int bookingNumber) {
         this.bookingNumber = bookingNumber;
     }
+
+    public boolean isCheckedIn() { return checkedIn; }
+
+    public void setCheckedIn(boolean checkedIn) { this.checkedIn = checkedIn; }
 }

@@ -1,11 +1,13 @@
 package main.model;
 
+import main.Booking;
 import main.SQLConnection;
 import main.UserHolder;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class CheckinModel {
@@ -21,19 +23,20 @@ public class CheckinModel {
     public Boolean checkBookingToday() {
 
         int UserID = UserHolder.getInstance().getUser().getEmployeeId();
-        System.out.println(UserID);
-        java.sql.Date dateNow = new java.sql.Date(new java.util.Date().getTime());
+        LocalDate dateNow = LocalDate.now();
         try {
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
-            String query = "select * from DeskBookings where EmployeeID = ? AND Canceled = false AND bookedDate = ?";
+            String query = "select * from DeskBookings " +
+                    "where EmployeeID = ? " +
+                    "AND AdminAccepted = true " +
+                    "AND bookedDate == ?";
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, UserID);
             preparedStatement.setObject(2, dateNow);
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next())
             {
-                System.out.println();
                 return true;
             }
         } catch (Exception e) {
@@ -42,60 +45,49 @@ public class CheckinModel {
         return false;
     }
 
-    public String getBooking()
+    public Booking getBooking()
     {
-        String returnString = "";
-        String bookedDate  = "";
-        Integer tableNum = -1;
         int UserID = UserHolder.getInstance().getUser().getEmployeeId();
-        System.out.println(UserID);
-        java.sql.Date dateNow = new java.sql.Date(new Date().getTime());
-
+        LocalDate date = LocalDate.now();
+        Booking booking = new Booking();
         try {
-            String query = "select * from DeskBookings where EmployeeID = ? and bookedDate > ? and CheckedIn = 0 and Canceled = 0";
+            String query = "select * from DeskBookings " +
+                    "where EmployeeID = ? " +
+                    "and bookedDate = ? " +
+                    "and AdminAccepted = true";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setInt(1, UserID);
-            preparedStatement.setDate(2, dateNow);
+            preparedStatement.setObject(2, date);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next())
             {
-                bookedDate = resultSet.getObject("bookedDate").toString();
-                tableNum = resultSet.getInt("deskId");
-                returnString = "You have booked table Number: " + tableNum + " for " + bookedDate;
+                booking.setTableNumber(resultSet.getInt("deskId"));
+                booking.setBookingNumber(resultSet.getInt("BookingID"));
+                booking.setCheckedIn(resultSet.getBoolean("CheckedIn"));
+                System.out.println(booking.isCheckedIn());
             }
 
         } catch (Exception e) {
 
         }
-        return returnString;
+        return booking;
     }
 
-    public boolean cancelBooking()
+    public void checkIn(int bookingID)
     {
-        boolean success = false;
-        int UserID = UserHolder.getInstance().getUser().getEmployeeId();
-        System.out.println(UserID);
-        java.sql.Date dateNow = new java.sql.Date(new Date().getTime());
-
         try {
             String query = "UPDATE DeskBookings " +
-                    "SET Canceled = true " +
-                    "where EmployeeID = ? " +
-                    "AND bookedDate > ? " +
-                    "AND CheckedIn = 0 " +
-                    "AND Canceled = 0";
+                    "set CheckedIn = ?" +
+                    "where BookingID = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
-            preparedStatement.setInt(1, UserID);
-            preparedStatement.setDate(2, dateNow);
-            if(preparedStatement.executeUpdate() == 1)
-            {
-                success = true;
-            }
-        }catch (Exception e) {
-            System.out.println(e);
+            preparedStatement.setBoolean(1, true);
+            preparedStatement.setInt(2, bookingID);
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e) {
+
         }
-        return success;
     }
 }

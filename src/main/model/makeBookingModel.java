@@ -19,14 +19,11 @@ public class makeBookingModel {
             System.exit(1);
     }
 
-    public String getBooking()
+    public Booking getBooking()
     {
-        String returnString = "";
-        String bookedDate  = "";
-        Integer tableNum = -1;
         int UserID = UserHolder.getInstance().getUser().getEmployeeId();
         LocalDate dateNow = LocalDate.now();
-
+        Booking booking = new Booking();
         try {
             String query = "select * from DeskBookings " +
                     "where EmployeeID = ? " +
@@ -40,15 +37,15 @@ public class makeBookingModel {
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next())
             {
-                bookedDate = resultSet.getObject("bookedDate").toString();
-                tableNum = resultSet.getInt("deskId");
-                returnString = "You have booked desk number " + tableNum + " for " + bookedDate;
+                booking.setBookingNumber(resultSet.getInt("BookingID"));
+                booking.setTableNumber(resultSet.getInt("deskId"));
+                booking.setDate(resultSet.getObject("bookedDate"));
             }
 
         } catch (Exception e) {
-
+            System.out.println(e);
         }
-        return returnString;
+        return booking;
     }
 
     public Boolean checkBooking(LocalDate date) {
@@ -108,28 +105,27 @@ public class makeBookingModel {
 
     public boolean makeBooking(int deskId, LocalDate date)
     {
+        boolean made = false;
         int userId = UserHolder.getInstance().getUser().getEmployeeId();
-        String query = "INSERT INTO DeskBookings (bookedDate, deskId, EmployeeId, CheckedIn, AdminAccepted) VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO DeskBookings (bookedDate, deskId, EmployeeId, CheckedIn, AdminAccepted) " +
+                "VALUES (?,?,?,?,?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
-            if(checkBooking(LocalDate.now()))
-            {
-                cancelBooking();
-            }
+
             preparedStatement.setObject(1, date);
             preparedStatement.setInt(2, deskId);
             preparedStatement.setInt(3, userId);
             preparedStatement.setBoolean(4, false);
             preparedStatement.setBoolean(5, false);
             preparedStatement.executeUpdate();
-            System.out.println("ADDED");
-            return true;
+
+            made = true;
         } catch (Exception e) {
             System.out.println(e);
-            return false;
-        }
 
+        }
+        return made;
     }
-    public boolean cancelBooking()
+    public boolean deleteBooking(Booking booking)
     {
         boolean success = false;
         int UserID = UserHolder.getInstance().getUser().getEmployeeId();
@@ -137,16 +133,12 @@ public class makeBookingModel {
         java.sql.Date dateNow = new java.sql.Date(new java.util.Date().getTime());
 
         try {
-            String query = "UPDATE DeskBookings " +
-                    "SET Canceled = true " +
-                    "where EmployeeID = ? " +
-                    "AND bookedDate > ? " +
-                    "AND CheckedIn = 0 " +
-                    "AND Canceled = 0";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            String query = "DELETE from DeskBookings " +
+                    "where BookingID = ?";
 
-            preparedStatement.setInt(1, UserID);
-            preparedStatement.setDate(2, dateNow);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, booking.getBookingNumber());
+
             if(preparedStatement.executeUpdate() == 1)
             {
                 success = true;

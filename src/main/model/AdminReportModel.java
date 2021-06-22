@@ -9,7 +9,9 @@ import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -63,6 +65,50 @@ public class AdminReportModel {
             System.out.println(e);
         }
         return users;
+    }
+
+    public ArrayList<ArrayList<String>> getBookingBetweenDates(LocalDate beforeDate, LocalDate afterDate)
+    {
+
+        ArrayList<ArrayList<String>> bookings = new ArrayList<ArrayList<String>>();
+        ArrayList<String > headers = new ArrayList<String >();
+        headers.add("Booking ID");
+        headers.add("Booking Date");
+        headers.add("Desk ID");
+        headers.add("Employee ID");
+        headers.add("CheckedIn");
+        headers.add("Admin Accepted");
+        headers.add("Canceled");
+        bookings.add(headers);
+
+
+        System.out.println(beforeDate);
+        System.out.println(afterDate);
+        try {
+            String query = "select * from DeskBookings where bookedDate >= ? AND bookedDate <= ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setObject(1, beforeDate);
+            preparedStatement.setObject(2, afterDate);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next())
+            {
+                ArrayList<String > booking = new ArrayList<>();
+                booking.add(String.valueOf(resultSet.getInt("BookingID")));
+                booking.add(String.valueOf(resultSet.getObject("bookedDate")));
+                booking.add(String.valueOf(resultSet.getInt("deskId")));
+                booking.add(String.valueOf(resultSet.getInt("EmployeeID")));
+                booking.add(String.valueOf(resultSet.getBoolean("CheckedIn")));
+                booking.add(String.valueOf(resultSet.getBoolean("AdminAccepted")));
+                booking.add(String.valueOf(resultSet.getBoolean("Canceled")));
+                bookings.add(booking);
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        return bookings;
     }
 
 }

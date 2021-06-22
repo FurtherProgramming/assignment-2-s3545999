@@ -7,9 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -23,10 +21,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class makeBookingController implements Initializable {
     public makeBookingModel makeModel = new makeBookingModel();
@@ -36,9 +31,11 @@ public class makeBookingController implements Initializable {
     private LocalDate date;
 
     List<Booking> currentBookings;
+
+    Booking currentUserBooking;
+
     @FXML
     DatePicker datePicker;
-
     @FXML
     Rectangle Table1;
     @FXML
@@ -88,8 +85,10 @@ public class makeBookingController implements Initializable {
         }
         else
         {
-            String theString = makeModel.getBooking();
-            booking.setText(theString);
+            currentUserBooking = makeModel.getBooking();
+            String bookingText = String.format("You have booked table " + currentUserBooking.getTableNumber() +
+                    " for " + currentUserBooking.getDate().toString());
+            booking.setText(bookingText);
         }
 
         if(makeModel.checkBooking(LocalDate.now()) && !makeModel.checkBooking(LocalDate.now().plusDays(2)))
@@ -97,7 +96,8 @@ public class makeBookingController implements Initializable {
             datePicker.setMouseTransparent(true);
             datePicker.setDisable(true);
             submitter.setVisible(false);
-            changeTXT.setText("You must cancel your booking before rebooking!");
+            changeTXT.setText("You have a booking in the next two days!\n\n" +
+                    "You must cancel your booking before rebooking!");
         }
     }
 
@@ -105,7 +105,7 @@ public class makeBookingController implements Initializable {
 
         Parent createAccParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ui/EmployeeHomepage.fxml")));
         Stage newStage = new Stage();
-        newStage.setScene(new Scene(createAccParent, 600, 400));
+        newStage.setScene(new Scene(createAccParent));
         newStage.show();
 
         final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -115,7 +115,7 @@ public class makeBookingController implements Initializable {
     public void highlight(MouseEvent event) {
         Rectangle rectangle = (Rectangle) event.getSource();
         setTables();
-        rectangle.setFill(Color.BLUE);
+        rectangle.setFill(Color.rgb(92,121,239));
         currentRectangle = rectangle;
     }
 
@@ -126,8 +126,28 @@ public class makeBookingController implements Initializable {
             {
                 if (currentRectangle == rectangles.get(i))
                 {
-                    makeModel.makeBooking(i+1, date);
-                    refresh(event);
+                    String contentText = "Are you sure you want to book Table " + i+1 +"?";
+
+                    if(currentUserBooking != null)
+                    {
+                         contentText += "\n\nThis will cancel your booking for " +
+                                 currentUserBooking.getTableNumber() + " on the " +
+                                 currentUserBooking.getDate().toString() + "!";
+                    }
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setContentText(contentText);
+                    Optional<ButtonType> result = alert.showAndWait();
+
+                    if (result.get() == ButtonType.OK)
+                    {
+                        if(currentUserBooking != null)
+                        {
+                            makeModel.deleteBooking(currentUserBooking);
+                            currentUserBooking = null;
+                        }
+                        makeModel.makeBooking(i+1, date);
+                        refresh(event);
+                    }
                 }
             }
         }
@@ -137,7 +157,6 @@ public class makeBookingController implements Initializable {
     {
         currentRectangle = null;
         LocalDate datePicked = datePicker.getValue();
-        datePicked.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
         int day = datePicked.getDayOfYear();
         int year = datePicked.getYear();
         LocalDate dateNow = LocalDate.now();
@@ -152,7 +171,7 @@ public class makeBookingController implements Initializable {
             setTables();
         }
         else {
-            setAllTab(Color.RED);
+            setAllTab(Color.GRAY);
             for(int i =0; i < rectangles.size(); i++)
             {
                 rectangles.get(i).setMouseTransparent(true);
@@ -161,7 +180,7 @@ public class makeBookingController implements Initializable {
     }
 
     public void setTables(){
-        setAllTab(Color.GREEN);
+        setAllTab(Color.rgb(169,184,243));
         for(int i = 0; i < rectangles.size(); i++)
         {
             rectangles.get(i).setMouseTransparent(false);
@@ -171,6 +190,7 @@ public class makeBookingController implements Initializable {
             int deskid = currentBookings.get(i).getTableNumber();
 
             rectangles.get(deskid - 1).setFill(Color.GREY);
+            rectangles.get(deskid - 1).setMouseTransparent(true);
         }
     }
 
@@ -184,11 +204,13 @@ public class makeBookingController implements Initializable {
 
     public void cancel(ActionEvent event)
     {
-        if(makeModel.cancelBooking())
+        if(makeModel.deleteBooking(currentUserBooking))
         {
-            System.out.println("Success");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Successfully deleted");
             refresh(event);
         }
+
     }
 
     public void refresh(ActionEvent event){

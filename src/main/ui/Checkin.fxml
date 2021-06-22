@@ -22,7 +22,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="bookingTXT" alignment="CENTER" prefHeight="23.0" prefWidth="562.0" text="UPDATE WHETHER BOOKING OR NOT">
+                  <Label fx:id="bookingTXT" alignment="CENTER" prefHeight="23.0" prefWidth="562.0" text="UPDATE WHETHER BOOKING OR NOT" textAlignment="CENTER">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>

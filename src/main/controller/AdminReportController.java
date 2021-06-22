@@ -20,7 +20,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -38,7 +40,8 @@ public class AdminReportController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        fromDate.setValue(LocalDate.now());
+        toDate.setValue(LocalDate.now());
     }
 
     public void back(ActionEvent event) throws IOException {
@@ -54,7 +57,8 @@ public class AdminReportController implements Initializable {
     public void BookingReport(ActionEvent event) {
         if(toDate.getValue() != null && fromDate != null)
         {
-            String[] header = {"BookingID", "Booked Date", "Desk ID", "Employee ID", "Checked In", "Admin Accepted"};
+            ArrayList<ArrayList<String>> bookings = adminReportModel.getBookingBetweenDates(fromDate.getValue(), toDate.getValue());
+            printCSV(bookings);
         }
     }
 
@@ -77,9 +81,12 @@ public class AdminReportController implements Initializable {
                 {
                     for(int j = 0; j < list.get(i).size(); j++)
                     {
+                        if(j != 0)
+                        {
+                            output.write(", ");
+                        }
                         System.out.println(list.get(i).get(j));
                         output.write(list.get(i).get(j));
-                        output.write(", ");
                     }
                     output.write("\n");
                 }

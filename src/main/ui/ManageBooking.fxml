@@ -31,9 +31,9 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="47.0" prefWidth="900.0">
+            <HBox alignment="CENTER" prefHeight="88.0" prefWidth="900.0">
                <children>
-                  <Label fx:id="changeTXT" alignment="CENTER" prefHeight="23.0" prefWidth="695.0" text="Do you want to edit your booking? This will cancel your current booking!" />
+                  <Label fx:id="changeTXT" alignment="CENTER" prefHeight="71.0" prefWidth="695.0" text="Do you want to edit your booking? This will cancel your current booking!" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="67.0" prefWidth="600.0" stylesheets="@../arub.css">
