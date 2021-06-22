@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
+// User to check into their shift
 public class CheckinController implements Initializable {
 
     CheckinModel checkinModel = new CheckinModel();
@@ -31,6 +33,7 @@ public class CheckinController implements Initializable {
     @FXML
     Button checkInButton;
 
+    // Set up the checkin depending on if they have a checkin
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if(!checkinModel.checkBookingToday())
@@ -70,6 +73,7 @@ public class CheckinController implements Initializable {
         window.close();
     }
 
+    // Check and show success
     public void CheckIn(ActionEvent event) throws IOException {
         checkinModel.checkIn(todayBooking.getBookingNumber());
         checkinModel.setLastdesk(todayBooking.getTableNumber());

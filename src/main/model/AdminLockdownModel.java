@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+// Lockdown model to set which tables are available at the time
 public class AdminLockdownModel {
 
     Connection connection;
@@ -20,6 +21,7 @@ public class AdminLockdownModel {
             System.exit(1);
     }
 
+    // Return whether a full lockdown is in effect
     public boolean isLockdown()
     {
         Boolean isLockdown = true;
@@ -41,6 +43,7 @@ public class AdminLockdownModel {
         return isLockdown;
     }
 
+    // return if all tables are currently available
     public boolean isAllAvailable()
     {
         Boolean isAvailable = true;
@@ -63,6 +66,7 @@ public class AdminLockdownModel {
         return isAvailable;
     }
 
+    // Set the lockdown
     public void setLockdown()
     {
         try
@@ -77,6 +81,8 @@ public class AdminLockdownModel {
             System.out.println(e);
         }
     }
+
+    // set all tables available
     public void setAllAvailable()
     {
         try
@@ -92,6 +98,7 @@ public class AdminLockdownModel {
         }
     }
 
+    // set alternating desk available
     public void setCovidSafe() {
 
         setLockdown();
@@ -114,6 +121,7 @@ public class AdminLockdownModel {
         }
     }
 
+    // Set all bookings to canceled
     public void cancelAllBookings()
     {
         LocalDate date = LocalDate.now();

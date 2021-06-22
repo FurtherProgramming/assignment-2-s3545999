@@ -21,6 +21,8 @@ public class LoginModel {
             System.exit(1);
     }
 
+    // returns if the username and password match
+    // Sets the userHolder
     public Boolean isLogin(String user, String pass) throws SQLException {
 
         String query = "select * from Employee " +

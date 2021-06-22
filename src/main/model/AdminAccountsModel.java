@@ -21,6 +21,7 @@ public class AdminAccountsModel {
             System.exit(1);
     }
 
+    // Removes a user from the database
     public boolean deleteUser(int userID)
     {
         boolean update = false;
@@ -42,6 +43,7 @@ public class AdminAccountsModel {
         return update;
     }
 
+    // deactivate a user
     public boolean updateActivityUser(boolean active, User user)
     {
         boolean update = false;
@@ -63,6 +65,7 @@ public class AdminAccountsModel {
         return update;
     }
 
+    // Get a specific user
     public User getUser(int userID)
     {
         User user = new User();
@@ -94,6 +97,7 @@ public class AdminAccountsModel {
         return user;
     }
 
+    // Return an observablelist of all users
     public ObservableList<User> getAllUsers()
     {
         ObservableList<User> users = FXCollections.observableArrayList();

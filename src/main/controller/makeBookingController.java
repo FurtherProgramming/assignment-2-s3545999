@@ -19,11 +19,10 @@ import main.model.makeBookingModel;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 import java.util.*;
 
+// Graphical representation and desk booking
 public class makeBookingController implements Initializable {
     public makeBookingModel makeModel = new makeBookingModel();
 
@@ -34,7 +33,6 @@ public class makeBookingController implements Initializable {
     private boolean lockdown;
 
     List<Booking> currentBookings;
-
     Booking currentUserBooking;
 
     @FXML
@@ -66,6 +64,7 @@ public class makeBookingController implements Initializable {
     @FXML
     Button submitter;
 
+    // Initialise the rectangles
     public void initialize(URL location, ResourceBundle resources) {
         rectangles.add(Table1);
         rectangles.add(Table2);
@@ -110,6 +109,8 @@ public class makeBookingController implements Initializable {
         }
     }
 
+    // Set up page for an admin
+    // Cannot make a booking
     private void adminSetUp()
     {
         changeTXT.setText("Welcome Admin! Choose a date to view desk allocation");
@@ -119,6 +120,7 @@ public class makeBookingController implements Initializable {
         HeaderTXT.setText("View Desk allocation");
     }
 
+    // Turn off bookings
     private void disableBooking()
     {
         datePicker.setMouseTransparent(true);
@@ -126,6 +128,7 @@ public class makeBookingController implements Initializable {
         submitter.setVisible(false);
     }
 
+    // Go back
     public void back(ActionEvent event) throws IOException {
         Parent createAccParent;
         if(UserHolder.getInstance().getUser().getAdmin())
@@ -144,6 +147,7 @@ public class makeBookingController implements Initializable {
         window.close();
     }
 
+    // Highlight a table and reset the rest
     public void highlight(MouseEvent event) {
         if(!UserHolder.getInstance().getUser().getAdmin())
         {
@@ -156,7 +160,8 @@ public class makeBookingController implements Initializable {
         }
     }
 
-    public void submit(ActionEvent event) throws IOException {
+    // Submit button to book a table
+    public void submit(ActionEvent event) {
         if(currentRectangle != null)
         {
             for(int i = 0; i < rectangles.size(); i++)
@@ -191,6 +196,7 @@ public class makeBookingController implements Initializable {
         }
     }
 
+    // Update all rectangles the datePicker is changed
     public void datePicker(ActionEvent event)
     {
         currentRectangle = null;
@@ -217,6 +223,7 @@ public class makeBookingController implements Initializable {
         }
     }
 
+    // set the tables by availability
     public void setTables(){
         setAllTab(Color.rgb(169,184,243));
 
@@ -233,6 +240,7 @@ public class makeBookingController implements Initializable {
         }
     }
 
+    // Set rectangles to the given colour
     public void setAllTab(Color colour)
     {
         for(int i = 0; i < rectangles.size(); i++)
@@ -242,6 +250,7 @@ public class makeBookingController implements Initializable {
         }
     }
 
+    // Cancel a booking
     public void cancel(ActionEvent event)
     {
         if(makeModel.deleteBooking(currentUserBooking))
@@ -253,6 +262,7 @@ public class makeBookingController implements Initializable {
 
     }
 
+    // Refresh the page
     public void refresh(ActionEvent event){
         try {
             Parent createAccParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ui/ManageBooking.fxml")));
@@ -266,6 +276,5 @@ public class makeBookingController implements Initializable {
         {
             System.out.println(e);
         }
-
     }
 }

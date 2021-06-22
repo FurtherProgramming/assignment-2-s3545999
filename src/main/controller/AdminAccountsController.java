@@ -24,6 +24,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+// Used to implement a table of all users
 public class AdminAccountsController implements Initializable {
 
     AdminAccountsModel manageAccount = new AdminAccountsModel();
@@ -43,6 +44,8 @@ public class AdminAccountsController implements Initializable {
     @FXML
     private TableColumn<User, Boolean> active;
 
+
+    // Set up the table
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ObservableList<User> users = manageAccount.getAllUsers();
@@ -67,6 +70,7 @@ public class AdminAccountsController implements Initializable {
         window.close();
     }
 
+    // Select a user to be updated
     public void select(ActionEvent event){
 
         if(accountTable.getSelectionModel().getSelectedItem() != null)
@@ -91,6 +95,7 @@ public class AdminAccountsController implements Initializable {
         }
     }
 
+    // Activate or deactivate a user
     public void activate(ActionEvent event){
 
         if(accountTable.getSelectionModel().getSelectedItem() != null)
@@ -117,6 +122,8 @@ public class AdminAccountsController implements Initializable {
         }
     }
 
+
+    // Make a new user
     public void add(ActionEvent event) throws IOException {
 
         CreateManageHolder holder = CreateManageHolder.getInstance();
@@ -138,6 +145,7 @@ public class AdminAccountsController implements Initializable {
         }
     }
 
+    // Delete a current user
     public void delete(ActionEvent event){
 
         if(accountTable.getSelectionModel().getSelectedItem() != null)
@@ -154,6 +162,7 @@ public class AdminAccountsController implements Initializable {
         }
     }
 
+    // A confirmation for delete or deactivate
     private boolean confirmUpdate(User user, String message)
     {
         int currentUser = UserHolder.getInstance().getUser().getEmployeeId();
@@ -185,6 +194,7 @@ public class AdminAccountsController implements Initializable {
         return confirmed;
     }
 
+    // Reload the page
     private void reload(ActionEvent event)
     {
         try {

@@ -20,6 +20,7 @@ public class CheckinModel {
             System.exit(1);
     }
 
+    // Return if a user has an admin accepted booking today
     public Boolean checkBookingToday() {
 
         int UserID = UserHolder.getInstance().getUser().getEmployeeId();
@@ -46,6 +47,7 @@ public class CheckinModel {
         return false;
     }
 
+    // Update the lastdesk of a user
     public void setLastdesk(int deskID)
     {
         try {
@@ -65,7 +67,7 @@ public class CheckinModel {
         }
     }
 
-
+    // returns an admin accepted booking today
     public Booking getBooking()
     {
         int UserID = UserHolder.getInstance().getUser().getEmployeeId();
@@ -94,6 +96,7 @@ public class CheckinModel {
         return booking;
     }
 
+    // sets a booking to be checked in
     public void checkIn(int bookingID)
     {
         try {

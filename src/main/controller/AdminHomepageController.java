@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+// Homepage of an admin
 public class AdminHomepageController implements Initializable {
 
     private User user;
@@ -33,6 +34,7 @@ public class AdminHomepageController implements Initializable {
         TXTwelcome.setText("Welcome " + fname);
     }
 
+    // Open booking management
     public void bookingManagement(ActionEvent event) throws IOException {
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminManageBookings.fxml"));
         Stage newStage = new Stage();
@@ -43,6 +45,7 @@ public class AdminHomepageController implements Initializable {
         window.close();
     }
 
+    // Open account management
     public void AccountManage(ActionEvent event) throws IOException {
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminAccounts.fxml"));
         Stage newStage = new Stage();
@@ -52,6 +55,8 @@ public class AdminHomepageController implements Initializable {
         final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.close();
     }
+
+    // Open report page
     public void AdminReports(ActionEvent event) throws IOException {
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminReport.fxml"));
         Stage newStage = new Stage();
@@ -62,6 +67,7 @@ public class AdminHomepageController implements Initializable {
         window.close();
     }
 
+    // Open lockdown page
     public void covidLockdown(ActionEvent event) throws IOException {
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminLockdown.fxml"));
         Stage newStage = new Stage();
@@ -72,7 +78,7 @@ public class AdminHomepageController implements Initializable {
         window.close();
     }
 
-
+    // Logout button
     public void logout(ActionEvent event) throws IOException {
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/login.fxml"));
         Stage newStage = new Stage();

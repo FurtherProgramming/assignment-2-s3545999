@@ -21,6 +21,7 @@ public class CreateManageAccountModel {
             System.exit(1);
     }
 
+    // return if a user has a last desk
     public boolean checkIfLastDesk(User user)
     {
         boolean lastDesk = false;
@@ -42,6 +43,7 @@ public class CreateManageAccountModel {
         return lastDesk;
     }
 
+    // Sets last desk to null
     public void releaseLast(User user)
     {
         try {
@@ -59,6 +61,7 @@ public class CreateManageAccountModel {
         }
     }
 
+    // returns whether a username is taken or not
     public boolean checkusername(String user)
     {
         boolean taken = false;
@@ -79,6 +82,7 @@ public class CreateManageAccountModel {
         return taken;
     }
 
+    // Returns all the security questions
     public List<String> getSecQuestions()
     {
         List<String> questions = FXCollections.observableArrayList();
@@ -98,6 +102,7 @@ public class CreateManageAccountModel {
         return questions;
     }
 
+    // Updates a user by its id
     public boolean updateUser(User user)
     {
         try {
@@ -132,6 +137,7 @@ public class CreateManageAccountModel {
         }
     }
 
+    // Adds a user to the database
     public boolean addUser(User user)
     {
         try {

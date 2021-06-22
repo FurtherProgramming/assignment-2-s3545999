@@ -22,6 +22,7 @@ public class AdminManageBookingModel {
             System.exit(1);
     }
 
+    // Return all bookings from today onwards
     public ObservableList<Booking> getAllBookings()
     {
         ObservableList<Booking> bookings = FXCollections.observableArrayList();
@@ -56,6 +57,7 @@ public class AdminManageBookingModel {
         return bookings;
     }
 
+    // return if a user has an accepted booking
     public boolean checkAccepted(int userID)
     {
         boolean exists = false;
@@ -82,6 +84,7 @@ public class AdminManageBookingModel {
         return exists;
     }
 
+    // Return if a user has a non-rejected and non-accepted booking
     public boolean checkNotRejected(int userID)
     {
         boolean exists = false;
@@ -108,6 +111,7 @@ public class AdminManageBookingModel {
         return exists;
     }
 
+    // Confirm a booking
     public void confirm(int bookingId)
     {
         try {
@@ -122,6 +126,7 @@ public class AdminManageBookingModel {
         }
     }
 
+    // return if a boooking is possible
     public boolean checkTableAvailable(Booking booking)
     {
         boolean available = true;
@@ -168,11 +173,11 @@ public class AdminManageBookingModel {
     }
 
 
-    public boolean hasPrevBooking()
+    // return if the user has a previous table
+    public boolean hasPrevBooking(int id)
     {
         boolean has = false;
         try {
-            int id = UserHolder.getInstance().getUser().getEmployeeId();
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
             String query = "select LastDesk from Employee " +
@@ -191,7 +196,7 @@ public class AdminManageBookingModel {
         return has;
     }
 
-
+    // Check if the table is the users last desk
     public boolean isPrevTable(int userId, int tableID)
     {
         boolean prevTable = false;
@@ -217,6 +222,7 @@ public class AdminManageBookingModel {
         return prevTable;
     }
 
+    // Cancel a booking
     public void reject(int bookingId)
     {
         try {
@@ -233,6 +239,7 @@ public class AdminManageBookingModel {
         }
     }
 
+    // Delete a booking
     public boolean delete(int bookingId)
     {
         boolean success = false;

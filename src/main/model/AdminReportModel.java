@@ -24,6 +24,7 @@ public class AdminReportModel {
             System.exit(1);
     }
 
+    // Returns a 2d Arraylist of User information
     public ArrayList<ArrayList<String>> getAllUsers()
     {
 
@@ -33,6 +34,8 @@ public class AdminReportModel {
         headers.add("firstName");
         headers.add("surname");
         headers.add("username");
+        headers.add("Role");
+        headers.add("LastDesk");
         headers.add("SecQuestion");
         headers.add("SecAns");
         headers.add("password");
@@ -52,6 +55,8 @@ public class AdminReportModel {
                 user.add(resultSet.getString("firstName"));
                 user.add(resultSet.getString("surname"));
                 user.add(resultSet.getString("username"));
+                user.add(resultSet.getString("empRole"));
+                user.add(String.valueOf(resultSet.getInt("LastDesk")));
                 user.add(resultSet.getString("SecQuestion"));
                 user.add(resultSet.getString("SecAns"));
                 user.add(resultSet.getString("password"));
@@ -67,6 +72,7 @@ public class AdminReportModel {
         return users;
     }
 
+    // returns a 2d array of the bookings as strings between inputted dates
     public ArrayList<ArrayList<String>> getBookingBetweenDates(LocalDate beforeDate, LocalDate afterDate)
     {
 
@@ -109,5 +115,4 @@ public class AdminReportModel {
         }
         return bookings;
     }
-
 }

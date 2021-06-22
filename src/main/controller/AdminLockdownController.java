@@ -22,10 +22,10 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+// Control the current lockdown level of the system
 public class AdminLockdownController implements Initializable {
 
     AdminLockdownModel lockdownModel = new AdminLockdownModel();
-
     Boolean isLockedDown;
     Boolean isAvailable;
 
@@ -61,6 +61,7 @@ public class AdminLockdownController implements Initializable {
         window.close();
     }
 
+    // Set to covidsafe alternating desks
     public void covidSafe(ActionEvent event){
         if(isLockedDown || isAvailable)
         {
@@ -80,6 +81,7 @@ public class AdminLockdownController implements Initializable {
         }
     }
 
+    // Set to lockdown
     public void covidLockdown(ActionEvent event){
         if(!isLockedDown)
         {
@@ -96,6 +98,7 @@ public class AdminLockdownController implements Initializable {
         }
     }
 
+    // Make all desks available
     public void allDesks(ActionEvent event) {
         if(!isAvailable)
         {
@@ -112,6 +115,7 @@ public class AdminLockdownController implements Initializable {
 
     }
 
+    // confirmation box
     private boolean confirmChange()
     {
         boolean confirmed = false;
@@ -128,6 +132,7 @@ public class AdminLockdownController implements Initializable {
         return confirmed;
     }
 
+    // Information if updating to current level of lockdown
     private void currentInfo()
     {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -137,6 +142,7 @@ public class AdminLockdownController implements Initializable {
         alert.show();
     }
 
+    // Reload the page
     private void reload(ActionEvent event)
     {
         try {

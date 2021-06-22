@@ -26,6 +26,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
+// Allow admins to make reports and view desks
 public class AdminReportController implements Initializable {
 
     AdminReportModel adminReportModel = new AdminReportModel();
@@ -44,6 +45,7 @@ public class AdminReportController implements Initializable {
         toDate.setValue(LocalDate.now());
     }
 
+    // Back
     public void back(ActionEvent event) throws IOException {
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminHomepage.fxml"));
         Stage newStage = new Stage();
@@ -54,6 +56,7 @@ public class AdminReportController implements Initializable {
         window.close();
     }
 
+    // View desk allocations
     public void desks(ActionEvent event) throws IOException{
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/ManageBooking.fxml"));
         Stage newStage = new Stage();
@@ -64,6 +67,7 @@ public class AdminReportController implements Initializable {
         window.close();
     }
 
+    // Get a booking report
     public void BookingReport(ActionEvent event) {
         if(toDate.getValue() != null && fromDate != null)
         {
@@ -72,11 +76,13 @@ public class AdminReportController implements Initializable {
         }
     }
 
+    // Get alll account report
     public void accountReport(ActionEvent event) throws IOException {
         ArrayList<ArrayList<String>> users = adminReportModel.getAllUsers();
         printCSV(users);
     }
 
+    // Print a CSV file
     public void printCSV(ArrayList<ArrayList<String>> list)
     {
         String fileToWrite = fileName.getText();
@@ -119,8 +125,5 @@ public class AdminReportController implements Initializable {
             alert.setContentText("File must end with '.csv'");
             alert.show();
         }
-
-
     }
-
 }

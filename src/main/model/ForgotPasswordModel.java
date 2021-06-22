@@ -23,6 +23,7 @@ public class ForgotPasswordModel {
 
     }
 
+    // Return if a user exists by username
     public Boolean userExists(String user){
 
         String query = "select * from Employee where username = ?";
@@ -46,6 +47,7 @@ public class ForgotPasswordModel {
         }
     }
 
+    // Get a user from their username
     public User getUser(String username){
 
         User user = new User();
@@ -70,6 +72,7 @@ public class ForgotPasswordModel {
         return user;
     }
 
+    // Set the password of a user
     public boolean setPassword(String newPassword, User user)
     {
         try {

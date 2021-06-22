@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+// Used to create and manage accounts
 public class CreateManageAccountController implements Initializable {
 
     CreateManageAccountModel createManageAccountModel = new CreateManageAccountModel();
@@ -61,6 +62,8 @@ public class CreateManageAccountController implements Initializable {
     @FXML
     ChoiceBox<String> admin;
 
+    // Create or manage an account
+    // CreateManageHolder used to initialise to correct settings
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         newAccount = CreateManageHolder.getInstance().getNewAccount();
@@ -71,6 +74,7 @@ public class CreateManageAccountController implements Initializable {
         newAccount = holder.getNewAccount();
         adminUpdate = holder.getAdmin();
 
+        // User to be updated
         if(holder.getUser() != null)
         {
             user = holder.getUser();
@@ -118,6 +122,7 @@ public class CreateManageAccountController implements Initializable {
         initialiseValidation();
     }
 
+    // Put in user detail if updating
     private void setUser()
     {
         CreateManageHolder holder = CreateManageHolder.getInstance();
@@ -133,8 +138,7 @@ public class CreateManageAccountController implements Initializable {
         confirmAnswer.setText(user.getSecretQAns());
     }
 
-
-
+    // Go back
     public void back(ActionEvent event){
         try {
             Parent createAccParent;
@@ -158,6 +162,7 @@ public class CreateManageAccountController implements Initializable {
         }
     }
 
+    // Update or create a user
     public void Submit(ActionEvent event)
     {
         if(validateSubmission() && confirmation())
@@ -168,8 +173,6 @@ public class CreateManageAccountController implements Initializable {
                 user.setAdmin(false);
             }
             CreateManageHolder holder = CreateManageHolder.getInstance();
-
-
             user.setFirstName(firstName.getText());
             user.setLastName(lastName.getText());
             user.setUserName(username.getText());
@@ -177,8 +180,6 @@ public class CreateManageAccountController implements Initializable {
             user.setPassword(password.getText());
             user.setSecretQ(secQuestion.getValue());
             user.setSecretQAns(secAnswer.getText());
-
-
             if(adminUpdate == true)
             {
                 System.out.println(admin.getSelectionModel().getSelectedIndex());
@@ -225,6 +226,7 @@ public class CreateManageAccountController implements Initializable {
         }
     }
 
+    // Confirmation messagebox
     private boolean confirmation()
     {
         boolean confirmed = true;
@@ -252,6 +254,7 @@ public class CreateManageAccountController implements Initializable {
         return confirmed;
     }
 
+    // Validate input
     private boolean validateSubmission()
     {
         boolean check = true;
@@ -317,7 +320,7 @@ public class CreateManageAccountController implements Initializable {
         return check;
     }
 
-
+    // Set the validation to track these textboxes
     private void initialiseValidation()
     {
         setUpValidation(firstName);

@@ -19,6 +19,7 @@ public class makeBookingModel {
             System.exit(1);
     }
 
+    // Returns if lockdown is on
     public boolean isLockdown()
     {
         Boolean Lockdown = true;
@@ -41,6 +42,7 @@ public class makeBookingModel {
     }
 
 
+    // Get a users booking
     public Booking getBooking()
     {
         int UserID = UserHolder.getInstance().getUser().getEmployeeId();
@@ -70,6 +72,7 @@ public class makeBookingModel {
         return booking;
     }
 
+    // Returns if a user has a booking after the date
     public Boolean checkBooking(LocalDate date) {
 
         boolean check = false;
@@ -97,6 +100,7 @@ public class makeBookingModel {
         return check;
     }
 
+    // Returns all bookings on a date, including lockdown
     public List<Booking> getTableAvailability(LocalDate date)
     {
         ArrayList<Booking> bookings = new ArrayList<>();
@@ -142,13 +146,13 @@ public class makeBookingModel {
 
         if(hasPrevBooking())
         {
-            System.out.println("PREV Booking");
             bookings.add(getPrevTable());
         }
 
         return bookings;
     }
 
+    // Returns if a user has a previous table they can't sit on
     public boolean hasPrevBooking()
     {
         boolean has = false;
@@ -175,7 +179,7 @@ public class makeBookingModel {
         return has;
     }
 
-
+    // Returns the previous table as a booking
     public Booking getPrevTable()
     {
         Booking booking = new Booking();;
@@ -199,8 +203,7 @@ public class makeBookingModel {
         return booking;
     }
 
-
-
+    // make a booking on the date and desk number
     public boolean makeBooking(int deskId, LocalDate date)
     {
         boolean made = false;
@@ -223,12 +226,11 @@ public class makeBookingModel {
         }
         return made;
     }
+
+    // Deletes a booking on its bookingID
     public boolean deleteBooking(Booking booking)
     {
         boolean success = false;
-        int UserID = UserHolder.getInstance().getUser().getEmployeeId();
-
-        java.sql.Date dateNow = new java.sql.Date(new java.util.Date().getTime());
 
         try {
             String query = "DELETE from DeskBookings " +

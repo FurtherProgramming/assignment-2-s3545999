@@ -73,6 +73,7 @@ public class LoginController implements Initializable {
         }
     }
 
+    // To create an account and set the holder instance
     public void createAccountButtonPushed(ActionEvent event) throws IOException
     {
         CreateManageHolder.getInstance().setNewAccount(true);
@@ -88,6 +89,7 @@ public class LoginController implements Initializable {
         window.close();
     }
 
+    // Update forgotten password
     public void forgotPassButton(ActionEvent event) throws IOException {
 
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/ForgotPass.fxml"));
@@ -98,7 +100,4 @@ public class LoginController implements Initializable {
         final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.close();
     }
-
-
-
 }

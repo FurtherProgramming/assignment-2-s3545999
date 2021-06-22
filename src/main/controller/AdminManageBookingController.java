@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+// Table of all current bookings to be edited
 public class AdminManageBookingController implements Initializable {
 
     AdminManageBookingModel adminManageBookingModel = new AdminManageBookingModel();
@@ -48,6 +49,7 @@ public class AdminManageBookingController implements Initializable {
     private TableColumn<User, Boolean> cancelCol;
 
 
+    // Set up the table of bookings
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         bookingTable.setPlaceholder(new Label("There are no bookings to display!"));
@@ -73,6 +75,7 @@ public class AdminManageBookingController implements Initializable {
         window.close();
     }
 
+    // to confirm a booking which is selected
     public void confirm(ActionEvent event){
 
         if(bookingTable.getSelectionModel().getSelectedItem() != null)
@@ -105,7 +108,7 @@ public class AdminManageBookingController implements Initializable {
                 String text = "Table " + booking.getTableNumber() + " is not available that day!\n";
                 error(text);
             }
-            else if(adminManageBookingModel.hasPrevBooking() &&
+            else if(adminManageBookingModel.hasPrevBooking(userID) &&
                     adminManageBookingModel.isPrevTable(userID, tableID))
             {
                 String text = "Table " + booking.getTableNumber() + " was their last desk!\n";
@@ -124,6 +127,7 @@ public class AdminManageBookingController implements Initializable {
         }
     }
 
+    // error alert
     public void error(String text)
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -132,6 +136,7 @@ public class AdminManageBookingController implements Initializable {
     }
 
 
+    // To reject a booking
     public void reject(ActionEvent event){
         if(bookingTable.getSelectionModel().getSelectedItem() != null)
         {
@@ -153,6 +158,7 @@ public class AdminManageBookingController implements Initializable {
         }
     }
 
+    // Delete a selected booking from database
     public void delete(ActionEvent event)
     {
         if(bookingTable.getSelectionModel().getSelectedItem() != null) {
@@ -166,6 +172,7 @@ public class AdminManageBookingController implements Initializable {
         }
     }
 
+    // Confirmation alert
     public boolean confirmation(String firstLine, Booking booking)
     {
         boolean confirm = false;
@@ -183,7 +190,7 @@ public class AdminManageBookingController implements Initializable {
         return confirm;
     }
 
-
+    // Refresh the screen
     public void refreshTable()
     {
         ObservableList<Booking> bookings = adminManageBookingModel.getAllBookings();

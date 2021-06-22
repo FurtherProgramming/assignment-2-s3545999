@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+// Employee homepage
 public class EmployeeHomepageController implements Initializable {
 
     private User user;
@@ -34,6 +35,7 @@ public class EmployeeHomepageController implements Initializable {
         TXTwelcome.setText("Welcome " + fname);
     }
 
+    // go to make a booking
     public void makeBooking(ActionEvent event) throws IOException {
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/ManageBooking.fxml"));
         Stage newStage = new Stage();
@@ -44,6 +46,7 @@ public class EmployeeHomepageController implements Initializable {
         window.close();
     }
 
+    // Go to checkin page
     public void checkIn(ActionEvent event) throws IOException {
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/CheckIn.fxml"));
         Stage newStage = new Stage();
@@ -54,6 +57,7 @@ public class EmployeeHomepageController implements Initializable {
         window.close();
     }
 
+    // Go to manage account page
     public void ManageAccount(ActionEvent event) throws IOException {
         CreateManageHolder holder = CreateManageHolder.getInstance();
         holder.setUser(user);
@@ -71,6 +75,7 @@ public class EmployeeHomepageController implements Initializable {
         window.close();
     }
 
+    // Logout
     public void logout(ActionEvent event) throws IOException
     {
         UserHolder userHolder = UserHolder.getInstance();

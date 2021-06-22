@@ -22,6 +22,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+// Forgot password update
 public class ForgotPasswordController implements Initializable {
     public ForgotPasswordModel forgotPasswordModel = new ForgotPasswordModel();
 
@@ -31,15 +32,11 @@ public class ForgotPasswordController implements Initializable {
     User user;
 
     @FXML
-    TextField TXTusername;
-    @FXML
     Label labelHeader;
     @FXML
     TextField textBox1;
     @FXML
     TextField textBox2;
-    @FXML
-    Button SubmitAnswer;
     @FXML
     Label textBox1Label;
     @FXML
@@ -58,6 +55,7 @@ public class ForgotPasswordController implements Initializable {
         labelHeader.setText("Enter your username");
     }
 
+    // when submitted
     public void submitAnswer(ActionEvent event){
 
         if(userName == true)
@@ -74,6 +72,7 @@ public class ForgotPasswordController implements Initializable {
         }
     }
 
+    // Take username input and validate
     public void userNameInput()
     {
         if(forgotPasswordModel.userExists(textBox1.getText())) {
@@ -95,6 +94,8 @@ public class ForgotPasswordController implements Initializable {
         }
     }
 
+
+    // Get security question input
     private void secQuestionInput()
     {
         if(textBox1.getText().equals(user.getSecretQAns()))
@@ -119,6 +120,7 @@ public class ForgotPasswordController implements Initializable {
         }
     }
 
+    // Take password update
     private void passwordInput(ActionEvent event)
     {
         if(textBox1.getText().equals(textBox2.getText()) &&
@@ -139,10 +141,7 @@ public class ForgotPasswordController implements Initializable {
         }
     }
 
-
-
-
-
+    // Go back
     public void backButton(ActionEvent event){
         Parent createAccParent = null;
         try {
