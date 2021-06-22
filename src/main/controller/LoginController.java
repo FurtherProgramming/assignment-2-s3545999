@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
@@ -60,6 +61,12 @@ public class LoginController implements Initializable {
 
                 final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
                 window.close();
+            }
+            else
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Incorrect username and password combination!");
+                alert.show();
             }
         } catch (SQLException | IOException e) {
             e.printStackTrace();

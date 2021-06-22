@@ -23,16 +23,7 @@ public class ForgotPasswordModel {
 
     }
 
-    public Boolean isDbConnected(){
-        try {
-            return !connection.isClosed();
-        }
-        catch(Exception e){
-            return false;
-        }
-    }
-
-    public Boolean userExists(String user) throws SQLException {
+    public Boolean userExists(String user){
 
         String query = "select * from Employee where username = ?";
         try {
@@ -55,9 +46,10 @@ public class ForgotPasswordModel {
         }
     }
 
-    public void selectUser(String username) throws SQLException {
+    public User getUser(String username){
 
-        String query = "select id from Employee where username = ?";
+        User user = new User();
+        String query = "select * from Employee where username = ?";
         try {
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
@@ -66,62 +58,38 @@ public class ForgotPasswordModel {
 
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                userID = resultSet.getInt("id");
+                user.setEmployeeId(resultSet.getInt("id"));
+                user.setSecretQ(resultSet.getString("SecQuestion"));
+                user.setSecretQAns(resultSet.getString("SecAns"));
             }
         }
         catch (Exception e)
         {
-
+            System.out.println(e);
         }
+        return user;
     }
 
-    public String getSecQuestion()
+    public boolean setPassword(String newPassword, User user)
     {
         try {
             PreparedStatement preparedStatement = null;
-            ResultSet resultSet = null;
-            String query = "select SecQuestion from Employee where id = ?";
+
+            int id = user.getEmployeeId();
+            String query = "Update Employee set password = ? where Employee.id = ?";
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, userID);
-
-            resultSet = preparedStatement.executeQuery();
-
-            return resultSet.getString("SecQuestion");
+            preparedStatement.setString(1, newPassword);
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+            return true;
         }
         catch (Exception e)
         {
-            return "";
-        }
-    }
-
-    public boolean checkSecAns(String secAns) throws SQLException {
-
-        String query = "select * from Employee where id = ? and SecAns= ?";
-        try {
-            PreparedStatement preparedStatement = null;
-            ResultSet resultSet=null;
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, userID);
-            preparedStatement.setString(2, secAns);
-
-            resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                User theUser = new User();
-                theUser.setEmployeeId(userID);
-                UserHolder holder = UserHolder.getInstance();
-                holder.setUser(theUser);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        catch (SQLException e)
-        {
+            System.out.println(e);
             return false;
         }
     }
+
 }
 
 

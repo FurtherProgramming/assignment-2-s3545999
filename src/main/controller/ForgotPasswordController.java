@@ -1,16 +1,19 @@
 package main.controller;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import main.User;
 import main.model.ForgotPasswordModel;
 
 
@@ -22,99 +25,135 @@ import java.util.ResourceBundle;
 public class ForgotPasswordController implements Initializable {
     public ForgotPasswordModel forgotPasswordModel = new ForgotPasswordModel();
 
+    boolean userName;
+    boolean secQuestion;
+    boolean password;
+    User user;
+
     @FXML
     TextField TXTusername;
     @FXML
-    Label UsernameLabel;
+    Label labelHeader;
     @FXML
-    Button submitUsernameButton;
+    TextField textBox1;
     @FXML
-    Label SecretQuestion;
-    @FXML
-    TextField txtSecQAns;
+    TextField textBox2;
     @FXML
     Button SubmitAnswer;
     @FXML
-    Label answer;
+    Label textBox1Label;
+    @FXML
+    Label textBox2Label;
 
 
     // Check database connection
     @Override
     public void initialize(URL location, ResourceBundle resources){
-        SubmitAnswer.setVisible(false);
-        txtSecQAns.setVisible(false);
-        answer.setVisible(false);
-        SecretQuestion.setVisible(false);
+        userName = true;
+        secQuestion = false;
+        password = false;
+
+        textBox2.setVisible(false);
+        textBox2Label.setVisible(false);
+        labelHeader.setText("Enter your username");
     }
 
-    public void submitUsernameButton(ActionEvent event) throws IOException {
-        String secQuestion = "";
+    public void submitAnswer(ActionEvent event){
+
+        if(userName == true)
+        {
+            userNameInput();
+        }
+        else if(secQuestion == true)
+        {
+            secQuestionInput();
+        }
+        else if(password == true)
+        {
+            passwordInput(event);
+        }
+    }
+
+    public void userNameInput()
+    {
+        if(forgotPasswordModel.userExists(textBox1.getText())) {
+
+            user = forgotPasswordModel.getUser(textBox1.getText());
+            userName = false;
+            secQuestion = true;
+            String txt = "Your secret question is: " + user.getSecretQ();
+            labelHeader.setText(txt);
+            textBox1Label.setText("Answer");
+            textBox1.promptTextProperty().set("Security Question Answer");
+            textBox1.setText("");
+        }
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Username does not exist!");
+            alert.show();
+        }
+    }
+
+    private void secQuestionInput()
+    {
+        if(textBox1.getText().equals(user.getSecretQAns()))
+        {
+            secQuestion = false;
+            password = true;
+
+            textBox1.setText("");
+            textBox1.promptTextProperty().set("New Password");
+            labelHeader.setText("Input new password");
+
+            textBox2Label.setVisible(true);
+            textBox2Label.setText("Confirm New Password");
+            textBox2.setVisible(true);
+            textBox1Label.setText("New Password");
+        }
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Security answer does not match!");
+            alert.show();
+        }
+    }
+
+    private void passwordInput(ActionEvent event)
+    {
+        if(textBox1.getText().equals(textBox2.getText()) &&
+                !textBox1.getText().contains(" ") &&
+                !textBox1.getText().equals(""))
+        {
+            forgotPasswordModel.setPassword(textBox1.getText(), user);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Password Successfully Changed!");
+            alert.showAndWait();
+            backButton(event);
+        }
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Passwords do not match!");
+            alert.show();
+        }
+    }
+
+
+
+
+
+    public void backButton(ActionEvent event){
+        Parent createAccParent = null;
         try {
-            if (forgotPasswordModel.userExists(TXTusername.getText())) {
-                forgotPasswordModel.selectUser(TXTusername.getText());
-                secQuestion = forgotPasswordModel.getSecQuestion();
-                if (secQuestion != "") {
-                    viewSecretQuestion(secQuestion);
-                }
-            }
-            else
-            {
-                Stage popupstage = new Stage();
-                popupstage.setTitle("Failure");
-                popupstage.setScene(new Scene(new TextField("User does not exist"), 200, 200));
-                popupstage.show();
-
-            }
+            createAccParent = FXMLLoader.load(getClass().getResource("../ui/login.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        catch (SQLException e) {
-            System.out.println(e);
-        }
-    }
-
-    public void backButtonPressed(ActionEvent event) throws IOException {
-        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/login.fxml"));
         Scene createAccScene = new Scene(createAccParent);
 
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(createAccScene);
         window.show();
-    }
-
-    public void SubmitAnswer(ActionEvent event) throws IOException
-    {
-        String secQAns = txtSecQAns.getText();
-        try
-        {
-            if (forgotPasswordModel.checkSecAns(secQAns))
-            {
-                Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/ChangePass.fxml"));
-                Stage newStage = new Stage();
-                newStage.setScene(new Scene(createAccParent, 600, 400));
-                newStage.show();
-
-                final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-                window.close();
-            }
-            else
-            {
-                System.out.println("Wrong Answer");
-            }
-        }
-        catch (Exception e)
-        {
-
-        }
-
-    }
-
-    public void viewSecretQuestion(String secQuestion) {
-        SecretQuestion.setText("Your secret question is: " + secQuestion);
-        SecretQuestion.setVisible(true);
-        txtSecQAns.setVisible(true);
-        SubmitAnswer.setVisible(true);
-        txtSecQAns.setVisible(true);
-        UsernameLabel.setVisible(false);
-        submitUsernameButton.setVisible(false);
-        TXTusername.setVisible(false);
     }
 }

@@ -39,7 +39,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                        <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Button lineSpacing="10.0" mnemonicParsing="false" onAction="#BookingReport" prefHeight="50.0" prefWidth="250.0" text="Booking Report">
                                  <HBox.margin>

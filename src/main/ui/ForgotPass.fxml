@@ -12,7 +12,7 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="labelHeader" text="Label">
+            <Label fx:id="labelHeader" alignment="CENTER" prefHeight="82.0" prefWidth="746.0" text="Label" textAlignment="CENTER" wrapText="true">
                <padding>
                   <Insets bottom="20.0" top="20.0" />
                </padding>
@@ -24,23 +24,23 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="TXTusername" prefHeight="36.0" prefWidth="413.0" promptText="Username" />
+                  <TextField fx:id="textBox1" prefHeight="36.0" prefWidth="413.0" promptText="Username" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="99.0" prefWidth="900.0">
                <children>
-                  <Label fx:id="textBox2Label" text="Answer:">
+                  <Label fx:id="textBox2Label" text="Confirm:">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="textBox2" prefHeight="36.0" prefWidth="440.0" promptText="Secret Question Answer" />
+                  <TextField fx:id="textBox2" prefHeight="36.0" prefWidth="440.0" promptText="Confirm New Pasword" />
                </children>
                <opaqueInsets>
                   <Insets top="3.0" />
                </opaqueInsets>
             </HBox>
-            <Button fx:id="submitUsernameButton" alignment="CENTER" mnemonicParsing="false" onAction="#submitUsernameButton" text="Submit" textAlignment="CENTER" />
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#submitAnswer" text="Submit" textAlignment="CENTER" />
          </children>
       </VBox>
    </center>
@@ -55,7 +55,7 @@
             </HBox>
             <HBox fx:id="header1" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="backButton" mnemonicParsing="false" text="Back" />
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButton" text="Back" />
                </children>
             </HBox>
          </children>
