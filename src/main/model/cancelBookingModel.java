@@ -25,7 +25,10 @@ public class cancelBookingModel {
         try {
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
-            String query = "select * from DeskBookings where EmployeeID = ? AND CheckedIn = false AND Canceled = false";
+            String query = "select * from DeskBookings " +
+                    "where EmployeeID = ? " +
+                    "AND CheckedIn = false " +
+                    "AND Canceled = false";
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, UserID);
             resultSet = preparedStatement.executeQuery();
@@ -50,7 +53,11 @@ public class cancelBookingModel {
         java.sql.Date dateNow = new java.sql.Date(new Date().getTime());
 
         try {
-            String query = "select * from DeskBookings where EmployeeID = ? and bookedDate > ? and CheckedIn = 0 and Canceled = 0";
+            String query = "select * from DeskBookings " +
+                    "where EmployeeID = ? " +
+                    "and bookedDate > ? " +
+                    "and CheckedIn = 0 " +
+                    "and Canceled = 0";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setInt(1, UserID);

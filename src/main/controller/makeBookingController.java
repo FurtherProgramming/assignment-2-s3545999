@@ -30,6 +30,8 @@ public class makeBookingController implements Initializable {
     private Rectangle currentRectangle;
     private LocalDate date;
 
+    private boolean lockdown;
+
     List<Booking> currentBookings;
 
     Booking currentUserBooking;
@@ -71,34 +73,49 @@ public class makeBookingController implements Initializable {
         rectangles.add(Table7);
         rectangles.add(Table8);
         setAllTab(Color.GRAY);
+        lockdown = makeModel.isLockdown();
 
         for(int i = 0; i < rectangles.size(); i++)
         {
             rectangles.get(i).setMouseTransparent(true);
         }
-
-        if(!makeModel.checkBooking(LocalDate.now()))
+        if(!lockdown)
         {
-            cancel.setVisible(false);
-            booking.setVisible(false);
-            changeTXT.setText("You don't have a Booking! Do you want to make one?");
+            if(!makeModel.checkBooking(LocalDate.now()))
+            {
+                cancel.setVisible(false);
+                booking.setVisible(false);
+                changeTXT.setText("You don't have a Booking! Do you want to make one?");
+            }
+            else
+            {
+                currentUserBooking = makeModel.getBooking();
+                String bookingText = String.format("You have booked table " + currentUserBooking.getTableNumber() +
+                        " for " + currentUserBooking.getDate().toString());
+                booking.setText(bookingText);
+            }
+
+            if(makeModel.checkBooking(LocalDate.now()) && !makeModel.checkBooking(LocalDate.now().plusDays(2)))
+            {
+                disableBooking();
+                changeTXT.setText("You have a booking in the next two days!\n\n" +
+                        "You must cancel your booking before rebooking!");
+            }
         }
         else
         {
-            currentUserBooking = makeModel.getBooking();
-            String bookingText = String.format("You have booked table " + currentUserBooking.getTableNumber() +
-                    " for " + currentUserBooking.getDate().toString());
-            booking.setText(bookingText);
+            disableBooking();
+            booking.setVisible(false);
+            cancel.setVisible(false);
+            changeTXT.setText("You cannot book due to lockdown!");
         }
+    }
 
-        if(makeModel.checkBooking(LocalDate.now()) && !makeModel.checkBooking(LocalDate.now().plusDays(2)))
-        {
-            datePicker.setMouseTransparent(true);
-            datePicker.setDisable(true);
-            submitter.setVisible(false);
-            changeTXT.setText("You have a booking in the next two days!\n\n" +
-                    "You must cancel your booking before rebooking!");
-        }
+    private void disableBooking()
+    {
+        datePicker.setMouseTransparent(true);
+        datePicker.setDisable(true);
+        submitter.setVisible(false);
     }
 
     public void back(ActionEvent event) throws IOException {
@@ -116,6 +133,8 @@ public class makeBookingController implements Initializable {
         Rectangle rectangle = (Rectangle) event.getSource();
         setTables();
         rectangle.setFill(Color.rgb(92,121,239));
+        rectangle.setStroke(Color.WHITE);
+        rectangle.strokeWidthProperty().set(3);
         currentRectangle = rectangle;
     }
 
@@ -126,7 +145,8 @@ public class makeBookingController implements Initializable {
             {
                 if (currentRectangle == rectangles.get(i))
                 {
-                    String contentText = "Are you sure you want to book Table " + i+1 +"?";
+                    int desk = i+1;
+                    String contentText = "Are you sure you want to book Table " + desk +"?";
 
                     if(currentUserBooking != null)
                     {
@@ -181,6 +201,7 @@ public class makeBookingController implements Initializable {
 
     public void setTables(){
         setAllTab(Color.rgb(169,184,243));
+
         for(int i = 0; i < rectangles.size(); i++)
         {
             rectangles.get(i).setMouseTransparent(false);
@@ -199,6 +220,7 @@ public class makeBookingController implements Initializable {
         for(int i = 0; i < rectangles.size(); i++)
         {
             rectangles.get(i).setFill(colour);
+            rectangles.get(i).strokeWidthProperty().set(0);
         }
     }
 

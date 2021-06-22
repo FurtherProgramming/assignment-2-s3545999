@@ -85,7 +85,9 @@ public class AdminReportModel {
         System.out.println(beforeDate);
         System.out.println(afterDate);
         try {
-            String query = "select * from DeskBookings where bookedDate >= ? AND bookedDate <= ?";
+            String query = "select * from DeskBookings " +
+                    "where bookedDate >= ? " +
+                    "AND bookedDate <= ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setObject(1, beforeDate);
             preparedStatement.setObject(2, afterDate);

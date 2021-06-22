@@ -13,6 +13,7 @@
          <children>
             <Button lineSpacing="10.0" mnemonicParsing="false" onAction="#bookingManagement" prefHeight="57.0" prefWidth="246.0" text="Booking Management" />
             <Button lineSpacing="10.0" mnemonicParsing="false" onAction="#AccountManage" prefHeight="57.0" prefWidth="246.0" text="Account Management" />
+            <Button lineSpacing="10.0" mnemonicParsing="false" onAction="#covidLockdown" prefHeight="57.0" prefWidth="246.0" text="Covid Lockdown" />
             <Button lineSpacing="10.0" mnemonicParsing="false" onAction="#AdminReports" prefHeight="57.0" prefWidth="246.0" text="Admin Reports" />
          </children>
       </VBox>

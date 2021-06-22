@@ -19,6 +19,28 @@ public class makeBookingModel {
             System.exit(1);
     }
 
+    public boolean isLockdown()
+    {
+        Boolean Lockdown = true;
+        try
+        {
+            String query = "select * from deskAvailability where covidAvailability = true";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if(resultSet.next())
+            {
+                Lockdown = false;
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        return Lockdown;
+    }
+
+
     public Booking getBooking()
     {
         int UserID = UserHolder.getInstance().getUser().getEmployeeId();
@@ -56,7 +78,8 @@ public class makeBookingModel {
         try {
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
-            String query = "select * from DeskBookings where EmployeeID = ? " +
+            String query = "select * from DeskBookings " +
+                    "where EmployeeID = ? " +
                     "AND CheckedIn = 0 " +
                     "AND Canceled = false " +
                     "AND bookedDate > ?";
@@ -77,11 +100,13 @@ public class makeBookingModel {
 
     public List<Booking> getTableAvailability(LocalDate date)
     {
-        List<Booking> bookings = new ArrayList<>();
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
+        ArrayList<Booking> bookings = new ArrayList<>();
         try {
-            String query = "select * from DeskBookings where bookedDate = ? and Canceled = false";
+            PreparedStatement preparedStatement = null;
+            ResultSet resultSet = null;
+            String query = "select * from DeskBookings " +
+                    "where bookedDate = ? " +
+                    "and Canceled = false";
             System.out.println(date);
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setObject(1, date);
@@ -94,13 +119,29 @@ public class makeBookingModel {
                 booking.setTableNumber(resultSet.getInt("deskId"));
                 bookings.add(booking);
             }
-            preparedStatement.close();
-            resultSet.close();
-            return bookings;
         } catch (Exception e) {
             System.out.println(e);
-            return bookings;
         }
+        try {
+            PreparedStatement preparedStatement = null;
+            ResultSet resultSet = null;
+            String query = "select * from deskAvailability " +
+                    "where covidAvailability = false ";
+
+            preparedStatement = connection.prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next())
+            {
+                Booking booking = new Booking();
+                booking.setTableNumber(resultSet.getInt("deskNumber"));
+                bookings.add(booking);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return bookings;
     }
 
     public boolean makeBooking(int deskId, LocalDate date)

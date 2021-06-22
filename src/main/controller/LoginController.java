@@ -85,7 +85,7 @@ public class LoginController implements Initializable {
 
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/ForgotPass.fxml"));
         Stage newStage = new Stage();
-        newStage.setScene(new Scene(createAccParent, 600, 400));
+        newStage.setScene(new Scene(createAccParent));
         newStage.show();
 
         final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();

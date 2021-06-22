@@ -61,6 +61,18 @@ public class AdminHomepageController implements Initializable {
         final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.close();
     }
+
+    public void covidLockdown(ActionEvent event) throws IOException {
+        Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminLockdown.fxml"));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(createAccParent));
+        newStage.show();
+
+        final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.close();
+    }
+
+
     public void logout(ActionEvent event) throws IOException {
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/login.fxml"));
         Stage newStage = new Stage();
