@@ -39,6 +39,7 @@ public class EmployeeHomepageController implements Initializable {
     public void makeBooking(ActionEvent event) throws IOException {
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/ManageBooking.fxml"));
         Stage newStage = new Stage();
+        newStage.setResizable(false);
         newStage.setScene(new Scene(createAccParent));
         newStage.show();
 
@@ -50,6 +51,7 @@ public class EmployeeHomepageController implements Initializable {
     public void checkIn(ActionEvent event) throws IOException {
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/CheckIn.fxml"));
         Stage newStage = new Stage();
+        newStage.setResizable(false);
         newStage.setScene(new Scene(createAccParent));
         newStage.show();
 
@@ -68,6 +70,7 @@ public class EmployeeHomepageController implements Initializable {
         Parent createAccParent = loader.load();
 
         Stage newStage = new Stage();
+        newStage.setResizable(false);
         newStage.setScene(new Scene(createAccParent));
         newStage.show();
 
@@ -82,6 +85,7 @@ public class EmployeeHomepageController implements Initializable {
         userHolder.setUser(null);
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/login.fxml"));
         Stage newStage = new Stage();
+        newStage.setResizable(false);
         newStage.setScene(new Scene(createAccParent, 600, 400));
         newStage.show();
 

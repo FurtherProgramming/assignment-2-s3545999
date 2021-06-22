@@ -63,6 +63,7 @@ public class AdminAccountsController implements Initializable {
 
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminHomepage.fxml"));
         Stage newStage = new Stage();
+        newStage.setResizable(false);
         newStage.setScene(new Scene(createAccParent));
         newStage.show();
 
@@ -84,6 +85,7 @@ public class AdminAccountsController implements Initializable {
             try {
                 Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/CreateManageAccount.fxml"));
                 Stage newStage = new Stage();
+                newStage.setResizable(false);
                 newStage.setScene(new Scene(createAccParent));
                 newStage.show();
 
@@ -201,6 +203,7 @@ public class AdminAccountsController implements Initializable {
         Parent createAccParent = null;
         createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminAccounts.fxml"));
         Stage newStage = new Stage();
+        newStage.setResizable(false);
         newStage.setScene(new Scene(createAccParent));
         newStage.show();
 

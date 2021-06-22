@@ -140,6 +140,7 @@ public class makeBookingController implements Initializable {
             createAccParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ui/EmployeeHomepage.fxml")));
         }
         Stage newStage = new Stage();
+        newStage.setResizable(false);
         newStage.setScene(new Scene(createAccParent));
         newStage.show();
 
@@ -267,6 +268,7 @@ public class makeBookingController implements Initializable {
         try {
             Parent createAccParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ui/ManageBooking.fxml")));
             Stage newStage = new Stage();
+            newStage.setResizable(false);
             newStage.setScene(new Scene(createAccParent));
             newStage.show();
 

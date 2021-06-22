@@ -49,6 +49,7 @@ public class AdminReportController implements Initializable {
     public void back(ActionEvent event) throws IOException {
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminHomepage.fxml"));
         Stage newStage = new Stage();
+        newStage.setResizable(false);
         newStage.setScene(new Scene(createAccParent));
         newStage.show();
 
@@ -60,6 +61,7 @@ public class AdminReportController implements Initializable {
     public void desks(ActionEvent event) throws IOException{
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/ManageBooking.fxml"));
         Stage newStage = new Stage();
+        newStage.setResizable(false);
         newStage.setScene(new Scene(createAccParent));
         newStage.show();
 

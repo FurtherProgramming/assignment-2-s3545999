@@ -68,6 +68,7 @@ public class AdminManageBookingController implements Initializable {
 
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminHomepage.fxml"));
         Stage newStage = new Stage();
+        newStage.setResizable(false);
         newStage.setScene(new Scene(createAccParent));
         newStage.show();
 

@@ -66,6 +66,7 @@ public class CheckinController implements Initializable {
 
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/EmployeeHomepage.fxml"));
         Stage newStage = new Stage();
+        newStage.setResizable(false);
         newStage.setScene(new Scene(createAccParent));
         newStage.show();
 

@@ -152,7 +152,7 @@ public class CreateManageAccountController implements Initializable {
             }
             Stage newStage = new Stage();
             newStage.setScene(new Scene(createAccParent));
-
+            newStage.setResizable(false);
             newStage.show();
             final Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.close();

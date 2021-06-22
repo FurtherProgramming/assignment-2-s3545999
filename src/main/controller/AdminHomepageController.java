@@ -38,7 +38,8 @@ public class AdminHomepageController implements Initializable {
     public void bookingManagement(ActionEvent event) throws IOException {
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminManageBookings.fxml"));
         Stage newStage = new Stage();
-        newStage.setScene(new Scene(createAccParent, 900, 600));
+        newStage.setResizable(false);
+        newStage.setScene(new Scene(createAccParent));
         newStage.show();
 
         final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -50,6 +51,7 @@ public class AdminHomepageController implements Initializable {
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminAccounts.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(createAccParent));
+        newStage.setResizable(false);
         newStage.show();
 
         final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -61,6 +63,7 @@ public class AdminHomepageController implements Initializable {
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminReport.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(createAccParent));
+        newStage.setResizable(false);
         newStage.show();
 
         final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -72,6 +75,7 @@ public class AdminHomepageController implements Initializable {
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/AdminLockdown.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(createAccParent));
+        newStage.setResizable(false);
         newStage.show();
 
         final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -82,6 +86,7 @@ public class AdminHomepageController implements Initializable {
     public void logout(ActionEvent event) throws IOException {
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/login.fxml"));
         Stage newStage = new Stage();
+        newStage.setResizable(false);
         newStage.setScene(new Scene(createAccParent));
         newStage.show();
 

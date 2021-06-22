@@ -55,6 +55,7 @@ public class LoginController implements Initializable {
                 }
 
                 Stage newStage = new Stage();
+                newStage.setResizable(false);
                 newStage.setScene(new Scene(createAccParent));
 
                 newStage.show();
@@ -82,6 +83,7 @@ public class LoginController implements Initializable {
 
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/CreateManageAccount.fxml"));
         Stage newStage = new Stage();
+        newStage.setResizable(false);
         newStage.setScene(new Scene(createAccParent));
         newStage.show();
 
@@ -95,6 +97,7 @@ public class LoginController implements Initializable {
         Parent createAccParent = FXMLLoader.load(getClass().getResource("../ui/ForgotPass.fxml"));
         Stage newStage = new Stage();
         newStage.setScene(new Scene(createAccParent));
+        newStage.setResizable(false);
         newStage.show();
 
         final Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();

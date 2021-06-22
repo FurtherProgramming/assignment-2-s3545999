@@ -152,6 +152,7 @@ public class ForgotPasswordController implements Initializable {
         Scene createAccScene = new Scene(createAccParent);
 
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setResizable(false);
         window.setScene(createAccScene);
         window.show();
     }

@@ -31,7 +31,7 @@
             <TextField fx:id="txtUsername" layoutX="395.0" layoutY="56.0" prefHeight="27.0" prefWidth="168.0" />
             <PasswordField fx:id="txtPassword" layoutX="395.0" layoutY="101.0" prefHeight="27.0" prefWidth="168.0" />
             <Button fx:id="ForgotButton" layoutX="342.0" layoutY="222.0" mnemonicParsing="false" onAction="#forgotPassButton" prefHeight="36.0" prefWidth="221.0" text="Forgot Password" />
-            <Button layoutX="342.0" layoutY="172.0" mnemonicParsing="false" onAction="#Login" prefHeight="36.0" prefWidth="221.0" text="Login" />
+            <Button layoutX="342.0" layoutY="172.0" mnemonicParsing="false" onAction="#Login" onKeyPressed="#e" prefHeight="36.0" prefWidth="221.0" text="Login" />
             <Label alignment="CENTER_RIGHT" layoutX="293.0" layoutY="61.0" stylesheets="@../arub.css" text="Username:" textFill="WHITE">
                <font>
                   <Font size="20.0" />

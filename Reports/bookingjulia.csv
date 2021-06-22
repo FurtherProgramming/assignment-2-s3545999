@@ -1,0 +1,2 @@
+Booking ID, Booking Date, Desk ID, Employee ID, CheckedIn, Admin Accepted, Canceled
+42, 2021-06-12, 3, 2, true, true, false
